@@ -1,0 +1,14 @@
+@font-face{
+	font-family: 'c-r';
+	src:url(../fonts/Comfortaa-Regular.ttf);
+}
+
+@font-face{
+	font-family: 'c-b';
+	src:url(../fonts/Comfortaa-Bold.ttf);
+}
+
+@font-face{
+	font-family: 'c-l';
+	src:url(../fonts/Comfortaa-Light.ttf);
+}
