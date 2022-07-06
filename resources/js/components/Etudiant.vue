@@ -2,23 +2,27 @@
     <div class="container">
         <div class="row">
                     <div class="col-md-3">
-                        <select id="code_filiere" class="form-control">
-                            <option value="" hidden selected>Selectionner une Filiere</option>
+                        <select v-model="ret.valfil" v-on:change="onFilCycAnSuChange()"  id="code_filiere" class="form-control">
+                            <option value="" selected>Selectionner une Filiere</option>
+                            <option  v-for="dFiliere in dFilieres" :key="dFiliere.code_filiere" :value="dFiliere.code_filiere" >{{dFiliere.code_filiere}}</option>
                         </select>
                     </div> 
                     <div class="col-md-3">
-                        <select id="cycle_id" class="form-control">
-                            <option value="" hidden selected>Selectionner un cycle</option>
+                        <select  v-model="ret.valcyc" @change="onFilCycAnSuChange()" id="cycle_id" class="form-control">
+                            <option value="" selected>Selectionner un cycle</option>
+                            <option v-for="cycle in cycles" :key="cycle.libelle_cycle" :value="cycle.libelle_cycle" >{{cycle.libelle_cycle}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="year_id" class="form-control">
-                            <option value="" hidden selected>Selectionner une Année</option>
+                        <select  v-model="ret.valAnn" @change="onFilCycAnSuChange()"  id="year_id" class="form-control">
+                            <option value="" selected>Selectionner une Année</option>
+                            <option v-for="year in years" :key="year.valeur_annee_scolaire" :value="year.valeur_annee_scolaire" >{{year.valeur_annee_scolaire}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="year_id" class="form-control">
+                        <select v-model="ret.valSuc" @change="onFilCycAnSuChange()" id="succursale_id" class="form-control">
                             <option value="" hidden selected>Selectionner une Succursale</option>
+                            <option v-for="dSuccursale in dSuccursales" :key="dSuccursale.libelle_succursale" :value="dSuccursale.libelle_succursale">{{dSuccursale.libelle_succursale}}</option>
                         </select>
                     </div>
         </div>
@@ -175,10 +179,14 @@
         name:"Etudiant",
         data(){
             return{
+                years:[],
+                cycles:[],
+                dFilieres:[],
+                dSuccursales:[],
+
                 succursales:[],
                 filieres:[],
-            
-              
+        
                 etudiants:[],
                 etudiant:{
                     nom:'',
@@ -198,6 +206,12 @@
                 },
                 edit_id:'',
                 is_Editing:false,
+                 ret:{
+                    valfil:"",
+                    valAnn:"",
+                    valcyc:"",
+                    valSuc:"",
+                },
             }
         },
         methods:{
@@ -221,6 +235,39 @@
                 this.is_Editing = false;
                 $('#addNew').modal('show');
             },
+            /*************************************************************/
+               onFilCycAnSuChange(){
+                    /*console.log("this.ret.valfil:",this.ret.valfil)*/
+                    alert("this.ret.valfil:"+this.ret.valfil+
+                        "\nthis.ret.valcyc:"+this.ret.valcyc+
+                        "\nthis.ret.valAnn:"+this.ret.valAnn+
+                        "\nthis.ret.valSuc:"+this.ret.valSuc);
+                           /* axios.get(`api/loadOnFiliereChange/${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}`).then(res=>{
+                                this.filieres=res.data
+                            })           */
+                },
+            /************************LES-SELECT***************************/
+            loadDistinctSuccursales(){
+                axios.get('api/distincSuccursales').then((succursales)=>{
+                    this.dSuccursales = succursales.data;
+                })
+            },
+            loadDistinctFilieres(){
+                axios.get('api/distinctFilieres').then((filieres)=>{
+                    this.dFilieres = filieres.data;
+                })
+            },
+            loadYears(){
+                axios.get('api/years').then((data)=>{
+                    this.years = data.data;
+                })
+            },
+            loadCycles(){
+                axios.get('api/cycles').then((cycles)=>{
+                    this.cycles = cycles.data;
+                })
+            },
+            /***********************************************************/
             loadDistinctFiliereCycleYear(){
                 axios.get('api/filiereCycleYear').then((filieres)=>{
                     this.filieres = filieres.data;
@@ -236,18 +283,18 @@
                     this.etudiants = etudiants.data;
                 })
             },
-            /*createEtudiant(){
+           
+            createEtudiant(){
                 let nm = document.querySelector("#nom").value;
                 let pr = document.querySelector("#prenom").value;
                 if(nm =="" || pr==""){
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post(`api/etudiant`,this.etudiant).then(()=>{
-                    //$('#addNew').modal('hide');
+                axios.post("api/etudiants",this.etudiant).then(()=>{
                     Swal.fire('Created!','Etudiant créer avec success.','success') ;
                     this.loadEtudiants();
-                    this.etudiant={
+                     /*this.etudiant={
                         nom:'',
                         prenom:'',
                         email:'',
@@ -262,21 +309,7 @@
                         year_id:'',
                         succursale_id:'',
                         montant:'50000'
-                    }
-                }).catch((err)=>{
-                    Swal.fire('Error !!!','An Error Occured !!!','error')
-                })
-            },*/
-            createEtudiant(){
-                let nm = document.querySelector("#nom").value;
-                let pr = document.querySelector("#prenom").value;
-                if(nm =="" || pr==""){
-                    Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
-                    return;
-                }
-                axios.post("api/etudiants",this.etudiant).then(()=>{
-                    Swal.fire('Created!','Etudiant créer avec success.','success') ;
-                    this.loadEtudiants();
+                    }*/
                 }).catch((err)=>{
                     //alert("err")
                     //console.log("err:",err.response.data.err.nom)
@@ -325,6 +358,12 @@
             this.loadDistinctFiliereCycleYear();
             this.loadSuccursales();
             this.loadEtudiants();
+            
+            /*SELECT*/
+            this.loadDistinctFilieres();
+            this.loadCycles();
+            this.loadYears();
+            this.loadDistinctSuccursales();
         },
         /*mounted() {
             console.log('Component mounted.')

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class EtudiantController extends Controller
 {
+    /*GET ONLY libelle_succursale AND use it on Etudiant Component SELECT*/
+    public function succursales(){
+        $succursales = DB::SELECT("SELECT libelle_succursale FROM `succursales` WHERE 1 ");
+        return $succursales;
+    }
+    /*GET ONLY Something like IRT/L1/2015-2016 AND use it on Etudiant Component CREATE FORM*/
     public function concatFiliere(){
         $filiere = DB::SELECT("SELECT filieres.id,
         CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere

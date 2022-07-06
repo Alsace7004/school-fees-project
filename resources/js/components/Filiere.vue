@@ -4,19 +4,19 @@
             <!---->
                 <div class="col-md-4">
                     <select v-model="ret.valfil" v-on:change="onFiliereChange()"  id="code_filiere" class="form-control">
-                        <option value="" hidden selected>Selectionner une Filiere</option>
+                        <option value="0" selected>Selectionner une Filiere</option>
                         <option  v-for="dFiliere in dFilieres" :key="dFiliere.code_filiere" :value="dFiliere.code_filiere" >{{dFiliere.code_filiere}}</option>
                     </select>
                 </div> 
                 <div class="col-md-4">
                     <select  v-model="ret.valAnn" @change="onFiliereChange()"  id="year_id" class="form-control">
-                        <option value="" hidden selected>Selectionner une Année</option>
+                        <option value="0" selected>Selectionner une Année</option>
                         <option v-for="year in years" :key="year.valeur_annee_scolaire" :value="year.valeur_annee_scolaire" >{{year.valeur_annee_scolaire}}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <select  v-model="ret.valcyc" @change="onFiliereChange()" id="cycle_id" class="form-control">
-                        <option value="" hidden selected>Selectionner un cycle</option>
+                        <option value="0" selected>Selectionner un cycle</option>
                         <option v-for="cycle in cycles" :key="cycle.libelle_cycle" :value="cycle.libelle_cycle" >{{cycle.libelle_cycle}}</option>
                     </select>
                 </div>

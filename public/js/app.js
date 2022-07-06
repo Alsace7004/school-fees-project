@@ -2439,10 +2439,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Etudiant",
   data: function data() {
     return {
+      years: [],
+      cycles: [],
+      dFilieres: [],
+      dSuccursales: [],
       succursales: [],
       filieres: [],
       etudiants: [],
@@ -2463,7 +2471,13 @@ __webpack_require__.r(__webpack_exports__);
         montant: '50000'
       },
       edit_id: '',
-      is_Editing: false
+      is_Editing: false,
+      ret: {
+        valfil: "",
+        valAnn: "",
+        valcyc: "",
+        valSuc: ""
+      }
     };
   },
   methods: {
@@ -2487,61 +2501,70 @@ __webpack_require__.r(__webpack_exports__);
       this.is_Editing = false;
       $('#addNew').modal('show');
     },
-    loadDistinctFiliereCycleYear: function loadDistinctFiliereCycleYear() {
+
+    /*************************************************************/
+    onFilCycAnSuChange: function onFilCycAnSuChange() {
+      /*console.log("this.ret.valfil:",this.ret.valfil)*/
+      alert("this.ret.valfil:" + this.ret.valfil + "\nthis.ret.valcyc:" + this.ret.valcyc + "\nthis.ret.valAnn:" + this.ret.valAnn + "\nthis.ret.valSuc:" + this.ret.valSuc);
+      /* axios.get(`api/loadOnFiliereChange/${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}`).then(res=>{
+           this.filieres=res.data
+       })           */
+    },
+
+    /************************LES-SELECT***************************/
+    loadDistinctSuccursales: function loadDistinctSuccursales() {
       var _this = this;
 
+      axios.get('api/distincSuccursales').then(function (succursales) {
+        _this.dSuccursales = succursales.data;
+      });
+    },
+    loadDistinctFilieres: function loadDistinctFilieres() {
+      var _this2 = this;
+
+      axios.get('api/distinctFilieres').then(function (filieres) {
+        _this2.dFilieres = filieres.data;
+      });
+    },
+    loadYears: function loadYears() {
+      var _this3 = this;
+
+      axios.get('api/years').then(function (data) {
+        _this3.years = data.data;
+      });
+    },
+    loadCycles: function loadCycles() {
+      var _this4 = this;
+
+      axios.get('api/cycles').then(function (cycles) {
+        _this4.cycles = cycles.data;
+      });
+    },
+
+    /***********************************************************/
+    loadDistinctFiliereCycleYear: function loadDistinctFiliereCycleYear() {
+      var _this5 = this;
+
       axios.get('api/filiereCycleYear').then(function (filieres) {
-        _this.filieres = filieres.data;
+        _this5.filieres = filieres.data;
       });
     },
     loadSuccursales: function loadSuccursales() {
-      var _this2 = this;
+      var _this6 = this;
 
       axios.get('api/succursales').then(function (succursales) {
-        _this2.succursales = succursales.data;
+        _this6.succursales = succursales.data;
       });
     },
     loadEtudiants: function loadEtudiants() {
-      var _this3 = this;
+      var _this7 = this;
 
       axios.get('api/etudiants').then(function (etudiants) {
-        _this3.etudiants = etudiants.data;
+        _this7.etudiants = etudiants.data;
       });
     },
-
-    /*createEtudiant(){
-        let nm = document.querySelector("#nom").value;
-        let pr = document.querySelector("#prenom").value;
-        if(nm =="" || pr==""){
-            Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
-            return;
-        }
-        axios.post(`api/etudiant`,this.etudiant).then(()=>{
-            //$('#addNew').modal('hide');
-            Swal.fire('Created!','Etudiant créer avec success.','success') ;
-            this.loadEtudiants();
-            this.etudiant={
-                nom:'',
-                prenom:'',
-                email:'',
-                genre:'',
-                date_anniv:'',
-                contact_1:'',
-                contact_2:'',
-                adresse:'',
-                nationalite:'',
-                matricule:'',
-                filiere_id:'',
-                year_id:'',
-                succursale_id:'',
-                montant:'50000'
-            }
-        }).catch((err)=>{
-            Swal.fire('Error !!!','An Error Occured !!!','error')
-        })
-    },*/
     createEtudiant: function createEtudiant() {
-      var _this4 = this;
+      var _this8 = this;
 
       var nm = document.querySelector("#nom").value;
       var pr = document.querySelector("#prenom").value;
@@ -2557,7 +2580,24 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("api/etudiants", this.etudiant).then(function () {
         Swal.fire('Created!', 'Etudiant créer avec success.', 'success');
 
-        _this4.loadEtudiants();
+        _this8.loadEtudiants();
+        /*this.etudiant={
+           nom:'',
+           prenom:'',
+           email:'',
+           genre:'',
+           date_anniv:'',
+           contact_1:'',
+           contact_2:'',
+           adresse:'',
+           nationalite:'',
+           matricule:'',
+           filiere_id:'',
+           year_id:'',
+           succursale_id:'',
+           montant:'50000'
+        }*/
+
       })["catch"](function (err) {
         //alert("err")
         //console.log("err:",err.response.data.err.nom)
@@ -2605,6 +2645,12 @@ __webpack_require__.r(__webpack_exports__);
     this.loadDistinctFiliereCycleYear();
     this.loadSuccursales();
     this.loadEtudiants();
+    /*SELECT*/
+
+    this.loadDistinctFilieres();
+    this.loadCycles();
+    this.loadYears();
+    this.loadDistinctSuccursales();
   }
   /*mounted() {
       console.log('Component mounted.')
@@ -8263,7 +8309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d7ec0e72]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d7ec0e72]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d7ec0e72]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d7ec0e72]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d7ec0e72]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d7ec0e72]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-d7ec0e72]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n}\n.btn-delete[data-v-d7ec0e72]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d7ec0e72]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d7ec0e72]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d7ec0e72]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d7ec0e72]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d7ec0e72]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d7ec0e72]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d7ec0e72]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-d7ec0e72]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n}\n.btn-delete[data-v-d7ec0e72]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d7ec0e72]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44295,7 +44341,235 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.ret.valfil,
+                expression: "ret.valfil",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { id: "code_filiere" },
+            on: {
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.ret,
+                    "valfil",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+                function ($event) {
+                  return _vm.onFilCycAnSuChange()
+                },
+              ],
+            },
+          },
+          [
+            _c("option", { attrs: { value: "", selected: "" } }, [
+              _vm._v("Selectionner une Filiere"),
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.dFilieres, function (dFiliere) {
+              return _c(
+                "option",
+                {
+                  key: dFiliere.code_filiere,
+                  domProps: { value: dFiliere.code_filiere },
+                },
+                [_vm._v(_vm._s(dFiliere.code_filiere))]
+              )
+            }),
+          ],
+          2
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.ret.valcyc,
+                expression: "ret.valcyc",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { id: "cycle_id" },
+            on: {
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.ret,
+                    "valcyc",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+                function ($event) {
+                  return _vm.onFilCycAnSuChange()
+                },
+              ],
+            },
+          },
+          [
+            _c("option", { attrs: { value: "", selected: "" } }, [
+              _vm._v("Selectionner un cycle"),
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.cycles, function (cycle) {
+              return _c(
+                "option",
+                {
+                  key: cycle.libelle_cycle,
+                  domProps: { value: cycle.libelle_cycle },
+                },
+                [_vm._v(_vm._s(cycle.libelle_cycle))]
+              )
+            }),
+          ],
+          2
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.ret.valAnn,
+                expression: "ret.valAnn",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { id: "year_id" },
+            on: {
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.ret,
+                    "valAnn",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+                function ($event) {
+                  return _vm.onFilCycAnSuChange()
+                },
+              ],
+            },
+          },
+          [
+            _c("option", { attrs: { value: "", selected: "" } }, [
+              _vm._v("Selectionner une Année"),
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.years, function (year) {
+              return _c(
+                "option",
+                {
+                  key: year.valeur_annee_scolaire,
+                  domProps: { value: year.valeur_annee_scolaire },
+                },
+                [_vm._v(_vm._s(year.valeur_annee_scolaire))]
+              )
+            }),
+          ],
+          2
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.ret.valSuc,
+                expression: "ret.valSuc",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { id: "succursale_id" },
+            on: {
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.ret,
+                    "valSuc",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+                function ($event) {
+                  return _vm.onFilCycAnSuChange()
+                },
+              ],
+            },
+          },
+          [
+            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
+              _vm._v("Selectionner une Succursale"),
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.dSuccursales, function (dSuccursale) {
+              return _c(
+                "option",
+                {
+                  key: dSuccursale.libelle_succursale,
+                  domProps: { value: dSuccursale.libelle_succursale },
+                },
+                [_vm._v(_vm._s(dSuccursale.libelle_succursale))]
+              )
+            }),
+          ],
+          2
+        ),
+      ]),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row mt-5" }, [
       _c(
@@ -44314,7 +44588,7 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "tbl-content" }, [
         _c("table", [
@@ -44336,7 +44610,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(etudiant.valeur_filiere))]),
                 _vm._v(" "),
-                _vm._m(2, true),
+                _vm._m(1, true),
               ])
             }),
             0
@@ -44375,7 +44649,7 @@ var render = function () {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(3),
+              _vm._m(2),
             ]),
             _vm._v(" "),
             _c(
@@ -44883,60 +45157,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-3" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { id: "code_filiere" } },
-          [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
-              _vm._v("Selectionner une Filiere"),
-            ]),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-3" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { id: "cycle_id" } },
-          [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
-              _vm._v("Selectionner un cycle"),
-            ]),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-3" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { id: "year_id" } },
-          [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
-              _vm._v("Selectionner une Année"),
-            ]),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-3" }, [
-        _c(
-          "select",
-          { staticClass: "form-control", attrs: { id: "year_id" } },
-          [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
-              _vm._v("Selectionner une Succursale"),
-            ]),
-          ]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "tbl-header" }, [
       _c("table", [
         _c("thead", [
@@ -45120,7 +45340,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner une Filiere"),
             ]),
             _vm._v(" "),
@@ -45177,7 +45397,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner une Année"),
             ]),
             _vm._v(" "),
@@ -45234,7 +45454,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner un cycle"),
             ]),
             _vm._v(" "),
