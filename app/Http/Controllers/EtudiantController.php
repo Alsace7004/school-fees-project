@@ -146,28 +146,119 @@ class EtudiantController extends Controller
         /*return response()->json([
             'message'=>dd($suc)
         ],500);*/
-        $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
-        E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
-        filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
-        FROM etudiants E,succursales,filieres,cycles,years 
-        WHERE  E.filiere_id = filieres.id 
-        AND    E.succursale_id = succursales.id
-        AND    succursales.libelle_succursale = '$Suc'
-        AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
-        return $succursales;
+      
 
         if(!$Cyc && !$Ann && !$Suc){    
             //on recupere alors la filiere
+            $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+            E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+            filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+            FROM etudiants E,succursales,filieres,cycles,years 
+            WHERE  E.filiere_id = filieres.id 
+            AND    E.succursale_id = succursales.id
+            AND    filieres.code_filiere = '$Fil'
+            AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
+        }else if(!$Fil && !$Ann && !$Suc ){
+            //on recupere alors les cycles
+            $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+            E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+            filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+            FROM etudiants E,succursales,filieres,cycles,years 
+            WHERE  E.filiere_id = filieres.id 
+            AND    E.succursale_id = succursales.id
+            AND    cycles.libelle_cycle = '$Cyc'
+            AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
+        }else if(!$Fil && !$Cyc && !$Suc ){
+            //on recupere alors les annees
+            $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+            E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+            filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+            FROM etudiants E,succursales,filieres,cycles,years 
+            WHERE  E.filiere_id = filieres.id 
+            AND    E.succursale_id = succursales.id
+            AND    years.valeur_annee_scolaire = '$Ann'
+            AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
+        }else if(!$Fil && !$Cyc && !$Ann ){
+                //on recupere alors les succursales
+                $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+                E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+                filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+                FROM etudiants E,succursales,filieres,cycles,years 
+                WHERE  E.filiere_id = filieres.id 
+                AND    E.succursale_id = succursales.id
+                AND    succursales.libelle_succursale = '$Suc'
+                AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+                return $succursales;
         }else if(!$Suc){
             //on recupere filiere + cycle + Ann
+            $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+            E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+            filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+            FROM etudiants E,succursales,filieres,cycles,years 
+            WHERE  E.filiere_id = filieres.id 
+            AND    E.succursale_id = succursales.id
+             	AND  filieres.code_filiere = '$Fil'
+               	AND  cycles.libelle_cycle = '$Cyc'
+               	AND  years.valeur_annee_scolaire = '$Ann'
+            AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
         }else if(!$Ann){
                 //on recupere filiere + cycle + succursale
+                $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+                E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+                filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+                FROM etudiants E,succursales,filieres,cycles,years 
+                WHERE  E.filiere_id = filieres.id 
+                AND    E.succursale_id = succursales.id
+                    AND  filieres.code_filiere = '$Fil'
+                    AND  cycles.libelle_cycle = '$Cyc'
+                    AND  succursales.libelle_succursale = '$Suc'
+                AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
         }else if(!$Cyc){
             //on recupere filiere + Ann + succursale
+                $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+                E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+                filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+                FROM etudiants E,succursales,filieres,cycles,years 
+                WHERE  E.filiere_id = filieres.id 
+                AND    E.succursale_id = succursales.id
+                    AND  filieres.code_filiere = '$Fil'
+                    AND  years.valeur_annee_scolaire = '$Ann'
+                    AND  succursales.libelle_succursale = '$Suc'
+                AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
         }else if(!$Fil){
             //on recupere Cyc + Ann + succursale
+                $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+                E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+                filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+                FROM etudiants E,succursales,filieres,cycles,years 
+                WHERE  E.filiere_id = filieres.id 
+                AND    E.succursale_id = succursales.id
+                    AND  cycles.libelle_cycle = '$Cyc'
+                    AND  years.valeur_annee_scolaire = '$Ann'
+                    AND  succursales.libelle_succursale = '$Suc'
+                AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            return $succursales;
         }else if(!$Ann && !$Suc){
             //on recupere filiere + cycle
+                $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+                E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+                filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+                FROM etudiants E,succursales,filieres,cycles,years 
+                WHERE  E.filiere_id = filieres.id 
+                AND    E.succursale_id = succursales.id
+                    AND  filieres.code_filiere = '$Fil'
+                    AND  cycles.libelle_cycle = '$Cyc'
+                AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+            //return $succursales;
+            return response()->json([
+                'message'=>dd($succursales)
+            ],500);
         }else if(!$Fil && !$Cyc){
             //on recupere Ann + Suc
         }else if(!$Fil && !$Ann){
