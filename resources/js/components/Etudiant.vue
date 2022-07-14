@@ -3,25 +3,25 @@
         <div class="row">
                     <div class="col-md-3">
                         <select v-model="ret.valfil" v-on:change="onFilCycAnSuChange()"  id="code_filiere" class="form-control">
-                            <option value="" selected>Selectionner une Filiere</option>
+                            <option value="0" selected>Selectionner une Filiere</option>
                             <option  v-for="dFiliere in dFilieres" :key="dFiliere.code_filiere" :value="dFiliere.code_filiere" >{{dFiliere.code_filiere}}</option>
                         </select>
                     </div> 
                     <div class="col-md-3">
                         <select  v-model="ret.valcyc" @change="onFilCycAnSuChange()" id="cycle_id" class="form-control">
-                            <option value="" selected>Selectionner un cycle</option>
+                            <option value="0" selected>Selectionner un cycle</option>
                             <option v-for="cycle in cycles" :key="cycle.libelle_cycle" :value="cycle.libelle_cycle" >{{cycle.libelle_cycle}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <select  v-model="ret.valAnn" @change="onFilCycAnSuChange()"  id="year_id" class="form-control">
-                            <option value="" selected>Selectionner une Année</option>
+                            <option value="0" selected>Selectionner une Année</option>
                             <option v-for="year in years" :key="year.valeur_annee_scolaire" :value="year.valeur_annee_scolaire" >{{year.valeur_annee_scolaire}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <select v-model="ret.valSuc" @change="onFilCycAnSuChange()" id="succursale_id" class="form-control">
-                            <option value="" hidden selected>Selectionner une Succursale</option>
+                            <option value="0" hidden selected>Selectionner une Succursale</option>
                             <option v-for="dSuccursale in dSuccursales" :key="dSuccursale.libelle_succursale" :value="dSuccursale.libelle_succursale">{{dSuccursale.libelle_succursale}}</option>
                         </select>
                     </div>
@@ -54,6 +54,7 @@
                     <div class="tbl-content">
                         <table>
                             <tbody>
+                                <tr v-if="!etudiants.length" class="text-center" style="font-weight:bold;margin:0px auto">Pas d'étudiants trouvé</tr>
                                 <tr v-for="(etudiant,i) in etudiants" :key="etudiant.id">
                                     <td>{{i=i+1}}</td>
                                     <!--<td>{{etudiant.matricule}}</td>-->
@@ -207,10 +208,10 @@
                 edit_id:'',
                 is_Editing:false,
                  ret:{
-                    valfil:"",
-                    valAnn:"",
-                    valcyc:"",
-                    valSuc:"",
+                    valfil:"0",
+                    valAnn:"0",
+                    valcyc:"0",
+                    valSuc:"0",
                 },
             }
         },
@@ -238,13 +239,14 @@
             /*************************************************************/
                onFilCycAnSuChange(){
                     /*console.log("this.ret.valfil:",this.ret.valfil)*/
-                    alert("this.ret.valfil:"+this.ret.valfil+
+                    /*alert("this.ret.valfil:"+this.ret.valfil+
                         "\nthis.ret.valcyc:"+this.ret.valcyc+
                         "\nthis.ret.valAnn:"+this.ret.valAnn+
-                        "\nthis.ret.valSuc:"+this.ret.valSuc);
-                           /* axios.get(`api/loadOnFiliereChange/${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}`).then(res=>{
-                                this.filieres=res.data
-                            })           */
+                        "\nthis.ret.valSuc:"+this.ret.valSuc);*/
+                        //${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}
+                            axios.get(`api/loadOnFilCycAnSuChange/${this.ret.valfil}/${this.ret.valcyc}/${this.ret.valAnn}/${this.ret.valSuc}`).then(res=>{
+                                this.etudiants=res.data
+                            })           
                 },
             /************************LES-SELECT***************************/
             loadDistinctSuccursales(){

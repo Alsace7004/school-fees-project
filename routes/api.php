@@ -32,7 +32,8 @@ Route::apiResources(['filieres'=>FiliereController::class]);
 Route::get("distinctFilieres",[FiliereController::class,'filieres']);
 Route::get("filiereCycleYear",[EtudiantController::class,'concatFiliere']);
 Route::get("distincSuccursales",[EtudiantController::class,'succursales']);
-Route::get("loadOnFiliereChange/{dev}/{Ann?}/{Cyc?}",[FiliereController::class,'onFiliereChange']);
+Route::get("loadOnFiliereChange/{dev}/{Ann}/{Cyc}",[FiliereController::class,'onFiliereChange']);
 //loadOnFiliereChange
 //Etudiants
 Route::apiResources(['etudiants'=>EtudiantController::class]);
+Route::get("loadOnFilCycAnSuChange/{Fil?}/{Cyc?}/{Ann?}/{Suc?}",[EtudiantController::class,'onFilCycAnSuChange']);

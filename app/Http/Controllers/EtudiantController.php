@@ -141,4 +141,43 @@ class EtudiantController extends Controller
     {
         //
     }
+
+    public function onFilCycAnSuChange($Fil,$Cyc,$Ann,$Suc){
+        /*return response()->json([
+            'message'=>dd($suc)
+        ],500);*/
+        $succursales = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+        E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+        filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+        FROM etudiants E,succursales,filieres,cycles,years 
+        WHERE  E.filiere_id = filieres.id 
+        AND    E.succursale_id = succursales.id
+        AND    succursales.libelle_succursale = '$Suc'
+        AND    filieres.year_id = years.id AND filieres.cycle_id = cycles.id;");
+        return $succursales;
+
+        if(!$Cyc && !$Ann && !$Suc){    
+            //on recupere alors la filiere
+        }else if(!$Suc){
+            //on recupere filiere + cycle + Ann
+        }else if(!$Ann){
+                //on recupere filiere + cycle + succursale
+        }else if(!$Cyc){
+            //on recupere filiere + Ann + succursale
+        }else if(!$Fil){
+            //on recupere Cyc + Ann + succursale
+        }else if(!$Ann && !$Suc){
+            //on recupere filiere + cycle
+        }else if(!$Fil && !$Cyc){
+            //on recupere Ann + Suc
+        }else if(!$Fil && !$Ann){
+            //on recupere Cyc + Suc
+        }else if(!$Cyc && !$Suc){
+            //on recupere Fil + Ann
+        }else if(!$Cyc && !$Ann){
+            //on recupere filiere + Succursale
+        }else if(!$Fil && !$Suc){
+        //on recupere Cycle + Anne
+        }
+    }
 }

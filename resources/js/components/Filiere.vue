@@ -138,9 +138,9 @@
                 edit_id:'',
                 is_Editing:false,
                 ret:{
-                    valfil:"",
-                    valAnn:"",
-                    valcyc:"",
+                    valfil:"0",
+                    valAnn:"0",
+                    valcyc:"0",
                 },
               
             }

@@ -2443,6 +2443,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Etudiant",
   data: function data() {
@@ -2473,10 +2474,10 @@ __webpack_require__.r(__webpack_exports__);
       edit_id: '',
       is_Editing: false,
       ret: {
-        valfil: "",
-        valAnn: "",
-        valcyc: "",
-        valSuc: ""
+        valfil: "0",
+        valAnn: "0",
+        valcyc: "0",
+        valSuc: "0"
       }
     };
   },
@@ -2504,67 +2505,74 @@ __webpack_require__.r(__webpack_exports__);
 
     /*************************************************************/
     onFilCycAnSuChange: function onFilCycAnSuChange() {
+      var _this = this;
+
       /*console.log("this.ret.valfil:",this.ret.valfil)*/
-      alert("this.ret.valfil:" + this.ret.valfil + "\nthis.ret.valcyc:" + this.ret.valcyc + "\nthis.ret.valAnn:" + this.ret.valAnn + "\nthis.ret.valSuc:" + this.ret.valSuc);
-      /* axios.get(`api/loadOnFiliereChange/${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}`).then(res=>{
-           this.filieres=res.data
-       })           */
+
+      /*alert("this.ret.valfil:"+this.ret.valfil+
+          "\nthis.ret.valcyc:"+this.ret.valcyc+
+          "\nthis.ret.valAnn:"+this.ret.valAnn+
+          "\nthis.ret.valSuc:"+this.ret.valSuc);*/
+      //${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}
+      axios.get("api/loadOnFilCycAnSuChange/".concat(this.ret.valfil, "/").concat(this.ret.valcyc, "/").concat(this.ret.valAnn, "/").concat(this.ret.valSuc)).then(function (res) {
+        _this.etudiants = res.data;
+      });
     },
 
     /************************LES-SELECT***************************/
     loadDistinctSuccursales: function loadDistinctSuccursales() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('api/distincSuccursales').then(function (succursales) {
-        _this.dSuccursales = succursales.data;
+        _this2.dSuccursales = succursales.data;
       });
     },
     loadDistinctFilieres: function loadDistinctFilieres() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('api/distinctFilieres').then(function (filieres) {
-        _this2.dFilieres = filieres.data;
+        _this3.dFilieres = filieres.data;
       });
     },
     loadYears: function loadYears() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('api/years').then(function (data) {
-        _this3.years = data.data;
+        _this4.years = data.data;
       });
     },
     loadCycles: function loadCycles() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get('api/cycles').then(function (cycles) {
-        _this4.cycles = cycles.data;
+        _this5.cycles = cycles.data;
       });
     },
 
     /***********************************************************/
     loadDistinctFiliereCycleYear: function loadDistinctFiliereCycleYear() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get('api/filiereCycleYear').then(function (filieres) {
-        _this5.filieres = filieres.data;
+        _this6.filieres = filieres.data;
       });
     },
     loadSuccursales: function loadSuccursales() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('api/succursales').then(function (succursales) {
-        _this6.succursales = succursales.data;
+        _this7.succursales = succursales.data;
       });
     },
     loadEtudiants: function loadEtudiants() {
-      var _this7 = this;
+      var _this8 = this;
 
       axios.get('api/etudiants').then(function (etudiants) {
-        _this7.etudiants = etudiants.data;
+        _this8.etudiants = etudiants.data;
       });
     },
     createEtudiant: function createEtudiant() {
-      var _this8 = this;
+      var _this9 = this;
 
       var nm = document.querySelector("#nom").value;
       var pr = document.querySelector("#prenom").value;
@@ -2580,7 +2588,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("api/etudiants", this.etudiant).then(function () {
         Swal.fire('Created!', 'Etudiant créer avec success.', 'success');
 
-        _this8.loadEtudiants();
+        _this9.loadEtudiants();
         /*this.etudiant={
            nom:'',
            prenom:'',
@@ -2863,9 +2871,9 @@ __webpack_require__.r(__webpack_exports__);
       edit_id: '',
       is_Editing: false,
       ret: {
-        valfil: "",
-        valAnn: "",
-        valcyc: ""
+        valfil: "0",
+        valAnn: "0",
+        valcyc: "0"
       }
     };
   },
@@ -8309,7 +8317,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d7ec0e72]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d7ec0e72]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d7ec0e72]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d7ec0e72]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d7ec0e72]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d7ec0e72]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-d7ec0e72]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n}\n.btn-delete[data-v-d7ec0e72]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d7ec0e72]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d7ec0e72]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d7ec0e72]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d7ec0e72]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d7ec0e72]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d7ec0e72]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d7ec0e72]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-d7ec0e72]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n}\n.btn-delete[data-v-d7ec0e72]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d7ec0e72]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44380,7 +44388,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner une Filiere"),
             ]),
             _vm._v(" "),
@@ -44437,7 +44445,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner un cycle"),
             ]),
             _vm._v(" "),
@@ -44494,7 +44502,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner une Année"),
             ]),
             _vm._v(" "),
@@ -44551,7 +44559,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "", hidden: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", hidden: "", selected: "" } }, [
               _vm._v("Selectionner une Succursale"),
             ]),
             _vm._v(" "),
@@ -44594,26 +44602,42 @@ var render = function () {
         _c("table", [
           _c(
             "tbody",
-            _vm._l(_vm.etudiants, function (etudiant, i) {
-              return _c("tr", { key: etudiant.id }, [
-                _c("td", [_vm._v(_vm._s((i = i + 1)))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(etudiant.nom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(etudiant.prenom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(etudiant.genre))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(etudiant.code_filiere))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(etudiant.libelle_succursale))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(etudiant.valeur_filiere))]),
-                _vm._v(" "),
-                _vm._m(1, true),
-              ])
-            }),
-            0
+            [
+              !_vm.etudiants.length
+                ? _c(
+                    "tr",
+                    {
+                      staticClass: "text-center",
+                      staticStyle: {
+                        "font-weight": "bold",
+                        margin: "0px auto",
+                      },
+                    },
+                    [_vm._v("Pas d'étudiants trouvé")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.etudiants, function (etudiant, i) {
+                return _c("tr", { key: etudiant.id }, [
+                  _c("td", [_vm._v(_vm._s((i = i + 1)))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(etudiant.nom))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(etudiant.prenom))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(etudiant.genre))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(etudiant.code_filiere))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(etudiant.libelle_succursale))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(etudiant.valeur_filiere))]),
+                  _vm._v(" "),
+                  _vm._m(1, true),
+                ])
+              }),
+            ],
+            2
           ),
         ]),
       ]),
