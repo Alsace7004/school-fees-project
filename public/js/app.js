@@ -44559,7 +44559,7 @@ var render = function () {
             },
           },
           [
-            _c("option", { attrs: { value: "0", hidden: "", selected: "" } }, [
+            _c("option", { attrs: { value: "0", selected: "" } }, [
               _vm._v("Selectionner une Succursale"),
             ]),
             _vm._v(" "),

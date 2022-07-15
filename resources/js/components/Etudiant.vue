@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-3">
                         <select v-model="ret.valSuc" @change="onFilCycAnSuChange()" id="succursale_id" class="form-control">
-                            <option value="0" hidden selected>Selectionner une Succursale</option>
+                            <option value="0" selected>Selectionner une Succursale</option>
                             <option v-for="dSuccursale in dSuccursales" :key="dSuccursale.libelle_succursale" :value="dSuccursale.libelle_succursale">{{dSuccursale.libelle_succursale}}</option>
                         </select>
                     </div>
