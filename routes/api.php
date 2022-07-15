@@ -36,4 +36,4 @@ Route::get("loadOnFiliereChange/{dev}/{Ann}/{Cyc}",[FiliereController::class,'on
 //loadOnFiliereChange
 //Etudiants
 Route::apiResources(['etudiants'=>EtudiantController::class]);
-Route::get("loadOnFilCycAnSuChange/{Fil?}/{Cyc?}/{Ann?}/{Suc?}",[EtudiantController::class,'onFilCycAnSuChange']);
+Route::get("loadOnFilCycAnSuChange/{Fil}/{Cyc}/{Ann}/{Suc}",[EtudiantController::class,'onFilCycAnSuChange']);
