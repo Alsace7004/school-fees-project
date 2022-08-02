@@ -33,6 +33,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 let routes = [
+    {path:'/',component:require('./components/Try.vue').default},
     {path:'/etudiants',component:require('./components/Etudiant.vue').default},
     {path:'/filieres',component:require('./components/Filiere.vue').default},
     {path:'/succursales',component:require('./components/Succursale.vue').default},
