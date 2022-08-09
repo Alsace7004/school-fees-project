@@ -1,82 +1,110 @@
 <template>
-    <div class="container">
-        <div class="row mt-5" >
-             <!---->
-                    <div class="d-flex justify-content-end">
-                        <button class="btn-add" @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
-                    </div>
-                    <!--table-->
-                    <div class="tbl-header">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Années Scolaires</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tbl-content">
-                        <table>
-                            <tbody>
-                                <tr v-for="year in years" :key="year.id">
-                                    <td>{{year.id}}</td>
-                                    <td>{{year.valeur_annee_scolaire}}</td>
-                                    <td>
-                                        <div class="display-flex">
-                                            <button @click="editYear(year)" class="btn-edit">Edit</button>
-                                            <button @click="deleteYear(year.id)" class="btn-delete">Delete</button>
+    <div class="wrapper">
+        <Nav/>
+        <Aside/>
+        <!--le contenu sera ici-->
+        <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <Title titre="Années Scolaires" description="Liste des Années scolaires"/>
+                    <!-- /.content-header -->
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                                <div class="row mt-2" >
+                                <!---->
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn-add" @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
+                                    </div>
+                                    <!--table-->
+                                    <div class="tbl-header">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Années Scolaires</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="tbl-content">
+                                        <table>
+                                            <tbody>
+                                                <tr v-for="year in years" :key="year.id">
+                                                    <td>{{year.id}}</td>
+                                                    <td>{{year.valeur_annee_scolaire}}</td>
+                                                    <td>
+                                                        <div class="display-flex">
+                                                            <button @click="editYear(year)" class="btn-edit">Edit</button>
+                                                            <button @click="deleteYear(year.id)" class="btn-delete">Delete</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            
+                                                
+                                            
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--table-->
+                                    <!---->
+                                </div>
+
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 v-show="editmode" class="modal-title" id="exampleModalLabel">Update Year</h5>
+                                                    <h5 v-show="!editmode" class="modal-title" id="exampleModalLabel">Add New Year</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form @submit.prevent="editmode ? updateYear() : createYear()">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <input type="text" v-model="form.valeur_annee_scolaire" id="valeur_annee_scolaire" name="valeur_annee_scolaire" placeholder="Année Scolaire..." class="form-control">
+                                                            <!--<div v-if="form.errors.has('valeur_annee_scolaire')" v-html="form.errors.get('valeur_annee_scolaire')" />-->
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
+                                                        <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                             
-                                
-                              
-                               
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--table-->
-            <!---->
-        </div>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 v-show="editmode" class="modal-title" id="exampleModalLabel">Update Year</h5>
-                        <h5 v-show="!editmode" class="modal-title" id="exampleModalLabel">Add New Year</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form @submit.prevent="editmode ? updateYear() : createYear()">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" v-model="form.valeur_annee_scolaire" id="valeur_annee_scolaire" name="valeur_annee_scolaire" placeholder="Année Scolaire..." class="form-control">
-                                <!--<div v-if="form.errors.has('valeur_annee_scolaire')" v-html="form.errors.get('valeur_annee_scolaire')" />-->
-                            </div>
-                        </div>
-                    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-                            <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </form>
+                                    </div>
+                                    <!-- Modal -->
+                            <!-- /.row (main row) -->
+                        </div><!-- /.container-fluid -->
+                    </section>
+                    <!-- /.content -->
                 </div>
-            </div>
-        </div>
-        <!-- Modal -->
+        <Footer/>
+    
     </div>
+   
 </template>
 
 <script>
+    import Title from "./pages/Title.vue";
+    import Nav from "./pages/Nav.vue";
+    import Aside from "./pages/Aside.vue";
+    import Footer from "./pages/Footer.vue";
     export default {
         name:"Year",
+        components:{
+            Nav,Aside,Footer,Title
+        },
         data(){
             return{
                 editmode:false,
@@ -168,7 +196,10 @@
             this.loadYears();
         },
         mounted() {
-            console.log('Component mounted.')
+            var year = document.querySelector('.year');
+            var dash = document.querySelector('.dash');
+            dash.classList.remove('active');
+            year.classList.add('active');
         }
     }
 </script>

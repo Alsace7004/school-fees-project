@@ -1,126 +1,158 @@
 <template>
-    <div class="container">
-        <div class="row mt-5" >
-            <!---->
-                <div class="col-md-4">
-                    <select v-model="ret.valfil" v-on:change="onFiliereChange()"  id="code_filiere" class="form-control">
-                        <option value="0" selected>Selectionner une Filiere</option>
-                        <option  v-for="dFiliere in dFilieres" :key="dFiliere.code_filiere" :value="dFiliere.code_filiere" >{{dFiliere.code_filiere}}</option>
-                    </select>
-                </div> 
-                <div class="col-md-4">
-                    <select  v-model="ret.valAnn" @change="onFiliereChange()"  id="year_id" class="form-control">
-                        <option value="0" selected>Selectionner une Année</option>
-                        <option v-for="year in years" :key="year.valeur_annee_scolaire" :value="year.valeur_annee_scolaire" >{{year.valeur_annee_scolaire}}</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <select  v-model="ret.valcyc" @change="onFiliereChange()" id="cycle_id" class="form-control">
-                        <option value="0" selected>Selectionner un cycle</option>
-                        <option v-for="cycle in cycles" :key="cycle.libelle_cycle" :value="cycle.libelle_cycle" >{{cycle.libelle_cycle}}</option>
-                    </select>
-                </div>
-                    
-                    
-                <div style="display: flex;justify-content: end;" class="mt-2">
-                    <button class="btn-add" @click="newModal"  data-toggle="modal" data-target="#addNew">Ajouter</button>
-                </div>
-            
-                    
-                    <!--table-->
-                    <div class="tbl-header">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Code Filiere</th>
-                                    <th>Nom Filiere</th>
-                                    <th>Scolarite Filiere</th>
-                                    <th>Année Scolaire</th>
-                                    <th>Cycle</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tbl-content">
-                        <table>
-                            <tbody>
-                                <tr v-if="!filieres.length" class="text-center" style="font-weight:bold;margin:0px auto">No filieres found</tr>
-                                <tr v-for="filiere in filieres" :key="filiere.id">
-                                    <td>{{filiere.id}}</td>
-                                    <td>{{filiere.code_filiere}}</td>
-                                    <td>{{filiere.libelle_filiere}}</td>
-                                    <td>{{filiere.scolarite_filiere}}</td>
-                                    <td>{{filiere.valeur_annee_scolaire}}</td>
-                                    <td>{{filiere.libelle_cycle}}</td>
-                                    <td>
-                                        <div class="display-flex">
-                                            <a @click="editFiliere(filiere.id)" class="btn-edit">Edit</a>
-                                            <a @click="deleteFiliere(filiere.id)" class="btn-delete">Delete</a>
+    <div class="wrapper">
+        <Nav/>
+        <Aside/>
+        <!--le contenu sera ici-->
+        <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <Title titre="Filieres" description="Liste des filières"/>
+                    <!-- /.content-header -->
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                            <div class="container">
+                                <div class="row mt-1" >
+                                    <!---->
+                                        <div class="col-md-4">
+                                            <select v-model="ret.valfil" v-on:change="onFiliereChange()"  id="code_filiere" class="form-control">
+                                                <option value="0" selected>Selectionner une Filiere</option>
+                                                <option  v-for="dFiliere in dFilieres" :key="dFiliere.code_filiere" :value="dFiliere.code_filiere" >{{dFiliere.code_filiere}}</option>
+                                            </select>
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <select  v-model="ret.valAnn" @change="onFiliereChange()"  id="year_id" class="form-control">
+                                                <option value="0" selected>Selectionner une Année</option>
+                                                <option v-for="year in years" :key="year.valeur_annee_scolaire" :value="year.valeur_annee_scolaire" >{{year.valeur_annee_scolaire}}</option>
+                                            </select>
                                         </div>
-                                    </td>
-                                </tr>
+                                        <div class="col-md-4">
+                                            <select  v-model="ret.valcyc" @change="onFiliereChange()" id="cycle_id" class="form-control">
+                                                <option value="0" selected>Selectionner un cycle</option>
+                                                <option v-for="cycle in cycles" :key="cycle.libelle_cycle" :value="cycle.libelle_cycle" >{{cycle.libelle_cycle}}</option>
+                                            </select>
+                                        </div>
+                                            
+                                            
+                                        <div style="display: flex;justify-content: end;" class="mt-2">
+                                            <button class="btn-add" @click="newModal"  data-toggle="modal" data-target="#addNew">Ajouter</button>
+                                        </div>
+                                    
+                                            
+                                            <!--table-->
+                                            <div class="tbl-header">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Code Filiere</th>
+                                                            <th>Nom Filiere</th>
+                                                            <th>Scolarite Filiere</th>
+                                                            <th>Année Scolaire</th>
+                                                            <th>Cycle</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                            <div class="tbl-content">
+                                                <table>
+                                                    <tbody>
+                                                        <tr v-if="!filieres.length" class="text-center" style="font-weight:bold;margin:0px auto">No filieres found</tr>
+                                                        <tr v-for="filiere in filieres" :key="filiere.id">
+                                                            <td>{{filiere.id}}</td>
+                                                            <td>{{filiere.code_filiere}}</td>
+                                                            <td>{{filiere.libelle_filiere}}</td>
+                                                            <td>{{filiere.scolarite_filiere}}</td>
+                                                            <td>{{filiere.valeur_annee_scolaire}}</td>
+                                                            <td>{{filiere.libelle_cycle}}</td>
+                                                            <td>
+                                                                <div class="display-flex">
+                                                                    <a @click="editFiliere(filiere.id)" class="btn-edit">Edit</a>
+                                                                    <a @click="deleteFiliere(filiere.id)" class="btn-delete">Delete</a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--table-->
+                                    <!---->
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Filiere":"Add New Filiere"}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form @submit.prevent="is_Editing ? updateFiliere() : createFiliere()">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="filiere.code_filiere"  id="code_filiere" placeholder="Code de la filiere..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="filiere.libelle_filiere"  id="libelle_filiere" placeholder="Nom de la filiere..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="filiere.description_filiere" id="description_filiere" placeholder="Description de la filiere..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="filiere.scolarite_filiere"  id="scolarite_filiere" placeholder="Scolarite de la filiere..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select  v-model="filiere.year_id" id="year_id" class="form-control">
+                                                            <option value="0" selected>Selectionner une Année</option>
+                                                            <option v-for="year in years" :key="year.id" :value="year.id" >{{year.valeur_annee_scolaire}}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select  v-model="filiere.cycle_id" id="cycle_id" class="form-control">
+                                                            <option value="0" selected>Selectionner un Cycle</option>
+                                                            <option v-for="cycle in cycles" :key="cycle.id" :value="cycle.id" >{{cycle.libelle_cycle}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                            </div>
                             
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--table-->
-            <!---->
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Filiere":"Add New Filiere"}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form @submit.prevent="is_Editing ? updateFiliere() : createFiliere()">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" v-model="filiere.code_filiere"  id="code_filiere" placeholder="Code de la filiere..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" v-model="filiere.libelle_filiere"  id="libelle_filiere" placeholder="Nom de la filiere..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" v-model="filiere.description_filiere" id="description_filiere" placeholder="Description de la filiere..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" v-model="filiere.scolarite_filiere"  id="scolarite_filiere" placeholder="Scolarite de la filiere..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <select  v-model="filiere.year_id" id="year_id" class="form-control">
-                                    <option value="0" selected>Selectionner une Année</option>
-                                    <option v-for="year in years" :key="year.id" :value="year.id" >{{year.valeur_annee_scolaire}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select  v-model="filiere.cycle_id" id="cycle_id" class="form-control">
-                                    <option value="0" selected>Selectionner un Cycle</option>
-                                    <option v-for="cycle in cycles" :key="cycle.id" :value="cycle.id" >{{cycle.libelle_cycle}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
-                        </div>
-                    </form>
+                            <!-- Small boxes (Stat box) -->
+                            
+                            <!-- /.row (main row) -->
+                        </div><!-- /.container-fluid -->
+                    </section>
+                    <!-- /.content -->
                 </div>
-            </div>
-        </div>
-        <!-- Modal -->
+        <Footer/>
+    
     </div>
 </template>
 
 <script>
+import Title from "./pages/Title.vue";
+    import Nav from "./pages/Nav.vue";
+    import Aside from "./pages/Aside.vue";
+    import Footer from "./pages/Footer.vue";
     export default {
         name:"Filiere",
+        components:{
+            Nav,Aside,Footer,Title
+        },
         data(){
             return{
                 years:[],
@@ -278,9 +310,12 @@
             this.loadCycles();
             this.loadDistinctFilieres();
         },
-        /*mounted() {
-            console.log('Component mounted.')
-        }*/
+        mounted() {
+            var filiere = document.querySelector('.filiere');
+            var dash = document.querySelector('.dash');
+            dash.classList.remove('active');
+            filiere.classList.add('active');
+        }
     }
 </script>
 

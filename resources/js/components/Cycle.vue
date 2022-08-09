@@ -1,79 +1,109 @@
 <template>
-    <div class="container">
-        <div class="row mt-5" >
-             <!---->
-                    <div class="d-flex justify-content-end">
-                        <button class="btn-add" @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
-                    </div>
-                    <!--table-->
-                    <div class="tbl-header">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Code cycle</th>
-                                    <th>Libelle cycle</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tbl-content">
-                        <table>
-                            <tbody>
-                                <tr v-for="cycle in cycles" :key="cycle.id">
-                                    <td>{{cycle.id}}</td>
-                                    <td>{{cycle.code_cycle}}</td>
-                                    <td>{{cycle.libelle_cycle}}</td>
-                                    <td>
-                                        <div class="display-flex">
-                                            <button @click="editCycle(cycle.id)" class="btn-edit">Edit</button>
-                                            <button @click="deleteCycle(cycle.id)" class="btn-delete">Delete</button>
+     <div class="wrapper">
+        <Nav/>
+        <Aside/>
+        <!--le contenu sera ici-->
+        <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <Title titre="Cycles" description="Liste des cyles"/>
+                    <!-- /.content-header -->
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                            <div class="container">
+                                <div class="row mt-2" >
+                                    <!---->
+                                            <div class="d-flex justify-content-end">
+                                                <button class="btn-add" @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
+                                            </div>
+                                            <!--table-->
+                                            <div class="tbl-header">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>Code cycle</th>
+                                                            <th>Libelle cycle</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                            <div class="tbl-content">
+                                                <table>
+                                                    <tbody>
+                                                        <tr v-for="cycle in cycles" :key="cycle.id">
+                                                            <td>{{cycle.id}}</td>
+                                                            <td>{{cycle.code_cycle}}</td>
+                                                            <td>{{cycle.libelle_cycle}}</td>
+                                                            <td>
+                                                                <div class="display-flex">
+                                                                    <button @click="editCycle(cycle.id)" class="btn-edit">Edit</button>
+                                                                    <button @click="deleteCycle(cycle.id)" class="btn-delete">Delete</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--table-->
+                                    <!---->
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Cycle":"Add New Cycle"}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form @submit.prevent="is_Editing ? updateCycle() : createCycle()">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="cycle.code_cycle"  id="code_cycle" placeholder="Code du cycle..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="cycle.libelle_cycle" id="libelle_cycle" placeholder="Libelle du cycle..." class="form-control">
+                                                    </div>
+                                                </div>
+                                            
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </td>
-                                </tr>
-                               
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--table-->
-            <!---->
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Cycle":"Add New Cycle"}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form @submit.prevent="is_Editing ? updateCycle() : createCycle()">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" v-model="cycle.code_cycle"  id="code_cycle" placeholder="Code du cycle..." class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Modal -->
                             </div>
-                            <div class="form-group">
-                                <input type="text" v-model="cycle.libelle_cycle" id="libelle_cycle" placeholder="Libelle du cycle..." class="form-control">
-                            </div>
-                        </div>
-                    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
-                        </div>
-                    </form>
+                            <!-- Small boxes (Stat box) -->
+                            <!-- /.row (main row) -->
+                        </div><!-- /.container-fluid -->
+                    </section>
+                    <!-- /.content -->
                 </div>
-            </div>
-        </div>
-        <!-- Modal -->
+        <Footer/>
+    
     </div>
 </template>
 
 <script>
+import Title from "../components/pages/Title.vue";
+import Nav from "../components/pages/Nav.vue";
+import Aside from "../components/pages/Aside.vue";
+import Footer from "../components/pages/Footer.vue";
     export default {
         name:"Cycle",
+        components:{
+            Nav,Aside,Footer,Title
+        },
         data(){
             return{
                 cycles:[],
@@ -173,7 +203,10 @@
             this.loadCycles();
         },
         mounted() {
-            console.log('Component mounted.')
+            var cycle = document.querySelector('.cycle');
+            var dash = document.querySelector('.dash');
+            dash.classList.remove('active');
+            cycle.classList.add('active');
         }
     }
 </script>

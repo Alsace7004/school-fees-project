@@ -1,88 +1,115 @@
 <template>
-    <div class="container">
-        <div class="row mt-5" >
-            <!---->
-                    <div style="display: flex;justify-content: end;">
-                        <button class="btn-add" @click="newModal"  data-toggle="modal" data-target="#addNew">Ajouter</button>
-                    </div>
-                    <!--table-->
-                    <div class="tbl-header">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nom de la succursale</th>
-                                    <th>Ville de la succursale</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tbl-content">
-                        <table>
-                            <tbody>
-                                <tr v-if="!succursales.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">No succursales found</tr>
-                                <tr v-for="succursale in succursales" :key="succursale.id">
-                                    <td>{{succursale.id}}</td>
-                                    <td>{{succursale.libelle_succursale}}</td>
-                                    <td>{{succursale.libelle_ville}}</td>
-                                    <td>
-                                        <div class="display-flex">
-                                            <button @click="editSuccursale(succursale.id)" class="btn-edit">Edit</button>
-                                            <button @click="deleteSuccursale(succursale.id)" class="btn-delete">Delete</button>
+        <div class="wrapper">
+        <Nav/>
+        <Aside/>
+        <!--le contenu sera ici-->
+        <!-- Content Wrapper. Contains page content -->
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <Title titre="Succursales" description="Liste des succursales"/>
+                    <!-- /.content-header -->
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                                <div class="container">
+                                    <div class="row mt-2" >
+                                        <!---->
+                                                <div style="display: flex;justify-content: end;">
+                                                    <button class="btn-add" @click="newModal"  data-toggle="modal" data-target="#addNew">Ajouter</button>
+                                                </div>
+                                                <!--table-->
+                                                <div class="tbl-header">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Nom de la succursale</th>
+                                                                <th>Ville de la succursale</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                                <div class="tbl-content">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr v-if="!succursales.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">No succursales found</tr>
+                                                            <tr v-for="succursale in succursales" :key="succursale.id">
+                                                                <td>{{succursale.id}}</td>
+                                                                <td>{{succursale.libelle_succursale}}</td>
+                                                                <td>{{succursale.libelle_ville}}</td>
+                                                                <td>
+                                                                    <div class="display-flex">
+                                                                        <button @click="editSuccursale(succursale.id)" class="btn-edit">Edit</button>
+                                                                        <button @click="deleteSuccursale(succursale.id)" class="btn-delete">Delete</button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!--table-->
+                                        <!---->
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Succursale":"Add New Succursale"}}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form @submit.prevent="is_Editing ? updateSuccursale() : createSuccursale()">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <input type="text" v-model="succursale.libelle_succursale"  id="libelle_succursale" placeholder="Nom de la succursale..." class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" v-model="succursale.description_succursale" id="description_succursale" placeholder="description de la succursale..." class="form-control">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <select  v-model="succursale.ville_id" id="ville_id" class="form-control">
+                                                                <option value="" hidden selected>Selectionner une ville</option>
+                                                                <option v-for="ville in villes" :key="ville.id" :value="ville.id" >{{ville.libelle_ville}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--table-->
-            <!---->
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Succursale":"Add New Succursale"}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form @submit.prevent="is_Editing ? updateSuccursale() : createSuccursale()">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="text" v-model="succursale.libelle_succursale"  id="libelle_succursale" placeholder="Nom de la succursale..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" v-model="succursale.description_succursale" id="description_succursale" placeholder="description de la succursale..." class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <select  v-model="succursale.ville_id" id="ville_id" class="form-control">
-                                    <option value="" hidden selected>Selectionner une ville</option>
-                                    <option v-for="ville in villes" :key="ville.id" :value="ville.id" >{{ville.libelle_ville}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
-                        </div>
-                    </form>
+                                    </div>
+                                    <!-- Modal -->
+                                </div>
+                            <!-- /.row (main row) -->
+                        </div><!-- /.container-fluid -->
+                    </section>
+                    <!-- /.content -->
                 </div>
-            </div>
-        </div>
-        <!-- Modal -->
-
+        <Footer/>
+    
     </div>
 </template>
 
 <script>
+    import Title from "./pages/Title.vue";
+    import Nav from "./pages/Nav.vue";
+    import Aside from "./pages/Aside.vue";
+    import Footer from "./pages/Footer.vue";
     export default {
         name:"Succursale",
+         components:{
+            Nav,Aside,Footer,Title
+        },
         data(){
             return{
                 villes:[],
@@ -192,7 +219,10 @@
             this.loadVilles();
         },
         mounted() {
-            console.log('Component mounted.')
+            var succursale = document.querySelector('.succursale');
+            var dash = document.querySelector('.dash');
+            dash.classList.remove('active');
+            succursale.classList.add('active');
         }
     }
 </script>

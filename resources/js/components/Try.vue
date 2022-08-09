@@ -6,28 +6,14 @@
         <!-- Content Wrapper. Contains page content -->
                 <div class="content-wrapper">
                     <!-- Content Header (Page header) -->
-                    <div class="content-header">
-                        <div class="container-fluid">
-                            <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0">Dashboard</h1>
-                            </div><!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard v1</li>
-                                </ol>
-                            </div><!-- /.col -->
-                            </div><!-- /.row -->
-                        </div><!-- /.container-fluid -->
-                    </div>
+                    
                     <!-- /.content-header -->
 
                     <!-- Main content -->
                     <section class="content">
                         <div class="container-fluid">
                             <!-- Small boxes (Stat box) -->
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-lg-3 col-6">
                                     <!-- small box -->
                                     <div class="small-box bg-info">
@@ -39,7 +25,7 @@
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -54,7 +40,7 @@
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -69,7 +55,7 @@
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -84,7 +70,7 @@
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -101,7 +87,7 @@
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -116,7 +102,7 @@
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -131,7 +117,7 @@
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -146,14 +132,13 @@
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
                             </div>
                             <!-- Small boxes (Stat box) -->
-                            <div class="row">
-                                hello
+                            <div class="row mt-5">
                                 <router-view></router-view>
                             </div>
                             <!-- /.row (main row) -->
@@ -167,6 +152,7 @@
 </template>
 
 <script>
+import Title from "../components/pages/Title.vue";
 import Nav from "../components/pages/Nav.vue";
 import Aside from "../components/pages/Aside.vue";
 import Footer from "../components/pages/Footer.vue";
@@ -176,7 +162,7 @@ export default {
     msg: String,
   },
   components:{
-    Nav,Aside,Footer
+    Nav,Aside,Footer,Title
   }
 };
 </script>
