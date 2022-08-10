@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResources(['years'=>YearController::class]);
+Route::get("count",[YearController::class,'countData']);
+
 Route::apiResources(['cycles'=>CycleController::class]);
 Route::apiResources(['villes'=>VilleController::class]);
 Route::apiResources(['succursales'=>SuccursaleController::class]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\year;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class YearController extends Controller
 {
@@ -68,5 +69,11 @@ class YearController extends Controller
     {
         //
         return $year->delete();
+    }
+
+    public function countData(){
+        $users = DB::SELECT("SELECT COUNT(*) as nbr_users FROM users");
+        $etudiants = DB::SELECT("SELECT COUNT(*) as nbr_etudiants FROM etudiants");
+        return compact('users','etudiants');
     }
 }

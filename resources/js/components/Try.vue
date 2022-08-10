@@ -18,8 +18,7 @@
                                     <!-- small box -->
                                     <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>150</h3>
-
+                                        <h3>{{users}}</h3>
                                         <p>Utilisateurs</p>
                                     </div>
                                     <div class="icon">
@@ -33,7 +32,7 @@
                                     <!-- small box -->
                                     <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                        <h3>{{etudiants}}</h3>
 
                                         <p>Etudiants</p>
                                     </div>
@@ -157,12 +156,36 @@ import Nav from "../components/pages/Nav.vue";
 import Aside from "../components/pages/Aside.vue";
 import Footer from "../components/pages/Footer.vue";
 export default {
-  name: "HelloWorld",
+  name: "Try",
   props: {
     msg: String,
   },
   components:{
     Nav,Aside,Footer,Title
+  },
+  data(){
+    return{
+        users:'',
+        etudiants:'',
+        filieres:'',
+        cycles:'',
+        villes:'',
+        succursales:'',
+        years:'',
+    }
+  },
+  methods:{
+    loadCountData(){
+        axios.get('api/count').then((res)=>{
+            console.log("valeur de res pour le count: ",res.data.users[0].nbr_users)
+            this.users = res.data.users[0].nbr_users;
+            this.etudiants = res.data.etudiants[0].nbr_etudiants;
+            //this.etudiants = res.data[1].nbr_etudiants;
+        })
+    }
+  },
+  created(){
+    this.loadCountData();
   }
 };
 </script>

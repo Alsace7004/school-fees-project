@@ -3584,13 +3584,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "HelloWorld",
+  name: "Try",
   props: {
     msg: String
   },
@@ -3599,6 +3598,31 @@ __webpack_require__.r(__webpack_exports__);
     Aside: _components_pages_Aside_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     Footer: _components_pages_Footer_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     Title: _components_pages_Title_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      users: '',
+      etudiants: '',
+      filieres: '',
+      cycles: '',
+      villes: '',
+      succursales: '',
+      years: ''
+    };
+  },
+  methods: {
+    loadCountData: function loadCountData() {
+      var _this = this;
+
+      axios.get('api/count').then(function (res) {
+        console.log("valeur de res pour le count: ", res.data.users[0].nbr_users);
+        _this.users = res.data.users[0].nbr_users;
+        _this.etudiants = res.data.etudiants[0].nbr_etudiants; //this.etudiants = res.data[1].nbr_etudiants;
+      });
+    }
+  },
+  created: function created() {
+    this.loadCountData();
   }
 });
 
@@ -47910,7 +47934,37 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-info" },
                   [
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.users))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Utilisateurs")]),
+                    ]),
+                    _vm._v(" "),
                     _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      [
+                        _vm._v("Plus info "),
+                        _c("i", { staticClass: "fas fa-arrow-circle-right" }),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "small-box bg-success" },
+                  [
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.etudiants))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Etudiants")]),
+                    ]),
                     _vm._v(" "),
                     _vm._m(1),
                     _vm._v(" "),
@@ -47930,7 +47984,7 @@ var render = function () {
               _c("div", { staticClass: "col-lg-3 col-6" }, [
                 _c(
                   "div",
-                  { staticClass: "small-box bg-success" },
+                  { staticClass: "small-box bg-warning" },
                   [
                     _vm._m(2),
                     _vm._v(" "),
@@ -47952,33 +48006,11 @@ var render = function () {
               _c("div", { staticClass: "col-lg-3 col-6" }, [
                 _c(
                   "div",
-                  { staticClass: "small-box bg-warning" },
+                  { staticClass: "small-box bg-danger" },
                   [
                     _vm._m(4),
                     _vm._v(" "),
                     _vm._m(5),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
-                      [
-                        _vm._v("Plus info "),
-                        _c("i", { staticClass: "fas fa-arrow-circle-right" }),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "small-box bg-danger" },
-                  [
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _vm._m(7),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -48000,6 +48032,28 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-info" },
                   [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      [
+                        _vm._v("Plus info "),
+                        _c("i", { staticClass: "fas fa-arrow-circle-right" }),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-3 col-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "small-box bg-success" },
+                  [
                     _vm._m(8),
                     _vm._v(" "),
                     _vm._m(9),
@@ -48020,7 +48074,7 @@ var render = function () {
               _c("div", { staticClass: "col-lg-3 col-6" }, [
                 _c(
                   "div",
-                  { staticClass: "small-box bg-success" },
+                  { staticClass: "small-box bg-warning" },
                   [
                     _vm._m(10),
                     _vm._v(" "),
@@ -48042,33 +48096,11 @@ var render = function () {
               _c("div", { staticClass: "col-lg-3 col-6" }, [
                 _c(
                   "div",
-                  { staticClass: "small-box bg-warning" },
+                  { staticClass: "small-box bg-danger" },
                   [
                     _vm._m(12),
                     _vm._v(" "),
                     _vm._m(13),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
-                      [
-                        _vm._v("Plus info "),
-                        _c("i", { staticClass: "fas fa-arrow-circle-right" }),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "small-box bg-danger" },
-                  [
-                    _vm._m(14),
-                    _vm._v(" "),
-                    _vm._m(15),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -48099,31 +48131,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [_vm._v("150")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Utilisateurs")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "ion ion-bag" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [
-        _vm._v("53"),
-        _c("sup", { staticStyle: { "font-size": "20px" } }, [_vm._v("%")]),
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Etudiants")]),
     ])
   },
   function () {
