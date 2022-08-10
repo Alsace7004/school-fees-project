@@ -24,7 +24,7 @@
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/users" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -39,7 +39,7 @@
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/etudiants" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -47,14 +47,14 @@
                                     <!-- small box -->
                                     <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>44</h3>
+                                        <h3>{{filieres}}</h3>
 
                                         <p>Filieres</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/filieres" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -62,14 +62,14 @@
                                     <!-- small box -->
                                     <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>65</h3>
+                                        <h3>{{cycles}}</h3>
 
                                         <p>Cycles</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/cycles" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -79,14 +79,13 @@
                                     <!-- small box -->
                                     <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>150</h3>
-
+                                        <h3>{{villes}}</h3>
                                         <p>Villes</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/villes" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -94,14 +93,14 @@
                                     <!-- small box -->
                                     <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
+                                        <h3>{{succursales}}</h3>
+                                        <!--<sup style="font-size: 20px">%</sup>-->
                                         <p>Succursales</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/succursales" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -109,14 +108,14 @@
                                     <!-- small box -->
                                     <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>44</h3>
+                                        <h3>{{years}}</h3>
 
                                         <p>Années Scolaires</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
                                     </div>
-                                    <router-link to="#" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/years" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->
@@ -124,7 +123,7 @@
                                     <!-- small box -->
                                     <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>65</h3>
+                                        <h3>{{cycles}}</h3>
 
                                         <p>Cycles</p>
                                     </div>
@@ -177,10 +176,15 @@ export default {
   methods:{
     loadCountData(){
         axios.get('api/count').then((res)=>{
-            console.log("valeur de res pour le count: ",res.data.users[0].nbr_users)
+            //console.log("valeur de res pour le count: ",res.data)
             this.users = res.data.users[0].nbr_users;
             this.etudiants = res.data.etudiants[0].nbr_etudiants;
-            //this.etudiants = res.data[1].nbr_etudiants;
+            this.filieres = res.data.filieres[0].nbr_filieres;
+            this.cycles = res.data.cycles[0].nbr_cycles;
+            this.villes = res.data.villes[0].nbr_villes;
+            this.succursales = res.data.succursales[0].nbr_succursales;
+            this.years = res.data.years[0].nbr_years;
+            
         })
     }
   },

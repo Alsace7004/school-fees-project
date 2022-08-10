@@ -3583,7 +3583,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3615,9 +3614,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('api/count').then(function (res) {
-        console.log("valeur de res pour le count: ", res.data.users[0].nbr_users);
+        //console.log("valeur de res pour le count: ",res.data)
         _this.users = res.data.users[0].nbr_users;
-        _this.etudiants = res.data.etudiants[0].nbr_etudiants; //this.etudiants = res.data[1].nbr_etudiants;
+        _this.etudiants = res.data.etudiants[0].nbr_etudiants;
+        _this.filieres = res.data.filieres[0].nbr_filieres;
+        _this.cycles = res.data.cycles[0].nbr_cycles;
+        _this.villes = res.data.villes[0].nbr_villes;
+        _this.succursales = res.data.succursales[0].nbr_succursales;
+        _this.years = res.data.years[0].nbr_years;
       });
     }
   },
@@ -47944,7 +47948,10 @@ var render = function () {
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/users" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -47970,7 +47977,10 @@ var render = function () {
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/etudiants" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -47986,13 +47996,20 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-warning" },
                   [
-                    _vm._m(2),
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.filieres))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Filieres")]),
+                    ]),
                     _vm._v(" "),
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/filieres" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -48008,13 +48025,20 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-danger" },
                   [
-                    _vm._m(4),
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.cycles))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Cycles")]),
+                    ]),
                     _vm._v(" "),
-                    _vm._m(5),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/cycles" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -48032,13 +48056,20 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-info" },
                   [
-                    _vm._m(6),
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.villes))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Villes")]),
+                    ]),
                     _vm._v(" "),
-                    _vm._m(7),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/villes" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -48054,13 +48085,20 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-success" },
                   [
-                    _vm._m(8),
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.succursales))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Succursales")]),
+                    ]),
                     _vm._v(" "),
-                    _vm._m(9),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/succursales" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -48076,13 +48114,20 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-warning" },
                   [
-                    _vm._m(10),
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.years))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Années Scolaires")]),
+                    ]),
                     _vm._v(" "),
-                    _vm._m(11),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/years" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -48098,9 +48143,13 @@ var render = function () {
                   "div",
                   { staticClass: "small-box bg-danger" },
                   [
-                    _vm._m(12),
+                    _c("div", { staticClass: "inner" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.cycles))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Cycles")]),
+                    ]),
                     _vm._v(" "),
-                    _vm._m(13),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c(
                       "router-link",
@@ -48147,28 +48196,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [_vm._v("44")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Filieres")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "ion ion-person-add" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [_vm._v("65")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Cycles")]),
     ])
   },
   function () {
@@ -48183,31 +48212,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [_vm._v("150")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Villes")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "ion ion-bag" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [
-        _vm._v("53"),
-        _c("sup", { staticStyle: { "font-size": "20px" } }, [_vm._v("%")]),
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Succursales")]),
     ])
   },
   function () {
@@ -48222,28 +48228,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [_vm._v("44")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Années Scolaires")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "ion ion-person-add" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", [_vm._v("65")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Cycles")]),
     ])
   },
   function () {

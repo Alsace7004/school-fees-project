@@ -74,6 +74,12 @@ class YearController extends Controller
     public function countData(){
         $users = DB::SELECT("SELECT COUNT(*) as nbr_users FROM users");
         $etudiants = DB::SELECT("SELECT COUNT(*) as nbr_etudiants FROM etudiants");
-        return compact('users','etudiants');
+        $filieres = DB::SELECT("SELECT COUNT( DISTINCT code_filiere) as nbr_filieres FROM filieres;");
+        $cycles = DB::SELECT("SELECT COUNT(*) as nbr_cycles FROM cycles");
+        $villes = DB::SELECT("SELECT COUNT(*) as nbr_villes FROM villes");
+        $succursales = DB::SELECT("SELECT COUNT(*) as nbr_succursales FROM succursales");
+        $years = DB::SELECT("SELECT COUNT(*) as nbr_years FROM years");
+
+        return compact('users','etudiants','filieres','cycles','villes','succursales','years');
     }
 }
