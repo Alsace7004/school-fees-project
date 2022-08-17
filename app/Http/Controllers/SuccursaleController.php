@@ -86,4 +86,10 @@ class SuccursaleController extends Controller
         //
         return $succursale->delete();
     }
+
+    public function nbrEtudiantParSuccursale(){
+        $nombres = DB::SELECT("SELECT succursales.libelle_succursale, COUNT(*) as nbr_etudiants FROM succursales,etudiants
+        WHERE etudiants.succursale_id = succursales.id GROUP BY succursales.libelle_succursale");
+        return $nombres;
+    }
 }

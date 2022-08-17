@@ -135,6 +135,104 @@
                                 </div>
                                 <!-- ./col -->
                             </div>
+                            <!--first table begin-->
+                            <!--<div class="row">
+                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Nombre d'Etudiants par Succursales</h3>
+
+                                                                <div class="card-tools">
+                                                                <div class="input-group input-group-sm" style="width: 150px;">
+                                                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                                                    <div class="input-group-append">
+                                                                    <button type="submit" class="btn btn-default">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                     
+                                                            <div class="card-body table-responsive p-0">
+                                                                <table class="table table-hover text-nowrap">
+                                                                <thead>
+                                                                    <tr>
+                                                                    <th>ID</th>
+                                                                    <th>User</th>
+                                                                    <th>Date</th>
+                                                                    <th>Status</th>
+                                                                    <th>Reason</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                    <td>183</td>
+                                                                    <td>John Doe</td>
+                                                                    <td>11-7-2014</td>
+                                                                    <td><span class="tag tag-success">Approved</span></td>
+                                                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <td>219</td>
+                                                                    <td>Alexander Pierce</td>
+                                                                    <td>11-7-2014</td>
+                                                                    <td><span class="tag tag-warning">Pending</span></td>
+                                                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <td>657</td>
+                                                                    <td>Bob Doe</td>
+                                                                    <td>11-7-2014</td>
+                                                                    <td><span class="tag tag-primary">Approved</span></td>
+                                                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <td>175</td>
+                                                                    <td>Mike Doe</td>
+                                                                    <td>11-7-2014</td>
+                                                                    <td><span class="tag tag-danger">Denied</span></td>
+                                                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                </table>
+                                                            </div>
+                                                          
+                                                        </div>
+                                      
+                                    </div>
+                            </div>-->
+                            <!---->
+                            <div class="card card-danger">
+                                <div class="card-header">
+                                    <h3 class="card-title">Le nombre d'etudiants par Succursales</h3>
+
+                                    <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <Pie
+                                        :chart-options="chartOptions"
+                                        :chart-data="chartData"
+                                        :chart-id="chartId"
+                                        :dataset-id-key="datasetIdKey"
+                                        :plugins="plugins"
+                                        :css-classes="cssClasses"
+                                        :styles="styles"
+                                        :width="width"
+                                        :height="height"
+                                    />
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!---->
                             <!-- Small boxes (Stat box) -->
                             <div class="row mt-5">
                                 <router-view></router-view>
@@ -150,17 +248,61 @@
 </template>
 
 <script>
-import Title from "../components/pages/Title.vue";
+//import Title from "../components/pages/Title.vue";
 import Nav from "../components/pages/Nav.vue";
 import Aside from "../components/pages/Aside.vue";
 import Footer from "../components/pages/Footer.vue";
+
+import { Pie } from 'vue-chartjs/legacy'
+
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale
+} from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
+
 export default {
   name: "Try",
   props: {
     msg: String,
   },
   components:{
-    Nav,Aside,Footer,Title
+    Nav,Aside,Footer,Title, Pie
+  },
+  props: {
+    chartId: {
+      type: String,
+      default: 'pie-chart'
+    },
+    datasetIdKey: {
+      type: String,
+      default: 'label'
+    },
+    width: {
+      type: Number,
+      default: 400
+    },
+    height: {
+      type: Number,
+      default: 400
+    },
+    cssClasses: {
+      default: '',
+      type: String
+    },
+    styles: {
+      type: Object,
+      default: () => {}
+    },
+    plugins: {
+      type: Array,
+      default: () => []
+    }
   },
   data(){
     return{
@@ -171,6 +313,22 @@ export default {
         villes:'',
         succursales:'',
         years:'',
+
+        chartData: {
+            //labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+            labels: [],
+            datasets: [
+                {
+                    backgroundColor: ['#41B883', '#3498db', '#00D8FF', '#ffa502'],
+                    //data: [40, 20, 80, 10]
+                    data: []
+                }
+            ]
+        },
+        chartOptions: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
     }
   },
   methods:{
@@ -186,13 +344,31 @@ export default {
             this.years = res.data.years[0].nbr_years;
             
         })
+    },
+    loadNbrEtudiantParSuccursale(){
+        axios.get('api/etudiantParSuccursale').then((res)=>{
+            //console.log("valeur de res lors des stats :",res.data)
+            var k = res.data;
+            for(var i =0;i<k.length;i++){
+                //console.log("valeur des i:",k[i].libelle_succursale)
+                //console.log("valeur des i:",k[i].nbr_etudiants)
+                this.chartData.labels.push(k[i].libelle_succursale);
+                this.chartData.datasets[0].data.push(k[i].nbr_etudiants);
+            }
+        })
     }
   },
   created(){
     this.loadCountData();
+    this.loadNbrEtudiantParSuccursale();
+  },
+  mounted(){
+    
   }
+
 };
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

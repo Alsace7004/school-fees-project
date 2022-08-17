@@ -28,8 +28,11 @@ Route::get("count",[YearController::class,'countData']);
 
 Route::apiResources(['cycles'=>CycleController::class]);
 Route::apiResources(['villes'=>VilleController::class]);
+
 Route::apiResources(['succursales'=>SuccursaleController::class]);
 Route::get("succursalesVilles",[SuccursaleController::class,'villes']);
+Route::get("etudiantParSuccursale",[SuccursaleController::class,'nbrEtudiantParSuccursale']);
+
 Route::apiResources(['filieres'=>FiliereController::class]);
 Route::get("distinctFilieres",[FiliereController::class,'filieres']);
 Route::get("filiereCycleYear",[EtudiantController::class,'concatFiliere']);

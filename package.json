@@ -24,8 +24,10 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "chart.js": "^3.9.1",
         "sweetalert2": "^11.4.8",
         "vform": "^2.1.2",
+        "vue-chartjs": "^4.1.1",
         "vue-router": "^3.5.3"
     }
 }
