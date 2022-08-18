@@ -40,7 +40,8 @@ let routes = [
     {path:'/users',component:require('./components/User.vue').default},
     {path:'/villes',component:require('./components/Ville.vue').default},
     {path:'/years',component:require('./components/Year.vue').default},
-    {path:'/cycles',component:require('./components/Cycle.vue').default}
+    {path:'/cycles',component:require('./components/Cycle.vue').default},
+    {path:'/scolarites',component:require('./components/Scolarite.vue').default}
 ]
 
 const router = new VueRouter({

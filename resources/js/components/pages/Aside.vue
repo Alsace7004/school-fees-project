@@ -57,7 +57,13 @@
                 <p>Etudiants</p>
               </router-link>
             </li>
-
+            <li class="nav-header">SCOLARITES</li>
+            <li class="nav-item">
+              <router-link to="/scolarites" class="nav-link scolarite">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Scolarités</p>
+              </router-link>
+            </li>
             <li class="nav-header">FILIERES</li>
             <li class="nav-item">
               <router-link to="/filieres" class="nav-link filiere">

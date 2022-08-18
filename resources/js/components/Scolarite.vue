@@ -6,7 +6,7 @@
         <!-- Content Wrapper. Contains page content -->
                 <div class="content-wrapper">
                     <!-- Content Header (Page header) -->
-                    <Title titre="Etudiants" description="Liste des étudiants"/>
+                    <Title titre="Scolarités" description="Payement des scolarités des étudiants"/>
                     <!-- /.content-header -->
 
                     <!-- Main content -->
@@ -14,7 +14,7 @@
                         <div class="container-fluid">
                             <!-- Small boxes (Stat box) -->
                             <div class="container">
-                                <div class="row">
+                                <div class="row mb-3">
                                             <div class="col-md-3">
                                                 <select v-model="ret.valfil" v-on:change="onFilCycAnSuChange()"  id="code_filiere" class="form-control">
                                                     <option value="0" selected>Selectionner une Filiere</option>
@@ -44,9 +44,9 @@
                                 <div class="row mt-2" >
                                             
                                     <!---->
-                                            <div style="display: flex;justify-content: end;">
+                                            <!--<div style="display: flex;justify-content: end;">
                                                 <button class="btn-add"  @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
-                                            </div>
+                                            </div>-->
                                             <!--table-->
                                             <div class="tbl-header">
                                                 <table>
@@ -80,7 +80,7 @@
                                                             <td>{{etudiant.valeur_filiere}}</td>
                                                             <td>
                                                                 <div class="display-flex">
-                                                                    <a href="" class="btn-edit">View</a>
+                                                                    <a href="" class="btn-edit">Pay</a>
                                                                     <a href="" class="btn-edit">Edit</a>
                                                                     <!--<a href="" class="btn-delete">Delete</a>-->
                                                                 </div>
@@ -400,7 +400,7 @@
             this.loadDistinctSuccursales();
         },
         mounted() {
-            var etudiant = document.querySelector('.etudiant');
+            var etudiant = document.querySelector('.scolarite');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
             etudiant.classList.add('active');
