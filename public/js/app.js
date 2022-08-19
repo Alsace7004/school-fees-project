@@ -50164,7 +50164,7 @@ var render = function () {
                     _c("div", { staticClass: "inner" }, [
                       _c("h3", [_vm._v(_vm._s(_vm.cycles))]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Etudiants")]),
+                      _c("p", [_vm._v("Scolarités")]),
                     ]),
                     _vm._v(" "),
                     _vm._m(7),
@@ -51362,7 +51362,9 @@ var render = function () {
                         attrs: { to: "/scolarites" },
                       },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-users" }),
+                        _c("i", {
+                          staticClass: "nav-icon fas fa-money-check-alt",
+                        }),
                         _vm._v(" "),
                         _c("p", [_vm._v("Scolarités")]),
                       ]
@@ -51406,7 +51408,9 @@ var render = function () {
                         attrs: { to: "/cycles" },
                       },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-ellipsis-h" }),
+                        _c("i", {
+                          staticClass: "nav-icon fas fa-level-up-alt",
+                        }),
                         _vm._v(" "),
                         _c("p", [_vm._v("Cycles")]),
                       ]
@@ -51428,9 +51432,7 @@ var render = function () {
                         attrs: { to: "/villes" },
                       },
                       [
-                        _c("i", {
-                          staticClass: "nav-icon far fa-calendar-alt",
-                        }),
+                        _c("i", { staticClass: "nav-icon fas fa-city" }),
                         _vm._v(" "),
                         _c("p", [_vm._v("Villes")]),
                       ]
@@ -51454,7 +51456,7 @@ var render = function () {
                         attrs: { to: "/succursales" },
                       },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-edit" }),
+                        _c("i", { staticClass: "nav-icon fas fa-building" }),
                         _vm._v(" "),
                         _c("p", [_vm._v("Succursales")]),
                       ]

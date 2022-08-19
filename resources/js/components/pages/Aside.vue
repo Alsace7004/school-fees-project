@@ -51,7 +51,7 @@
             <li class="nav-header">SCOLARITES</li>
             <li class="nav-item">
               <router-link to="/scolarites" class="nav-link scolarite">
-                <i class="nav-icon fas fa-users"></i>
+                <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>Scolarités</p>
               </router-link>
             </li>
@@ -68,7 +68,7 @@
             <li class="nav-header">CYCLES</li>
             <li class="nav-item">
               <router-link to="/cycles" class="nav-link cycle">
-                <i class="nav-icon fas fa-ellipsis-h"></i>
+                <i class="nav-icon fas fa-level-up-alt"></i>
                 <p>Cycles</p>
               </router-link>
             </li>
@@ -76,7 +76,7 @@
             <li class="nav-header">VILLES</li>
             <li class="nav-item">
               <router-link to="/villes" class="nav-link ville">
-                <i class="nav-icon far fa-calendar-alt"></i>
+                <i class="nav-icon fas fa-city"></i>
                 <p>Villes</p>
               </router-link>
             </li>
@@ -86,7 +86,7 @@
             <li class="nav-header">SUCCURSALES</li>
             <li class="nav-item">
               <router-link to="/succursales" class="nav-link succursale">
-                <i class="nav-icon fas fa-edit"></i>
+                <i class="nav-icon fas fa-building"></i>
                 <p>Succursales</p>
               </router-link>
             </li>

@@ -125,7 +125,7 @@
                                     <div class="inner">
                                         <h3>{{cycles}}</h3>
 
-                                        <p>Etudiants</p>
+                                        <p>Scolarités</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
