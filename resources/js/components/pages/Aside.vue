@@ -63,13 +63,7 @@
               </router-link>
             </li>
 
-            <li class="nav-header">VILLES</li>
-            <li class="nav-item">
-              <router-link to="/villes" class="nav-link ville">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>Villes</p>
-              </router-link>
-            </li>
+            
 
             <li class="nav-header">CYCLES</li>
             <li class="nav-item">
@@ -79,7 +73,13 @@
               </router-link>
             </li>
 
-            
+            <li class="nav-header">VILLES</li>
+            <li class="nav-item">
+              <router-link to="/villes" class="nav-link ville">
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>Villes</p>
+              </router-link>
+            </li>
 
    
             

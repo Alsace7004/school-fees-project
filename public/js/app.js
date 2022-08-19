@@ -49814,13 +49814,7 @@ var render = function () {
                                   [
                                     _c(
                                       "option",
-                                      {
-                                        attrs: {
-                                          value: "",
-                                          hidden: "",
-                                          selected: "",
-                                        },
-                                      },
+                                      { attrs: { value: "0", selected: "" } },
                                       [_vm._v("Selectionner une ville")]
                                     ),
                                     _vm._v(" "),
@@ -50170,14 +50164,17 @@ var render = function () {
                     _c("div", { staticClass: "inner" }, [
                       _c("h3", [_vm._v(_vm._s(_vm.cycles))]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Cycles")]),
+                      _c("p", [_vm._v("Etudiants")]),
                     ]),
                     _vm._v(" "),
                     _vm._m(7),
                     _vm._v(" "),
                     _c(
                       "router-link",
-                      { staticClass: "small-box-footer", attrs: { to: "#" } },
+                      {
+                        staticClass: "small-box-footer",
+                        attrs: { to: "/etudiants" },
+                      },
                       [
                         _vm._v("Plus info "),
                         _c("i", { staticClass: "fas fa-arrow-circle-right" }),
@@ -50435,15 +50432,15 @@ var staticRenderFns = [
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Jhon")]),
+                    _c("td", [_vm._v("ABA")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Doe")]),
+                    _c("td", [_vm._v("Afi")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("M")]),
+                    _c("td", [_vm._v("F")]),
                     _vm._v(" "),
                     _c("td", [_vm._v("Avedji")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Admin")]),
+                    _c("td", [_vm._v("Secretaire")]),
                     _vm._v(" "),
                     _c("td", [
                       _c("div", { staticClass: "display-flex" }, [
@@ -50463,43 +50460,15 @@ var staticRenderFns = [
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Jhon")]),
+                    _c("td", [_vm._v("ABBEY")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Doe")]),
+                    _c("td", [_vm._v("Benitha")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("M")]),
+                    _c("td", [_vm._v("F")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Avedji")]),
+                    _c("td", [_vm._v("Avenou")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Admin")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "display-flex" }, [
-                        _c(
-                          "a",
-                          { staticClass: "btn-edit", attrs: { href: "" } },
-                          [_vm._v("Edit")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          { staticClass: "btn-delete", attrs: { href: "" } },
-                          [_vm._v("Delete")]
-                        ),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [_vm._v("Jhon")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Doe")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("M")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Avedji")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Admin")]),
+                    _c("td", [_vm._v("Secretaire")]),
                     _vm._v(" "),
                     _c("td", [
                       _c("div", { staticClass: "display-flex" }, [
@@ -50519,15 +50488,43 @@ var staticRenderFns = [
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", [_vm._v("Jhon")]),
+                    _c("td", [_vm._v("ADOMAY")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Doe")]),
+                    _c("td", [_vm._v("Koko")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("F")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("KOdjoviakope")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Secreatire")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "display-flex" }, [
+                        _c(
+                          "a",
+                          { staticClass: "btn-edit", attrs: { href: "" } },
+                          [_vm._v("Edit")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          { staticClass: "btn-delete", attrs: { href: "" } },
+                          [_vm._v("Delete")]
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v("AGBESSI")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Kokou")]),
                     _vm._v(" "),
                     _c("td", [_vm._v("M")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Avedji")]),
+                    _c("td", [_vm._v("Adidogome")]),
                     _vm._v(" "),
-                    _c("td", [_vm._v("Admin")]),
+                    _c("td", [_vm._v("Secretaire")]),
                     _vm._v(" "),
                     _c("td", [
                       _c("div", { staticClass: "display-flex" }, [
@@ -51396,6 +51393,28 @@ var render = function () {
                   1
                 ),
                 _vm._v(" "),
+                _c("li", { staticClass: "nav-header" }, [_vm._v("CYCLES")]),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link cycle",
+                        attrs: { to: "/cycles" },
+                      },
+                      [
+                        _c("i", { staticClass: "nav-icon fas fa-ellipsis-h" }),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Cycles")]),
+                      ]
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
                 _c("li", { staticClass: "nav-header" }, [_vm._v("VILLES")]),
                 _vm._v(" "),
                 _c(
@@ -51414,28 +51433,6 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _c("p", [_vm._v("Villes")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [_vm._v("CYCLES")]),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link cycle",
-                        attrs: { to: "/cycles" },
-                      },
-                      [
-                        _c("i", { staticClass: "nav-icon fas fa-ellipsis-h" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Cycles")]),
                       ]
                     ),
                   ],

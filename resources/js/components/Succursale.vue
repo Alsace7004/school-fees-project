@@ -74,7 +74,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <select  v-model="succursale.ville_id" id="ville_id" class="form-control">
-                                                                <option value="" hidden selected>Selectionner une ville</option>
+                                                                <option value="0" selected>Selectionner une ville</option>
                                                                 <option v-for="ville in villes" :key="ville.id" :value="ville.id" >{{ville.libelle_ville}}</option>
                                                             </select>
                                                         </div>
