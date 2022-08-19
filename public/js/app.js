@@ -51219,7 +51219,7 @@ var render = function () {
             _vm._m(0),
           ]),
           _vm._v(" "),
-          _c("nav", { staticClass: "mt-2" }, [
+          _c("nav", { staticClass: "mt-2 " }, [
             _c(
               "ul",
               {
