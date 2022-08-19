@@ -25,14 +25,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        /*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'){ 
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'){ 
             $protocol = "https://".$_SERVER['HTTP_HOST']; 
         } else{ 
             $protocol='http://'.$_SERVER['HTTP_HOST']; 
-        }*/
-
-        if(env('APP_ENV') !== 'local'){
-            URL::forceSchema('https');
         }
+
+        /*if(env('APP_ENV') !== 'local'){
+            URL::forceSchema('https');
+        }*/
     }
 }
