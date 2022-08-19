@@ -33,6 +33,7 @@
                                     <div class="tbl-content">
                                         <table>
                                             <tbody>
+                                                <tr v-if="!years.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">Pas encore d'Année Scolaire disponible</tr>
                                                 <tr v-for="year in years" :key="year.id">
                                                     <td>{{year.id}}</td>
                                                     <td>{{year.valeur_annee_scolaire}}</td>

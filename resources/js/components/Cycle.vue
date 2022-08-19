@@ -35,6 +35,7 @@
                                             <div class="tbl-content">
                                                 <table>
                                                     <tbody>
+                                                        <tr v-if="!cycles.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">Pas encore de cycles disponible</tr>
                                                         <tr v-for="cycle in cycles" :key="cycle.id">
                                                             <td>{{cycle.id}}</td>
                                                             <td>{{cycle.code_cycle}}</td>

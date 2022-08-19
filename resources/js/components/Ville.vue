@@ -35,6 +35,7 @@
                                             <div class="tbl-content">
                                                 <table>
                                                     <tbody>
+                                                        <tr v-if="!villes.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">Pas encore de villes disponible</tr>
                                                         <tr v-for="ville in villes" :key="ville.id">
                                                             <td>{{ville.id}}</td>
                                                             <td>{{ville.libelle_ville}}</td>
