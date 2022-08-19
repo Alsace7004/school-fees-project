@@ -6,7 +6,7 @@
         <title>School | Fees</title>
             
         <!-- Google Font: Source Sans Pro -->
-        <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset("admin/plugins/fontawesome-free/css/all.min.css")}}" type="text/css">
         <!-- Ionicons -->
@@ -25,7 +25,8 @@
         <link rel="stylesheet" href="{{asset("admin/plugins/daterangepicker/daterangepicker.css")}}" type="text/css">
         <!-- summernote -->
         <link rel="stylesheet" href="{{asset("admin/plugins/summernote/summernote-bs4.min.css")}}" type="text/css">
-
+        <!----------------------------------------------->
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
         
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -70,6 +71,6 @@
          
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="{{asset("admin/dist/js/pages/dashboard.js")}}"></script>
-
+        <script src="{{asset('js/app.js')}}"></script>
      
 </html>
