@@ -5014,15 +5014,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Aside",
   props: {}
@@ -51228,8 +51219,6 @@ var render = function () {
             _vm._m(0),
           ]),
           _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
           _c("nav", { staticClass: "mt-2" }, [
             _c(
               "ul",
@@ -51447,7 +51436,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("li", { staticClass: "nav-header" }, [_vm._v("PARAMETRES")]),
                 _vm._v(" "),
-                _vm._m(2),
+                _vm._m(1),
               ]
             ),
           ]),
@@ -51465,36 +51454,6 @@ var staticRenderFns = [
       _c("a", { staticClass: "d-block", attrs: { href: "#" } }, [
         _vm._v("Ogunbissi Moshe"),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-inline" }, [
-      _c(
-        "div",
-        {
-          staticClass: "input-group",
-          attrs: { "data-widget": "sidebar-search" },
-        },
-        [
-          _c("input", {
-            staticClass: "form-control form-control-sidebar",
-            attrs: {
-              type: "search",
-              placeholder: "Rechercher...",
-              "aria-label": "Search",
-            },
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c("button", { staticClass: "btn btn-sidebar" }, [
-              _c("i", { staticClass: "fas fa-search fa-fw" }),
-            ]),
-          ]),
-        ]
-      ),
     ])
   },
   function () {
