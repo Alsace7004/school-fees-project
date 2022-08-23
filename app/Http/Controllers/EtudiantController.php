@@ -117,6 +117,7 @@ class EtudiantController extends Controller
     public function show(Etudiant $etudiant)
     {
         //
+        return $etudiant;
     }
 
     /**

@@ -35,7 +35,7 @@
                                             </select>
                                         </div>
                                             
-                                            
+                                  
                                         <div style="display: flex;justify-content: end;" class="mt-2">
                                             <button class="btn-add" @click="newModal"  data-toggle="modal" data-target="#addNew">Ajouter</button>
                                         </div>
@@ -87,7 +87,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Filiere":"Add New Filiere"}}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Mise à jour d'une Filiere":"Ajouté une Filiere"}}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -129,6 +129,8 @@
                                     </div>
                                 </div>
                                 <!-- Modal -->
+
+                               
                             </div>
                             
                             <!-- Small boxes (Stat box) -->
@@ -381,6 +383,7 @@ td{
 .btn-edit:hover{
     background-color:rgb(69, 69, 240);
     transition: 0.5s all;
+    cursor: pointer;
 }
 .btn-delete{
     border: none;

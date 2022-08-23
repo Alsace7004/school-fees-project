@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="row mt-2" >
-                                            
+                                    
                                     <!---->
                                             <div style="display: flex;justify-content: end;">
                                                 <button class="btn-add"  @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
@@ -80,8 +80,8 @@
                                                             <td>{{etudiant.valeur_filiere}}</td>
                                                             <td>
                                                                 <div class="display-flex">
-                                                                    <a href="" class="btn-edit">View</a>
-                                                                    <a href="" class="btn-edit">Edit</a>
+                                                                    <a @click="voirEtudiant(etudiant.id)" class="btn-edit">View</a>
+                                                                    <a @click="editEtudiant(etudiant.id)" class="btn-edit">Edit</a>
                                                                     <!--<a href="" class="btn-delete">Delete</a>-->
                                                                 </div>
                                                             </td>
@@ -96,10 +96,10 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Etudiant":"Add New Etudiant"}}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Mise à jour des informations d'un Etudiant":"Ajouter un Etudiant"}}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -178,14 +178,17 @@
                                                 </div>
                                             
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Mettre à jour":"Ajouter"}}</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Modal -->
+
+                                  
+
                             </div>
                             
                             <!-- Small boxes (Stat box) -->
@@ -385,6 +388,15 @@
                         return;
                     }
                 })
+            },
+
+            editEtudiant(id){
+                axios.get(`api/etudiants/${id}`).then((res)=>{
+                    $('#addNew').modal('show');
+                    console.log("valeur de res:",res);
+                     this.edit_id = res.data.id;
+                        this.is_Editing = true;
+                })
             }
           
         },
@@ -465,10 +477,12 @@ td{
     color: #fff;
     text-decoration: none;
     margin: 2px;
+    cursor:pointer;
 }
 .btn-edit:hover{
     background-color:rgb(69, 69, 240);
     transition: 0.5s all;
+    cursor:pointer;
 }
 .btn-delete{
     border: none;
