@@ -78,8 +78,8 @@ class EtudiantController extends Controller
             'email'         => 'required|string|email|max:255',
             'genre'         => 'required|string|max:255',
             'date_anniv'    => 'required|string|max:255',
-            'contact_1'     => 'required|string|max:255',
-            'contact_2'     => 'nullable|string|max:255',
+            'contact_1'     => 'required|integer',
+            'contact_2'     => 'nullable|integer',
             'nationalite'   => 'required|string|max:255',
             'adresse'       => 'required|string|max:255',
             'matricule'     => 'string|max:255',
@@ -117,7 +117,8 @@ class EtudiantController extends Controller
     public function show(Etudiant $etudiant)
     {
         //
-        return $etudiant;
+        $mt = DB::SELECT("SELECT montant FROM inscriptions WHERE etudiant_id = $etudiant->id");
+        return compact('etudiant','mt');
     }
 
     /**
@@ -130,6 +131,51 @@ class EtudiantController extends Controller
     public function update(Request $request, Etudiant $etudiant)
     {
         //
+        $message=[
+            'nom.required'          =>'Veuillez Entrer le nom svp!!!',
+            'prenom.required'       =>'Veuillez Entrer le prenom',
+            'email.required'        =>'Veuillez Entrer le email',
+            'genre.required'        =>'Veuillez Choisir le genre',
+            'date_anniv.required'   =>'Veuillez Entrer la date d\'anniversaire',
+            'contact_1.required'    =>'Veuillez Entrer le contact 1',
+            'contact_2'=>'Entrer le contact 2',
+            'adresse.required'      =>'Veuillez Entrer l\'adresse',
+            'nationalite.required'  =>'Veuillez Entrer la nationalite',
+            'matricule'=>'Entrer le matricule',
+            'filiere_id.required'   =>'Veuillez Veuillez Choisir la filiere',
+            'succursale_id.required'=>'Veuillez Choisir la succursale',
+            'montant.required'      =>'Veuillez entrer le montant',
+        ];
+        $validator = Validator::make($request->all(),[
+            'nom'           => 'required|string|max:255',
+            'prenom'        => 'required|string|max:255',
+            'email'         => 'required|string|email|max:255',
+            'genre'         => 'required|string|max:255',
+            'date_anniv'    => 'required|string|max:255',
+            'contact_1'     => 'required|integer',
+            'contact_2'     => 'nullable|integer',
+            'nationalite'   => 'required|string|max:255',
+            'adresse'       => 'required|string|max:255',
+            'matricule'     => 'string|max:255',
+            'filiere_id'    => 'required|integer',
+            'succursale_id' => 'required|integer',
+            'montant'       => 'required|numeric',
+        ],$message);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'err'=>$validator->errors()
+            ],500);
+        }else{
+            $etudiant->update($request->all());
+            DB::SELECT("UPDATE inscriptions SET montant = $request->montant WHERE etudiant_id = $etudiant->id");
+            $response = [
+                'message'=>'Info Etudiant mise à jour avec success',
+            ];
+            return response($response,201);
+        }
+        
     }
 
     /**

@@ -160,7 +160,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
                                                             <label for="">Inscription</label>
-                                                            <input type="number" v-model="etudiant.montant" id="montant" placeholder="date" class="form-control">
+                                                            <input type="number" v-model="etudiant.montant" id="montant" placeholder="montant" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -331,7 +331,7 @@
                 axios.post("api/etudiants",this.etudiant).then(()=>{
                     Swal.fire('Created!','Etudiant créer avec success.','success') ;
                     this.loadEtudiants();
-                     /*this.etudiant={
+                    this.etudiant={
                         nom:'',
                         prenom:'',
                         email:'',
@@ -346,7 +346,7 @@
                         year_id:'',
                         succursale_id:'',
                         montant:'50000'
-                    }*/
+                    }
                 }).catch((err)=>{
                     //alert("err")
                     //console.log("err:",err.response.data.err.nom)
@@ -393,11 +393,74 @@
             editEtudiant(id){
                 axios.get(`api/etudiants/${id}`).then((res)=>{
                     $('#addNew').modal('show');
-                    console.log("valeur de res:",res);
-                     this.edit_id = res.data.id;
-                        this.is_Editing = true;
+                    //console.log("valeur de res:",res);
+                    this.edit_id = res.data.etudiant.id;
+                    this.is_Editing = true;
+                    this.etudiant.nom=res.data.etudiant.nom,
+                    this.etudiant.prenom=res.data.etudiant.prenom,
+                    this.etudiant.email=res.data.etudiant.email,
+                    this.etudiant.genre=res.data.etudiant.genre,
+                    this.etudiant.date_anniv=res.data.etudiant.date_anniv,
+                    this.etudiant.contact_1=res.data.etudiant.contact_1,
+                    this.etudiant.contact_2=res.data.etudiant.contact_2,
+                    this.etudiant.adresse=res.data.etudiant.adresse,
+                    this.etudiant.nationalite=res.data.etudiant.nationalite,
+                    this.etudiant.matricule=res.data.etudiant.matricule,
+                    this.etudiant.filiere_id=res.data.etudiant.filiere_id,
+                    this.etudiant.succursale_id=res.data.etudiant.succursale_id,
+                    this.etudiant.montant=res.data.mt[0].montant
+             
                 })
-            }
+            },
+            updateEtudiant(){
+                axios.put(`api/etudiants/${this.edit_id}`,this.etudiant).then(()=>{
+                        $('#addNew').modal('hide');
+                        Swal.fire('Mise à jour!',"Les informations de l'etudiant ont été mise à jour avec success.",'success')    
+                        this.loadEtudiants();
+                        this.edit_id = "";
+                        this.is_Editing = false;
+                    }).catch((err)=>{
+                        //console.log("valeur de err:",errors)
+                        //Swal.fire('Error !!!','Une Erreur est survenue !!!','error')
+                         if(err.response.data.err.nom){
+                        Swal.fire('Error !!!',`${err.response.data.err.nom[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.prenom){
+                        Swal.fire('Error !!!',`${err.response.data.err.prenom[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.email){
+                        Swal.fire('Error !!!',`${err.response.data.err.email[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.genre){
+                        Swal.fire('Error !!!',`${err.response.data.err.genre[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.date_anniv){
+                        Swal.fire('Error !!!',`${err.response.data.err.date_anniv[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.contact_1){
+                        Swal.fire('Error !!!',`${err.response.data.err.contact_1[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.nationalite){
+                        Swal.fire('Error !!!',`${err.response.data.err.nationalite[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.adresse){
+                        Swal.fire('Error !!!',`${err.response.data.err.adresse[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.filiere_id){
+                        Swal.fire('Error !!!',`${err.response.data.err.filiere_id[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.succursale_id){
+                        Swal.fire('Error !!!',`${err.response.data.err.succursale_id[0]}`,'error')
+                        return;
+                    }else if(err.response.data.err.montant){
+                        Swal.fire('Error !!!',`${err.response.data.err.montant[0]}`,'error')
+                        return;
+                    }else{
+                        Swal.fire('Error !!!','Une erreure lors de la mise à jour d\'un etudiant !!!','error')
+                        return;
+                    }
+                })
+            },
           
         },
         created(){

@@ -2672,23 +2672,23 @@ __webpack_require__.r(__webpack_exports__);
         Swal.fire('Created!', 'Etudiant créer avec success.', 'success');
 
         _this9.loadEtudiants();
-        /*this.etudiant={
-           nom:'',
-           prenom:'',
-           email:'',
-           genre:'',
-           date_anniv:'',
-           contact_1:'',
-           contact_2:'',
-           adresse:'',
-           nationalite:'',
-           matricule:'',
-           filiere_id:'',
-           year_id:'',
-           succursale_id:'',
-           montant:'50000'
-        }*/
 
+        _this9.etudiant = {
+          nom: '',
+          prenom: '',
+          email: '',
+          genre: '',
+          date_anniv: '',
+          contact_1: '',
+          contact_2: '',
+          adresse: '',
+          nationalite: '',
+          matricule: '',
+          filiere_id: '',
+          year_id: '',
+          succursale_id: '',
+          montant: '50000'
+        };
       })["catch"](function (err) {
         //alert("err")
         //console.log("err:",err.response.data.err.nom)
@@ -2735,10 +2735,64 @@ __webpack_require__.r(__webpack_exports__);
       var _this10 = this;
 
       axios.get("api/etudiants/".concat(id)).then(function (res) {
-        $('#addNew').modal('show');
-        console.log("valeur de res:", res);
-        _this10.edit_id = res.data.id;
+        $('#addNew').modal('show'); //console.log("valeur de res:",res);
+
+        _this10.edit_id = res.data.etudiant.id;
         _this10.is_Editing = true;
+        _this10.etudiant.nom = res.data.etudiant.nom, _this10.etudiant.prenom = res.data.etudiant.prenom, _this10.etudiant.email = res.data.etudiant.email, _this10.etudiant.genre = res.data.etudiant.genre, _this10.etudiant.date_anniv = res.data.etudiant.date_anniv, _this10.etudiant.contact_1 = res.data.etudiant.contact_1, _this10.etudiant.contact_2 = res.data.etudiant.contact_2, _this10.etudiant.adresse = res.data.etudiant.adresse, _this10.etudiant.nationalite = res.data.etudiant.nationalite, _this10.etudiant.matricule = res.data.etudiant.matricule, _this10.etudiant.filiere_id = res.data.etudiant.filiere_id, _this10.etudiant.succursale_id = res.data.etudiant.succursale_id, _this10.etudiant.montant = res.data.mt[0].montant;
+      });
+    },
+    updateEtudiant: function updateEtudiant() {
+      var _this11 = this;
+
+      axios.put("api/etudiants/".concat(this.edit_id), this.etudiant).then(function () {
+        $('#addNew').modal('hide');
+        Swal.fire('Mise à jour!', "Les informations de l'etudiant ont été mise à jour avec success.", 'success');
+
+        _this11.loadEtudiants();
+
+        _this11.edit_id = "";
+        _this11.is_Editing = false;
+      })["catch"](function (err) {
+        //console.log("valeur de err:",errors)
+        //Swal.fire('Error !!!','Une Erreur est survenue !!!','error')
+        if (err.response.data.err.nom) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.nom[0]), 'error');
+          return;
+        } else if (err.response.data.err.prenom) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.prenom[0]), 'error');
+          return;
+        } else if (err.response.data.err.email) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.email[0]), 'error');
+          return;
+        } else if (err.response.data.err.genre) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.genre[0]), 'error');
+          return;
+        } else if (err.response.data.err.date_anniv) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.date_anniv[0]), 'error');
+          return;
+        } else if (err.response.data.err.contact_1) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.contact_1[0]), 'error');
+          return;
+        } else if (err.response.data.err.nationalite) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.nationalite[0]), 'error');
+          return;
+        } else if (err.response.data.err.adresse) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.adresse[0]), 'error');
+          return;
+        } else if (err.response.data.err.filiere_id) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.filiere_id[0]), 'error');
+          return;
+        } else if (err.response.data.err.succursale_id) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.succursale_id[0]), 'error');
+          return;
+        } else if (err.response.data.err.montant) {
+          Swal.fire('Error !!!', "".concat(err.response.data.err.montant[0]), 'error');
+          return;
+        } else {
+          Swal.fire('Error !!!', 'Une erreure lors de la mise à jour d\'un etudiant !!!', 'error');
+          return;
+        }
       });
     }
   },
@@ -9710,7 +9764,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d7ec0e72]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d7ec0e72]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d7ec0e72]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d7ec0e72]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d7ec0e72]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d7ec0e72]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor:pointer;\n}\n.btn-edit[data-v-d7ec0e72]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor:pointer;\n}\n.btn-delete[data-v-d7ec0e72]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d7ec0e72]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d7ec0e72]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d7ec0e72]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d7ec0e72]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d7ec0e72]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d7ec0e72]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d7ec0e72]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor:pointer;\n}\n.btn-edit[data-v-d7ec0e72]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor:pointer;\n}\n.btn-delete[data-v-d7ec0e72]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d7ec0e72]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d7ec0e72]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47492,7 +47546,7 @@ var render = function () {
                                       attrs: {
                                         type: "number",
                                         id: "montant",
-                                        placeholder: "date",
+                                        placeholder: "montant",
                                       },
                                       domProps: { value: _vm.etudiant.montant },
                                       on: {
