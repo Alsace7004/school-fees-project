@@ -107,9 +107,30 @@
                                             <form @submit.prevent="is_Editing ? updateEtudiant() : createEtudiant()">
                                                 <div class="modal-body">
                                                     <div class="row">
-                                                        <div class="form-group col-md-12">
-                                                            <p class="text-center"><label for="">Scolarité Total à Payer : 250500 FCFA</label></p>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Nom : {{scolarite.nom}}</label>
                                                         </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Prenom : {{scolarite.prenom}}</label>
+                                                        </div>
+                                                    </div>
+                                                     <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Filiere : {{scolarite.filiere}}</label>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Cycle : {{scolarite.cycle}}</label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <p><label for="">Total à Payer : {{scolarite.scolarite}}</label></p>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="">Année Scolaire : {{scolarite.annee}}</label>
+                                                        </div>
+                                                        
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
@@ -126,7 +147,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
                                                             <label for="">Somme à payer</label>
-                                                            <input type="number" v-model="etudiant.montant" id="montant" placeholder="date" class="form-control">
+                                                            <input type="number" v-model="etudiant.montant_paye" id="montant" placeholder="date" class="form-control">
                                                         </div>
                                                     </div>
                                                 
@@ -180,20 +201,9 @@
         
                 etudiants:[],
                 etudiant:{
-                    nom:'',
-                    prenom:'',
-                    email:'',
-                    genre:'',
-                    date_anniv:'',
-                    contact_1:'',
-                    contact_2:'',
-                    adresse:'',
-                    nationalite:'',
-                    matricule:'',
-                    filiere_id:'',
-                    year_id:'',
-                    succursale_id:'',
-                    montant:'50000'
+                    etudiants_id:'',
+                    montant_paye:'',
+                    annee_scolaires_id:''
                 },
                 edit_id:'',
                 is_Editing:false,
@@ -203,6 +213,14 @@
                     valcyc:"0",
                     valSuc:"0",
                 },
+                scolarite:{
+                    nom:"",
+                    prenom:"",
+                    cycle:"",
+                    filiere:"",
+                    scolarite:"",
+                    annee:""
+                }
             }
         },
         methods:{
@@ -271,77 +289,42 @@
             },
            
             createEtudiant(){
-                let nm = document.querySelector("#nom").value;
-                let pr = document.querySelector("#prenom").value;
-                if(nm =="" || pr==""){
+                let nm = document.querySelector("#montant").value;
+              
+                if(nm ==""){
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post("api/etudiants",this.etudiant).then(()=>{
+                axios.post("api/payerScolariteEtudiant",this.etudiant).then(()=>{
                     Swal.fire('Created!','Etudiant créer avec success.','success') ;
                     this.loadEtudiants();
-                     /*this.etudiant={
-                        nom:'',
-                        prenom:'',
-                        email:'',
-                        genre:'',
-                        date_anniv:'',
-                        contact_1:'',
-                        contact_2:'',
-                        adresse:'',
-                        nationalite:'',
-                        matricule:'',
-                        filiere_id:'',
-                        year_id:'',
-                        succursale_id:'',
-                        montant:'50000'
-                    }*/
+                    this.etudiant={
+                        etudiants_id:'',
+                        montant_paye:'',
+                        annee_scolaires_id:''
+                    }
                 }).catch((err)=>{
                     //alert("err")
                     //console.log("err:",err.response.data.err.nom)
-                    if(err.response.data.err.nom){
-                        Swal.fire('Error !!!',`${err.response.data.err.nom[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.prenom){
-                        Swal.fire('Error !!!',`${err.response.data.err.prenom[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.email){
-                        Swal.fire('Error !!!',`${err.response.data.err.email[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.genre){
-                        Swal.fire('Error !!!',`${err.response.data.err.genre[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.date_anniv){
-                        Swal.fire('Error !!!',`${err.response.data.err.date_anniv[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.contact_1){
-                        Swal.fire('Error !!!',`${err.response.data.err.contact_1[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.nationalite){
-                        Swal.fire('Error !!!',`${err.response.data.err.nationalite[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.adresse){
-                        Swal.fire('Error !!!',`${err.response.data.err.adresse[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.filiere_id){
-                        Swal.fire('Error !!!',`${err.response.data.err.filiere_id[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.succursale_id){
-                        Swal.fire('Error !!!',`${err.response.data.err.succursale_id[0]}`,'error')
-                        return;
-                    }else if(err.response.data.err.montant){
-                        Swal.fire('Error !!!',`${err.response.data.err.montant[0]}`,'error')
-                        return;
-                    }else{
-                        Swal.fire('Error !!!','Une erreure lors de l\'ajout d\'un etudiant !!!','error')
-                        return;
-                    }
+                    Swal.fire('Error !!!','Une erreure lors du payement de Scolarité de l\' etudiant !!!','error')
+                    return;
+                    
                 })
             },
 
             payerScolarite(id){
-                axios.get().then((res)=>{
-                    console.log("valeur de res dans payerScolarite:",res);
+                axios.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
+                    console.log("valeur de res dans payerScolarite:",res.data);
+                    this.scolarite.nom=res.data[0].nom,
+                    this.scolarite.prenom=res.data[0].prenom,
+                    this.scolarite.cycle=res.data[0].code_cycle,
+                    this.scolarite.filiere=res.data[0].code_filiere,
+                    this.scolarite.scolarite=res.data[0].scolarite_filiere,
+                    this.scolarite.annee=res.data[0].valeur_annee_scolaire,
+
+                    this.etudiant.etudiants_id=res.data[0].id,
+                    this.etudiant.annee_scolaires_id=res.data[0].valeur_annee_scolaire
+         
                 })
             }
           

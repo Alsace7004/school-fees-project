@@ -8,6 +8,7 @@ use App\Http\Controllers\VilleController;
 use App\Http\Controllers\SuccursaleController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\ScolariteController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,3 +43,6 @@ Route::get("loadOnFiliereChange/{dev}/{Ann}/{Cyc}",[FiliereController::class,'on
 //Etudiants
 Route::apiResources(['etudiants'=>EtudiantController::class]);
 Route::get("loadOnFilCycAnSuChange/{Fil}/{Cyc}/{Ann}/{Suc}",[EtudiantController::class,'onFilCycAnSuChange']);
+//scolarite
+Route::get("getEtudiantScolariteInformation/{id}",[ScolariteController::class,'getEtudiantScolariteInfo']);
+Route::post("payerScolariteEtudiant",[ScolariteController::class,'payerScolarite']);

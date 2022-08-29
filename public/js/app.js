@@ -3403,6 +3403,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3425,20 +3446,9 @@ __webpack_require__.r(__webpack_exports__);
       //filieres:[],
       etudiants: [],
       etudiant: {
-        nom: '',
-        prenom: '',
-        email: '',
-        genre: '',
-        date_anniv: '',
-        contact_1: '',
-        contact_2: '',
-        adresse: '',
-        nationalite: '',
-        matricule: '',
-        filiere_id: '',
-        year_id: '',
-        succursale_id: '',
-        montant: '50000'
+        etudiants_id: '',
+        montant_paye: '',
+        annee_scolaires_id: ''
       },
       edit_id: '',
       is_Editing: false,
@@ -3447,6 +3457,14 @@ __webpack_require__.r(__webpack_exports__);
         valAnn: "0",
         valcyc: "0",
         valSuc: "0"
+      },
+      scolarite: {
+        nom: "",
+        prenom: "",
+        cycle: "",
+        filiere: "",
+        scolarite: "",
+        annee: ""
       }
     };
   },
@@ -3534,10 +3552,9 @@ __webpack_require__.r(__webpack_exports__);
     createEtudiant: function createEtudiant() {
       var _this7 = this;
 
-      var nm = document.querySelector("#nom").value;
-      var pr = document.querySelector("#prenom").value;
+      var nm = document.querySelector("#montant").value;
 
-      if (nm == "" || pr == "") {
+      if (nm == "") {
         Toast.fire({
           icon: 'error',
           title: 'veuillez remplir tous les champs !!!'
@@ -3545,72 +3562,29 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("api/etudiants", this.etudiant).then(function () {
+      axios.post("api/payerScolariteEtudiant", this.etudiant).then(function () {
         Swal.fire('Created!', 'Etudiant créer avec success.', 'success');
 
         _this7.loadEtudiants();
-        /*this.etudiant={
-           nom:'',
-           prenom:'',
-           email:'',
-           genre:'',
-           date_anniv:'',
-           contact_1:'',
-           contact_2:'',
-           adresse:'',
-           nationalite:'',
-           matricule:'',
-           filiere_id:'',
-           year_id:'',
-           succursale_id:'',
-           montant:'50000'
-        }*/
 
+        _this7.etudiant = {
+          etudiants_id: '',
+          montant_paye: '',
+          annee_scolaires_id: ''
+        };
       })["catch"](function (err) {
         //alert("err")
         //console.log("err:",err.response.data.err.nom)
-        if (err.response.data.err.nom) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.nom[0]), 'error');
-          return;
-        } else if (err.response.data.err.prenom) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.prenom[0]), 'error');
-          return;
-        } else if (err.response.data.err.email) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.email[0]), 'error');
-          return;
-        } else if (err.response.data.err.genre) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.genre[0]), 'error');
-          return;
-        } else if (err.response.data.err.date_anniv) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.date_anniv[0]), 'error');
-          return;
-        } else if (err.response.data.err.contact_1) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.contact_1[0]), 'error');
-          return;
-        } else if (err.response.data.err.nationalite) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.nationalite[0]), 'error');
-          return;
-        } else if (err.response.data.err.adresse) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.adresse[0]), 'error');
-          return;
-        } else if (err.response.data.err.filiere_id) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.filiere_id[0]), 'error');
-          return;
-        } else if (err.response.data.err.succursale_id) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.succursale_id[0]), 'error');
-          return;
-        } else if (err.response.data.err.montant) {
-          Swal.fire('Error !!!', "".concat(err.response.data.err.montant[0]), 'error');
-          return;
-        } else {
-          Swal.fire('Error !!!', 'Une erreure lors de l\'ajout d\'un etudiant !!!', 'error');
-          return;
-        }
+        Swal.fire('Error !!!', 'Une erreure lors du payement de Scolarité de l\' etudiant !!!', 'error');
+        return;
       });
     },
     payerScolarite: function payerScolarite(id) {
-      axios.get().then(function (res) {
-        console.log("valeur de res dans payerScolarite:", res);
+      var _this8 = this;
+
+      axios.get('api/getEtudiantScolariteInformation/' + id).then(function (res) {
+        console.log("valeur de res dans payerScolarite:", res.data);
+        _this8.scolarite.nom = res.data[0].nom, _this8.scolarite.prenom = res.data[0].prenom, _this8.scolarite.cycle = res.data[0].code_cycle, _this8.scolarite.filiere = res.data[0].code_filiere, _this8.scolarite.scolarite = res.data[0].scolarite_filiere, _this8.scolarite.annee = res.data[0].valeur_annee_scolaire, _this8.etudiant.etudiants_id = res.data[0].id, _this8.etudiant.annee_scolaires_id = res.data[0].valeur_annee_scolaire;
       });
     }
   },
@@ -9766,7 +9740,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-4e8aea3e]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-4e8aea3e]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-4e8aea3e]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-4e8aea3e]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-4e8aea3e]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-4e8aea3e]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-4e8aea3e]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor: pointer;\n}\n.btn-delete[data-v-4e8aea3e]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-4e8aea3e]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-4e8aea3e]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-4e8aea3e]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-4e8aea3e]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-4e8aea3e]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-4e8aea3e]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-4e8aea3e]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-4e8aea3e]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor: pointer;\n}\n.btn-delete[data-v-4e8aea3e]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-4e8aea3e]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48888,9 +48862,91 @@ var render = function () {
                           },
                           [
                             _c("div", { staticClass: "modal-body" }, [
-                              _vm._m(2),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Nom : " + _vm._s(_vm.scolarite.nom)
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Prenom : " +
+                                          _vm._s(_vm.scolarite.prenom)
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
                               _vm._v(" "),
-                              _vm._m(3),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Filiere : " +
+                                          _vm._s(_vm.scolarite.filiere)
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Cycle : " + _vm._s(_vm.scolarite.cycle)
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("p", [
+                                      _c("label", { attrs: { for: "" } }, [
+                                        _vm._v(
+                                          "Total à Payer : " +
+                                            _vm._s(_vm.scolarite.scolarite)
+                                        ),
+                                      ]),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Année Scolaire : " +
+                                          _vm._s(_vm.scolarite.annee)
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(2),
                               _vm._v(" "),
                               _c("div", { staticClass: "row" }, [
                                 _c(
@@ -48906,8 +48962,8 @@ var render = function () {
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.etudiant.montant,
-                                          expression: "etudiant.montant",
+                                          value: _vm.etudiant.montant_paye,
+                                          expression: "etudiant.montant_paye",
                                         },
                                       ],
                                       staticClass: "form-control",
@@ -48916,7 +48972,9 @@ var render = function () {
                                         id: "montant",
                                         placeholder: "date",
                                       },
-                                      domProps: { value: _vm.etudiant.montant },
+                                      domProps: {
+                                        value: _vm.etudiant.montant_paye,
+                                      },
                                       on: {
                                         input: function ($event) {
                                           if ($event.target.composing) {
@@ -48924,7 +48982,7 @@ var render = function () {
                                           }
                                           _vm.$set(
                                             _vm.etudiant,
-                                            "montant",
+                                            "montant_paye",
                                             $event.target.value
                                           )
                                         },
@@ -49024,20 +49082,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "form-group col-md-12" }, [
-        _c("p", { staticClass: "text-center" }, [
-          _c("label", { attrs: { for: "" } }, [
-            _vm._v("Scolarité Total à Payer : 250500 FCFA"),
-          ]),
-        ]),
-      ]),
-    ])
   },
   function () {
     var _vm = this
