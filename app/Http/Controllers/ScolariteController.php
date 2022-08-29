@@ -3,19 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\FraisScolarite;
 use Illuminate\Support\Facades\DB;
 
 class ScolariteController extends Controller
 {
     public function getEtudiantScolariteInfo($id){
-        $etudiant = DB::SELECT("SELECT etudiants.id,etudiants.nom,etudiants.prenom,filieres.scolarite_filiere,filieres.code_filiere,years.valeur_annee_scolaire,cycles.code_cycle
+        $etudiant = DB::SELECT("SELECT etudiants.id,etudiants.nom,etudiants.prenom,filieres.scolarite_filiere,filieres.code_filiere,years.valeur_annee_scolaire,years.id as year_id,cycles.code_cycle
         FROM etudiants,filieres,years,cycles WHERE etudiants.filiere_id = filieres.id
         AND filieres.year_id = years.id AND filieres.cycle_id = cycles.id AND etudiants.id = $id");
-        return $etudiant;
+        $mt = DB::SELECT("SELECT sum(frais_scolarites.montant_paye) as montant_payer FROM frais_scolarites,etudiants 
+        WHERE frais_scolarites.etudiant_id = etudiants.id
+        AND etudiants.id = $id");
+        return compact('etudiant','mt');
     }
 
     public function payerScolarite(Request $request){
-        dd($request->all());
+        //dd($request->all());
+        $p = new FraisScolarite();
+        $p->montant_paye = $request->montant_paye;
+        $p->etudiant_id = $request->etudiants_id;
+        $p->year_id = $request->annee_scolaires_id;
+        $p->save();
+        return $p;
     }
     /**
      * Display a listing of the resource.

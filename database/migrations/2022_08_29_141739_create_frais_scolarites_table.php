@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRelationsTable extends Migration
+class CreateFraisScolaritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('relations', function (Blueprint $table) {
+        Schema::create('frais_scolarites', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('filiere_id');
+            $table->double("montant_paye");
+            $table->unsignedBigInteger('etudiant_id');
             $table->unsignedBigInteger('year_id');
-            $table->unsignedBigInteger('cycle_id');
-            $table->double('scolarite_filiere');
-            $table->foreign('filiere_id')->references('id')->on('filieres')->onDelete('cascade');
+            $table->foreign('etudiant_id')->references('id')->on('etudiants')->onDelete('cascade');
             $table->foreign('year_id')->references('id')->on('years')->onDelete('cascade');
-            $table->foreign('cycle_id')->references('id')->on('cycles')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relations');
+        Schema::dropIfExists('frais_scolarites');
     }
 }

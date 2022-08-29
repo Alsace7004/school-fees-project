@@ -134,10 +134,10 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
-                                                            <label for="">Total Payer à ce jour: 17500 FCFA</label>
+                                                            <label for="">Total Payer à ce jour: {{scolarite.mt_payer}} FCFA</label>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <label for="">Reste à Payer : 187500 FCFA</label>
+                                                            <label for="">Reste à Payer : {{scolarite.scolarite-scolarite.mt_payer}} FCFA</label>
                                                         </div>
                                                     </div>
                                                   
@@ -219,7 +219,8 @@
                     cycle:"",
                     filiere:"",
                     scolarite:"",
-                    annee:""
+                    annee:"",
+                    mt_payer:""
                 }
             }
         },
@@ -296,13 +297,14 @@
                     return;
                 }
                 axios.post("api/payerScolariteEtudiant",this.etudiant).then(()=>{
-                    Swal.fire('Created!','Etudiant créer avec success.','success') ;
+                    Swal.fire('Effectué!','Payement de Scolarité effectuer avec success.','success') ;
                     this.loadEtudiants();
                     this.etudiant={
                         etudiants_id:'',
                         montant_paye:'',
                         annee_scolaires_id:''
                     }
+                    //$('#addNewPay').modal('hide');
                 }).catch((err)=>{
                     //alert("err")
                     //console.log("err:",err.response.data.err.nom)
@@ -315,15 +317,16 @@
             payerScolarite(id){
                 axios.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
                     console.log("valeur de res dans payerScolarite:",res.data);
-                    this.scolarite.nom=res.data[0].nom,
-                    this.scolarite.prenom=res.data[0].prenom,
-                    this.scolarite.cycle=res.data[0].code_cycle,
-                    this.scolarite.filiere=res.data[0].code_filiere,
-                    this.scolarite.scolarite=res.data[0].scolarite_filiere,
-                    this.scolarite.annee=res.data[0].valeur_annee_scolaire,
-
-                    this.etudiant.etudiants_id=res.data[0].id,
-                    this.etudiant.annee_scolaires_id=res.data[0].valeur_annee_scolaire
+                    this.scolarite.nom=res.data.etudiant[0].nom,
+                    this.scolarite.prenom=res.data.etudiant[0].prenom,
+                    this.scolarite.cycle=res.data.etudiant[0].code_cycle,
+                    this.scolarite.filiere=res.data.etudiant[0].code_filiere,
+                    this.scolarite.scolarite=res.data.etudiant[0].scolarite_filiere,
+                    this.scolarite.annee=res.data.etudiant[0].valeur_annee_scolaire,
+                    //this.scolarite.mt_payer=res.data.mt[0].montant_payer,
+                    res.data.mt[0].montant_payer == null ? this.scolarite.mt_payer = 0 :this.scolarite.mt_payer=res.data.mt[0].montant_payer,
+                    this.etudiant.etudiants_id=res.data.etudiant[0].id,
+                    this.etudiant.annee_scolaires_id=res.data.etudiant[0].year_id
          
                 })
             }

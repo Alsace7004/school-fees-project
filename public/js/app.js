@@ -3464,7 +3464,8 @@ __webpack_require__.r(__webpack_exports__);
         cycle: "",
         filiere: "",
         scolarite: "",
-        annee: ""
+        annee: "",
+        mt_payer: ""
       }
     };
   },
@@ -3563,7 +3564,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.post("api/payerScolariteEtudiant", this.etudiant).then(function () {
-        Swal.fire('Created!', 'Etudiant créer avec success.', 'success');
+        Swal.fire('Effectué!', 'Payement de Scolarité effectuer avec success.', 'success');
 
         _this7.loadEtudiants();
 
@@ -3571,7 +3572,7 @@ __webpack_require__.r(__webpack_exports__);
           etudiants_id: '',
           montant_paye: '',
           annee_scolaires_id: ''
-        };
+        }; //$('#addNewPay').modal('hide');
       })["catch"](function (err) {
         //alert("err")
         //console.log("err:",err.response.data.err.nom)
@@ -3584,7 +3585,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/getEtudiantScolariteInformation/' + id).then(function (res) {
         console.log("valeur de res dans payerScolarite:", res.data);
-        _this8.scolarite.nom = res.data[0].nom, _this8.scolarite.prenom = res.data[0].prenom, _this8.scolarite.cycle = res.data[0].code_cycle, _this8.scolarite.filiere = res.data[0].code_filiere, _this8.scolarite.scolarite = res.data[0].scolarite_filiere, _this8.scolarite.annee = res.data[0].valeur_annee_scolaire, _this8.etudiant.etudiants_id = res.data[0].id, _this8.etudiant.annee_scolaires_id = res.data[0].valeur_annee_scolaire;
+        _this8.scolarite.nom = res.data.etudiant[0].nom, _this8.scolarite.prenom = res.data.etudiant[0].prenom, _this8.scolarite.cycle = res.data.etudiant[0].code_cycle, _this8.scolarite.filiere = res.data.etudiant[0].code_filiere, _this8.scolarite.scolarite = res.data.etudiant[0].scolarite_filiere, _this8.scolarite.annee = res.data.etudiant[0].valeur_annee_scolaire, //this.scolarite.mt_payer=res.data.mt[0].montant_payer,
+        res.data.mt[0].montant_payer == null ? _this8.scolarite.mt_payer = 0 : _this8.scolarite.mt_payer = res.data.mt[0].montant_payer, _this8.etudiant.etudiants_id = res.data.etudiant[0].id, _this8.etudiant.annee_scolaires_id = res.data.etudiant[0].year_id;
       });
     }
   },
@@ -9740,7 +9742,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-4e8aea3e]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-4e8aea3e]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-4e8aea3e]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-4e8aea3e]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-4e8aea3e]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-4e8aea3e]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-4e8aea3e]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor: pointer;\n}\n.btn-delete[data-v-4e8aea3e]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-4e8aea3e]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-4e8aea3e]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-4e8aea3e]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-4e8aea3e]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-4e8aea3e]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-4e8aea3e]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-4e8aea3e]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-4e8aea3e]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor: pointer;\n}\n.btn-delete[data-v-4e8aea3e]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-4e8aea3e]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48946,7 +48948,38 @@ var render = function () {
                                 ),
                               ]),
                               _vm._v(" "),
-                              _vm._m(2),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Total Payer à ce jour: " +
+                                          _vm._s(_vm.scolarite.mt_payer) +
+                                          " FCFA"
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group col-md-6" },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(
+                                        "Reste à Payer : " +
+                                          _vm._s(
+                                            _vm.scolarite.scolarite -
+                                              _vm.scolarite.mt_payer
+                                          ) +
+                                          " FCFA"
+                                      ),
+                                    ]),
+                                  ]
+                                ),
+                              ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "row" }, [
                                 _c(
@@ -49082,24 +49115,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", { attrs: { for: "" } }, [
-          _vm._v("Total Payer à ce jour: 17500 FCFA"),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", { attrs: { for: "" } }, [
-          _vm._v("Reste à Payer : 187500 FCFA"),
-        ]),
-      ]),
-    ])
   },
 ]
 render._withStripped = true
