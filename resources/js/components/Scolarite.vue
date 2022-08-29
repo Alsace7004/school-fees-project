@@ -80,7 +80,7 @@
                                                             <td>{{etudiant.valeur_filiere}}</td>
                                                             <td>
                                                                 <div class="display-flex">
-                                                                    <a href="" class="btn-edit">Pay</a>
+                                                                    <a @click="payerScolarite(etudiant.id)" data-toggle="modal" data-target="#addNewPay" class="btn-edit">Pay</a>
                                                                     <a href="" class="btn-edit">Edit</a>
                                                                     <!--<a href="" class="btn-delete">Delete</a>-->
                                                                 </div>
@@ -95,11 +95,11 @@
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="addNewPay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Update Etudiant":"Add New Etudiant"}}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Mise à jour d'un payement de Scolarité":"Effectuer un payement de Scolarité"}}</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -107,79 +107,37 @@
                                             <form @submit.prevent="is_Editing ? updateEtudiant() : createEtudiant()">
                                                 <div class="modal-body">
                                                     <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.nom"  id="nom" placeholder="Nom..." class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.prenom" id="prenom" placeholder="Prenom..." class="form-control">
+                                                        <div class="form-group col-md-12">
+                                                            <p class="text-center"><label for="">Scolarité Total à Payer : 250500 FCFA</label></p>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.email"  id="email" placeholder="Email..." class="form-control">
+                                                            <label for="">Total Payer à ce jour: 17500 FCFA</label>
                                                         </div>
                                                         <div class="form-group col-md-6">
-                                                            <select name="" v-model="etudiant.genre" class="form-control" id="genre">
-                                                                <option value="">Genre</option>
-                                                                <option value="M">Masculin</option>
-                                                                <option value="F">Feminin</option>
-                                                            </select>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.contact_1" id="contact_1" placeholder="Contact 1..." class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.contact_2" id="contact_2" placeholder="Contact 2..." class="form-control">
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.adresse" id="adresse" placeholder="Adresse..." class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <input type="text" v-model="etudiant.nationalite" id="nationalite" placeholder="Nationalite..." class="form-control">
+                                                            <label for="">Reste à Payer : 187500 FCFA</label>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-6">
+                                                  
+                                                  
+                                                   
                                                     
-                                                            <input type="date" min='1990-01-01' max='2010-01-01' v-model="etudiant.date_anniv" id="date_anniv" placeholder="date" class="form-control">
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                        
-                                                            <select name="" v-model="etudiant.succursale_id" class="form-control" id="succursale_id">
-                                                                <option value="" selected>Succursales</option>
-                                                                <option v-for="succursale in succursales" :key="succursale.id" :value="succursale.id">{{succursale.libelle_succursale}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
                                                     <div class="row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="">Inscription</label>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="">Somme à payer</label>
                                                             <input type="number" v-model="etudiant.montant" id="montant" placeholder="date" class="form-control">
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-12">
-                                                            <label for="">Filieres</label>
-                                                            <select name="" v-model="etudiant.filiere_id" class="form-control" id="">
-                                                                <option value="">Filiere</option>
-                                                                <option v-for="filiere in filieres" :key="filiere.id" :value="filiere.id">{{filiere.valeur_filiere}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                
                                                 
                                                     
                                                     
                                                 </div>
                                             
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Mette à jour":"Payer"}}</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -217,8 +175,8 @@
                 dFilieres:[],
                 dSuccursales:[],
 
-                succursales:[],
-                filieres:[],
+                //succursales:[],
+                //filieres:[],
         
                 etudiants:[],
                 etudiant:{
@@ -270,12 +228,6 @@
             },
             /*************************************************************/
                onFilCycAnSuChange(){
-                    /*console.log("this.ret.valfil:",this.ret.valfil)*/
-                    /*alert("this.ret.valfil:"+this.ret.valfil+
-                        "\nthis.ret.valcyc:"+this.ret.valcyc+
-                        "\nthis.ret.valAnn:"+this.ret.valAnn+
-                        "\nthis.ret.valSuc:"+this.ret.valSuc);*/
-                        //${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}
                             axios.get(`api/loadOnFilCycAnSuChange/${this.ret.valfil}/${this.ret.valcyc}/${this.ret.valAnn}/${this.ret.valSuc}`).then(res=>{
                                 this.etudiants=res.data
                             })           
@@ -302,16 +254,16 @@
                 })
             },
             /***********************************************************/
-            loadDistinctFiliereCycleYear(){
+            /*loadDistinctFiliereCycleYear(){
                 axios.get('api/filiereCycleYear').then((filieres)=>{
                     this.filieres = filieres.data;
                 })
-            },
-            loadSuccursales(){
+            },*/
+            /*loadSuccursales(){
                 axios.get('api/succursales').then((succursales)=>{
                     this.succursales = succursales.data;
                 })
-            },
+            },*/
             loadEtudiants(){
                 axios.get('api/etudiants').then((etudiants)=>{
                     this.etudiants = etudiants.data;
@@ -385,12 +337,18 @@
                         return;
                     }
                 })
+            },
+
+            payerScolarite(id){
+                axios.get().then((res)=>{
+                    console.log("valeur de res dans payerScolarite:",res);
+                })
             }
           
         },
         created(){
-            this.loadDistinctFiliereCycleYear();
-            this.loadSuccursales();
+            //this.loadDistinctFiliereCycleYear();
+            //this.loadSuccursales();
             this.loadEtudiants();
             
             /*SELECT*/
@@ -469,6 +427,7 @@ td{
 .btn-edit:hover{
     background-color:rgb(69, 69, 240);
     transition: 0.5s all;
+    cursor: pointer;
 }
 .btn-delete{
     border: none;
