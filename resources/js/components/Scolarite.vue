@@ -177,7 +177,7 @@
                                                 </button>
                                             </div>
                                             
-                                            <div class="modal-body">
+                                            <div class="modal-body" id="hello">
                                                    <div>
                                                     <!---->
                                                         <div class="header">
@@ -186,9 +186,9 @@
                                                             </div>
                                                         </div>
                                                     <!---->
-                                                        <div class="title">
-                                                                <p class="text-center" style="font-weight:bolder;letter-spacing:0.5rem">RECU DE PAIEMENT</p>
-                                                                <p class="text-center"><strong>N° : 20200107403028314</strong></p>
+                                                        <div class="title text-center">
+                                                                <p class="text-center" style="font-weight:bolder;letter-spacing:0.5rem;display:flex;justify-content:center;align-items:center">RECU DE PAIEMENT</p>
+                                                                <p class="text-center" style="font-weight:bolder;display:flex;justify-content:center;align-items:center"><strong>N° : 20200107403028314</strong></p>
                                                         </div>
                                                     <!---->
                                                         <div class="student_info" style="display:flex;justify-content:space-between">
@@ -205,50 +205,18 @@
                                                         </div>
                                                     <!---->
                                                         <div class="niveau_filiere">
-                                                            <p class="text-center" style="font-weight:bolder">LICENCE 1 / IRT - Informatique Réseaux Télécommunication</p>
+                                                            <p class="text-center" style="font-weight:bolder;display:flex;justify-content:center;align-items:center">LICENCE 1 / IRT - Informatique Réseaux Télécommunication</p>
                                                         </div>
                                                     <!---->
                                                         <div class="historique_payement">
-                                                            <p class="text-center">HISTORIQUE PAIEMENT</p>
+                                                            <p class="text-center" style="display:flex;justify-content:center;align-items:center">HISTORIQUE PAIEMENT</p>
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="card">
                                         
                                                                     <!-- /.card-header -->
-                                                                    <div class="card-body table-responsive p-0">
-                                                                        <div class="tbl-header">
-                                                                            <table>
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Date Paiment</th>
-                                                                                        <th>Montant Payer</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                            </table>
-                                                                        </div>
-                                                                        <table class="table table-hover text-nowrap">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td>1-07-2022</td>
-                                                                                    <td>55000</td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td>01-08-2022</td>
-                                                                                    <td>85000</td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td>01-09-2022</td>
-                                                                                    <td>90000</td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td>01-10-2022</td>
-                                                                                    <td>95000</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
+                                                                    <div class="card-body table-responsive p-0" >
+                                                                            
                                                                     </div>
                                                                     <!-- /.card-body -->
                                                                     </div>
@@ -267,7 +235,7 @@
                                             
                                             <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                                    <button type="submit" class="btn btn-primary">Imprimer</button>
+                                                    <button type="submit" @click="codespeedy()" class="btn btn-primary">Imprimer</button>
                                             </div>
                                             
                                         </div>
@@ -438,7 +406,17 @@
                     this.etudiant.annee_scolaires_id=res.data.etudiant[0].year_id
          
                 })
-            }
+            },
+                codespeedy(){
+                        var print_div = document.getElementById("hello");
+                        var print_area = window.open();
+                        print_area.document.write(print_div.innerHTML);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    // This is the code print a particular div element
+                }
           
         },
         created(){
