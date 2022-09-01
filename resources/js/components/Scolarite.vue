@@ -81,7 +81,7 @@
                                                             <td>
                                                                 <div class="display-flex">
                                                                     <a @click="payerScolarite(etudiant.id)" data-toggle="modal" data-target="#addNewPay" class="btn-edit">Pay</a>
-                                                                    <a href="" class="btn-edit">Edit</a>
+                                                                    <a data-toggle="modal" data-target="#printNew" class="btn-edit">Print</a>
                                                                     <!--<a href="" class="btn-delete">Delete</a>-->
                                                                 </div>
                                                             </td>
@@ -161,6 +161,70 @@
                                                     <button type="submit" class="btn btn-primary">{{is_Editing ?"Mette à jour":"Payer"}}</button>
                                                 </div>
                                             </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="printNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Recu de paiement</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            
+                                            <div class="modal-body">
+                                                   <div>
+                                                    <!---->
+                                                        <div class="header">
+                                                            <div class="shool-info">
+                                                                <p>le logo de l'ecole ici</p>
+                                                            </div>
+                                                        </div>
+                                                    <!---->
+                                                        <div class="title">
+                                                                <p class="text-center" style="font-weight:bolder;letter-spacing:0.5rem">RECU DE PAIEMENT</p>
+                                                                <p class="text-center"><strong>N° : 20200107403028314</strong></p>
+                                                        </div>
+                                                    <!---->
+                                                        <div class="student_info" style="display:flex;justify-content:space-between">
+                                                            <div class="one">
+                                                                <p><strong>Nom :</strong> ALABI</p>
+                                                                <p><strong>Prénom(s) :</strong> BAMIDELE JERIEL</p>
+                                                                <p><strong>Matricule :</strong> 201900003780ABAVT</p>
+                                                            </div>
+                                                            <div class="two">
+                                                                <p><strong>Année :</strong> 2019-2020</p>
+                                                                <p><strong>Succursale :</strong> AVEDJI</p>
+                                                                <p><strong>Date :</strong> 07-01-2020</p>
+                                                            </div>
+                                                        </div>
+                                                    <!---->
+                                                        <div class="niveau_filiere">
+                                                            <p class="text-center" style="font-weight:bolder">LICENCE 1 / IRT - Informatique Réseaux Télécommunication</p>
+                                                        </div>
+                                                    <!---->
+                                                        <div class="historique_payement">
+
+                                                        </div>
+                                                    <!---->
+                                                        <div class="rappel_payement">
+
+                                                        </div>
+                                                    <!---->
+                                                   </div>
+                                                    
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    <button type="submit" class="btn btn-primary">Imprimer</button>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
