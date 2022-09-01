@@ -193,9 +193,9 @@
                                                     <!---->
                                                         <div class="student_info" style="display:flex;justify-content:space-between">
                                                             <div class="one">
-                                                                <p><strong>Nom :</strong> ALABI</p>
-                                                                <p><strong>Prénom(s) :</strong> BAMIDELE JERIEL</p>
-                                                                <p><strong>Matricule :</strong> 201900003780ABAVT</p>
+                                                                <p><strong>Nom :</strong> ADEBOLA</p>
+                                                                <p><strong>Prénom(s) :</strong> ADEBAYO</p>
+                                                                <p><strong>Matricule :</strong> 201900003780AAVT</p>
                                                             </div>
                                                             <div class="two">
                                                                 <p><strong>Année :</strong> 2019-2020</p>
@@ -209,7 +209,52 @@
                                                         </div>
                                                     <!---->
                                                         <div class="historique_payement">
+                                                            <p class="text-center">HISTORIQUE PAIEMENT</p>
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="card">
+                                        
+                                                                    <!-- /.card-header -->
+                                                                    <div class="card-body table-responsive p-0">
+                                                                        <div class="tbl-header">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Date Paiment</th>
+                                                                                        <th>Montant Payer</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                        </div>
+                                                                        <table class="table table-hover text-nowrap">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>1-07-2022</td>
+                                                                                    <td>55000</td>
+                                                                                </tr>
 
+                                                                                <tr>
+                                                                                    <td>01-08-2022</td>
+                                                                                    <td>85000</td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td>01-09-2022</td>
+                                                                                    <td>90000</td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td>01-10-2022</td>
+                                                                                    <td>95000</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <!-- /.card-body -->
+                                                                    </div>
+                                                                    <!-- /.card -->
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     <!---->
                                                         <div class="rappel_payement">
