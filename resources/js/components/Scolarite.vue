@@ -209,14 +209,41 @@
                                                         </div>
                                                     <!---->
                                                         <div class="historique_payement">
-                                                            <p class="text-center" style="display:flex;justify-content:center;align-items:center">HISTORIQUE PAIEMENT</p>
+                                                            <p class="text-center" style="font-weight:bolder;display:flex;justify-content:center;align-items:center">HISTORIQUE PAIEMENT</p>
                                                             <div class="row">
                                                                 <div class="col-12">
                                                                     <div class="card">
                                         
                                                                     <!-- /.card-header -->
-                                                                    <div class="card-body table-responsive p-0" >
-                                                                            
+                                                                    <div class="card-body" >
+                                                                            <div>
+                                                                                <div style="display:flex;justify-content:space-between">
+                                                                                    <p>DATE PAIEMENT</p>
+                                                                                    <p>MONTANT PAYER</p>
+                                                                                </div>
+                                                                                
+                                                                                <div style="display:flex;justify-content:space-around">
+                                                                                    <p>01-02-2022</p>
+                                                                                    <p>95000</p>
+                                                                                </div>
+                                                                                <div style="display:flex;justify-content:space-around">
+                                                                                    <p>01-03-2022</p>
+                                                                                    <p>90000</p>
+                                                                                </div>
+                                                                                <div style="display:flex;justify-content:space-around">
+                                                                                    <p>01-04-2022</p>
+                                                                                    <p>80000</p>
+                                                                                </div>
+                                                                                <div style="display:flex;justify-content:space-around">
+                                                                                    <p>01-05-2022</p>
+                                                                                    <p>75000</p>
+                                                                                </div>
+                                                                                <div style="display:flex;justify-content:space-around">
+                                                                                    <p>01-06-2022</p>
+                                                                                    <p>90000</p>
+                                                                                </div>
+                                                                                
+                                                                            </div>
                                                                     </div>
                                                                     <!-- /.card-body -->
                                                                     </div>
