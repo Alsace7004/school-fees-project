@@ -244,6 +244,10 @@
                                                                                 </div>
                                                                                 
                                                                             </div>
+                                                                            <div style="display:flex;justify-content:right">
+                                                                                <p><strong>Total payé :</strong>22000</p>
+                                                                            </div>
+                                                                            
                                                                     </div>
                                                                     <!-- /.card-body -->
                                                                     </div>
@@ -252,8 +256,24 @@
                                                             </div>
                                                         </div>
                                                     <!---->
-                                                        <div class="rappel_payement">
-
+                                                        <div style="display:flex;justify-content:center">
+                                                            <p><strong>RAPPEL DES PAIEMENTS</strong></p>
+                                                        </div>
+                                                    <!---->
+                                                        <div class="rappel_payement" style="display:flex;justify-content:space-between">
+                                                                <div>
+                                                                    <p><strong>Total à payer :</strong>350000</p>
+                                                                    <p><strong>Remise :</strong>0</p>
+                                                                    <p><strong>Total payé à ce jour :</strong>260000</p>
+                                                                    <p><strong>Reste à payer :</strong>350000</p>
+                                                                </div>
+                                                                <div>
+                                                                    <p><strong>Caissier(ère)</strong></p>
+                                                                </div>
+                                                        </div>
+                                                    <!---->
+                                                        <div style="display:flex;justify-content:right">
+                                                            <p><strong>NOM & PRENOM du caissier(ère)</strong></p>
                                                         </div>
                                                     <!---->
                                                    </div>
