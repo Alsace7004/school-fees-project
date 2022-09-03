@@ -81,7 +81,7 @@
                                                             <td>
                                                                 <div class="display-flex">
                                                                     <a @click="payerScolarite(etudiant.id)" data-toggle="modal" data-target="#addNewPay" class="btn-edit">Pay</a>
-                                                                    <a data-toggle="modal" data-target="#printNew" class="btn-edit">Print</a>
+                                                                    <a @click="getRecuPaiementInfo(etudiant.id)" data-toggle="modal" data-target="#printNew" class="btn-edit">Print</a>
                                                                     <!--<a href="" class="btn-delete">Delete</a>-->
                                                                 </div>
                                                             </td>
@@ -166,7 +166,7 @@
                                 </div>
                                 <!-- Modal -->
 
-                                <!-- Modal -->
+                                <!-- Modal RECU PAIEMENT-->
                                 <div class="modal fade" id="printNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -193,19 +193,19 @@
                                                     <!---->
                                                         <div class="student_info" style="display:flex;justify-content:space-between">
                                                             <div class="one">
-                                                                <p><strong>Nom :</strong> ADEBOLA</p>
-                                                                <p><strong>Prénom(s) :</strong> ADEBAYO</p>
-                                                                <p><strong>Matricule :</strong> 201900003780AAVT</p>
+                                                                <p><strong>Nom :</strong> {{scolarite.nom}}</p>
+                                                                <p><strong>Prénom(s) :</strong> {{scolarite.prenom}}</p>
+                                                                <p><strong>Matricule :</strong> {{scolarite.matricule}}</p>
                                                             </div>
                                                             <div class="two">
-                                                                <p><strong>Année :</strong> 2019-2020</p>
-                                                                <p><strong>Succursale :</strong> AVEDJI</p>
-                                                                <p><strong>Date :</strong> 07-01-2020</p>
+                                                                <p><strong>Année :</strong> {{scolarite.annee}}</p>
+                                                                <p><strong>Succursale :</strong> {{scolarite.libelle_succursale}}</p>
+                                                                <p><strong>Date :</strong> {{convert(Date.now())}}</p>
                                                             </div>
                                                         </div>
                                                     <!---->
                                                         <div class="niveau_filiere">
-                                                            <p class="text-center" style="font-weight:bolder;display:flex;justify-content:center;align-items:center">LICENCE 1 / IRT - Informatique Réseaux Télécommunication</p>
+                                                            <p class="text-center" style="font-weight:bolder;display:flex;justify-content:center;align-items:center"> {{scolarite.libelle_cycle}} / {{scolarite.filiere}} - {{scolarite.libelle_filiere}}</p>
                                                         </div>
                                                     <!---->
                                                         <div class="historique_payement">
@@ -262,10 +262,10 @@
                                                     <!---->
                                                         <div class="rappel_payement" style="display:flex;justify-content:space-between">
                                                                 <div>
-                                                                    <p><strong>Total à payer :</strong>350000</p>
+                                                                    <p><strong>Total à payer :</strong>{{scolarite.scolarite}}</p>
                                                                     <p><strong>Remise :</strong>0</p>
-                                                                    <p><strong>Total payé à ce jour :</strong>260000</p>
-                                                                    <p><strong>Reste à payer :</strong>350000</p>
+                                                                    <p><strong>Total payé à ce jour :</strong>{{scolarite.mt_payer}}</p>
+                                                                    <p><strong>Reste à payer :</strong>{{scolarite.scolarite-scolarite.mt_payer}}</p>
                                                                 </div>
                                                                 <div>
                                                                     <p><strong>Caissier(ère)</strong></p>
@@ -288,7 +288,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal -->
+                                <!-- Modal RECU PAIEMENT-->
                             </div>
                             
                             <!-- Small boxes (Stat box) -->
@@ -344,11 +344,20 @@
                     filiere:"",
                     scolarite:"",
                     annee:"",
-                    mt_payer:""
+                    mt_payer:"",
+                    //pour les recu
+                    libelle_cycle:'',
+                    libelle_filiere:'',
+                    libelle_succursale:'',
+                    matricule:''
                 }
             }
         },
         methods:{
+            convert(jour){
+                let  date =  new Date(jour);
+                return  date.toLocaleDateString() // "sun nov 29 2020 "
+            },
             newModal(){
                 this.etudiant={
                     nom:'',
@@ -440,7 +449,7 @@
 
             payerScolarite(id){
                 axios.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
-                    console.log("valeur de res dans payerScolarite:",res.data);
+                    //console.log("valeur de res dans payerScolarite:",res.data);
                     this.scolarite.nom=res.data.etudiant[0].nom,
                     this.scolarite.prenom=res.data.etudiant[0].prenom,
                     this.scolarite.cycle=res.data.etudiant[0].code_cycle,
@@ -454,6 +463,27 @@
          
                 })
             },
+            getRecuPaiementInfo(id){
+                axios.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
+                    console.log("valeur de res dans getEtudiantScolariteInformation:",res.data);
+                    this.scolarite.nom=res.data.etudiant[0].nom,
+                    this.scolarite.prenom=res.data.etudiant[0].prenom,
+                    this.scolarite.cycle=res.data.etudiant[0].code_cycle,
+                    this.scolarite.filiere=res.data.etudiant[0].code_filiere,
+                    this.scolarite.scolarite=res.data.etudiant[0].scolarite_filiere,
+                    this.scolarite.annee=res.data.etudiant[0].valeur_annee_scolaire,
+                    this.scolarite.libelle_cycle=res.data.etudiant[0].libelle_cycle,
+                    this.scolarite.libelle_filiere=res.data.etudiant[0].libelle_filiere,
+                    this.scolarite.libelle_succursale=res.data.etudiant[0].libelle_succursale,
+                    this.scolarite.matricule=res.data.etudiant[0].matricule,
+                    //this.scolarite.mt_payer=res.data.mt[0].montant_payer,
+                    res.data.mt[0].montant_payer == null ? this.scolarite.mt_payer = 0 :this.scolarite.mt_payer=res.data.mt[0].montant_payer,
+                    this.etudiant.etudiants_id=res.data.etudiant[0].id,
+                    this.etudiant.annee_scolaires_id=res.data.etudiant[0].year_id
+         
+                })
+            },
+                //for recu paiement print
                 codespeedy(){
                         var print_div = document.getElementById("hello");
                         var print_area = window.open();

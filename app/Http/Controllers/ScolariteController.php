@@ -9,10 +9,19 @@ use Illuminate\Support\Facades\DB;
 class ScolariteController extends Controller
 {
     public function getEtudiantScolariteInfo($id){
-        $etudiant = DB::SELECT("SELECT etudiants.id,etudiants.nom,etudiants.prenom,filieres.scolarite_filiere,filieres.code_filiere,years.valeur_annee_scolaire,years.id as year_id,cycles.code_cycle
-        FROM etudiants,filieres,years,cycles WHERE etudiants.filiere_id = filieres.id
-        AND filieres.year_id = years.id AND filieres.cycle_id = cycles.id AND etudiants.id = $id");
-        $mt = DB::SELECT("SELECT sum(frais_scolarites.montant_paye) as montant_payer FROM frais_scolarites,etudiants 
+        $etudiant = DB::SELECT("SELECT etudiants.id,etudiants.nom,etudiants.prenom,etudiants.matricule,
+        filieres.scolarite_filiere,filieres.code_filiere,filieres.libelle_filiere,
+        years.valeur_annee_scolaire,
+        years.id as year_id,cycles.code_cycle,cycles.libelle_cycle,succursales.libelle_succursale
+        FROM etudiants,filieres,years,cycles,succursales 
+        WHERE etudiants.filiere_id = filieres.id
+        AND filieres.year_id = years.id 
+        AND filieres.cycle_id = cycles.id
+        AND etudiants.succursale_id = succursales.id 
+        AND etudiants.id = $id");
+
+        $mt = DB::SELECT("SELECT sum(frais_scolarites.montant_paye) as montant_payer 
+        FROM frais_scolarites,etudiants 
         WHERE frais_scolarites.etudiant_id = etudiants.id
         AND etudiants.id = $id");
         return compact('etudiant','mt');
