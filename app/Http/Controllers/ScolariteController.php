@@ -10,21 +10,22 @@ class ScolariteController extends Controller
 {
     public function getEtudiantScolariteInfo($id){
         $etudiant = DB::SELECT("SELECT etudiants.id,etudiants.nom,etudiants.prenom,etudiants.matricule,
-        filieres.scolarite_filiere,filieres.code_filiere,filieres.libelle_filiere,
-        years.valeur_annee_scolaire,
-        years.id as year_id,cycles.code_cycle,cycles.libelle_cycle,succursales.libelle_succursale
-        FROM etudiants,filieres,years,cycles,succursales 
-        WHERE etudiants.filiere_id = filieres.id
-        AND filieres.year_id = years.id 
-        AND filieres.cycle_id = cycles.id
-        AND etudiants.succursale_id = succursales.id 
-        AND etudiants.id = $id");
+            filieres.scolarite_filiere,filieres.code_filiere,filieres.libelle_filiere,
+            years.valeur_annee_scolaire,
+            years.id as year_id,cycles.code_cycle,cycles.libelle_cycle,succursales.libelle_succursale
+            FROM etudiants,filieres,years,cycles,succursales 
+            WHERE etudiants.filiere_id = filieres.id
+            AND filieres.year_id = years.id 
+            AND filieres.cycle_id = cycles.id
+            AND etudiants.succursale_id = succursales.id 
+            AND etudiants.id = $id");
 
         $mt = DB::SELECT("SELECT sum(frais_scolarites.montant_paye) as montant_payer 
-        FROM frais_scolarites,etudiants 
-        WHERE frais_scolarites.etudiant_id = etudiants.id
-        AND etudiants.id = $id");
-        return compact('etudiant','mt');
+            FROM frais_scolarites,etudiants 
+            WHERE frais_scolarites.etudiant_id = etudiants.id
+            AND etudiants.id = $id");
+        $historique = DB::SELECT("SELECT montant_paye,created_at FROM frais_scolarites WHERE etudiant_id = $id");
+        return compact('etudiant','mt','historique');
     }
 
     public function payerScolarite(Request $request){

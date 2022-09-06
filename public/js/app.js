@@ -3562,6 +3562,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      historiques: [],
       years: [],
       cycles: [],
       dFilieres: [],
@@ -3728,7 +3729,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('api/getEtudiantScolariteInformation/' + id).then(function (res) {
         console.log("valeur de res dans getEtudiantScolariteInformation:", res.data);
         _this9.scolarite.nom = res.data.etudiant[0].nom, _this9.scolarite.prenom = res.data.etudiant[0].prenom, _this9.scolarite.cycle = res.data.etudiant[0].code_cycle, _this9.scolarite.filiere = res.data.etudiant[0].code_filiere, _this9.scolarite.scolarite = res.data.etudiant[0].scolarite_filiere, _this9.scolarite.annee = res.data.etudiant[0].valeur_annee_scolaire, _this9.scolarite.libelle_cycle = res.data.etudiant[0].libelle_cycle, _this9.scolarite.libelle_filiere = res.data.etudiant[0].libelle_filiere, _this9.scolarite.libelle_succursale = res.data.etudiant[0].libelle_succursale, _this9.scolarite.matricule = res.data.etudiant[0].matricule, //this.scolarite.mt_payer=res.data.mt[0].montant_payer,
-        res.data.mt[0].montant_payer == null ? _this9.scolarite.mt_payer = 0 : _this9.scolarite.mt_payer = res.data.mt[0].montant_payer, _this9.etudiant.etudiants_id = res.data.etudiant[0].id, _this9.etudiant.annee_scolaires_id = res.data.etudiant[0].year_id;
+        res.data.mt[0].montant_payer == null ? _this9.scolarite.mt_payer = 0 : _this9.scolarite.mt_payer = res.data.mt[0].montant_payer, _this9.etudiant.etudiants_id = res.data.etudiant[0].id, _this9.etudiant.annee_scolaires_id = res.data.etudiant[0].year_id, //historique payement
+        _this9.historiques = res.data.historique;
       });
     },
     //for recu paiement print
@@ -9894,7 +9896,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-4e8aea3e]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-4e8aea3e]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-4e8aea3e]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-4e8aea3e]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-4e8aea3e]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-4e8aea3e]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-4e8aea3e]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor: pointer;\n}\n.btn-delete[data-v-4e8aea3e]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-4e8aea3e]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-4e8aea3e]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-4e8aea3e]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-4e8aea3e]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-4e8aea3e]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-4e8aea3e]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-4e8aea3e]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-4e8aea3e]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n    cursor: pointer;\n}\n.btn-delete[data-v-4e8aea3e]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-4e8aea3e]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-4e8aea3e]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49330,7 +49332,101 @@ var render = function () {
                                 ),
                               ]),
                               _vm._v(" "),
-                              _vm._m(5),
+                              _c(
+                                "div",
+                                { staticClass: "historique_payement" },
+                                [
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "text-center",
+                                      staticStyle: {
+                                        "font-weight": "bolder",
+                                        display: "flex",
+                                        "justify-content": "center",
+                                        "align-items": "center",
+                                      },
+                                    },
+                                    [_vm._v("HISTORIQUE PAIEMENT")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-12" }, [
+                                      _c("div", { staticClass: "card" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "card-body" },
+                                          [
+                                            _c(
+                                              "div",
+                                              [
+                                                _vm._m(5),
+                                                _vm._v(" "),
+                                                _vm._l(
+                                                  _vm.historiques,
+                                                  function (historique) {
+                                                    return _c(
+                                                      "div",
+                                                      {
+                                                        key: historique.id,
+                                                        staticStyle: {
+                                                          display: "flex",
+                                                          "justify-content":
+                                                            "space-around",
+                                                        },
+                                                      },
+                                                      [
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              historique.created_at
+                                                            )
+                                                          ),
+                                                        ]),
+                                                        _vm._v(" "),
+                                                        _c("p", [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              historique.montant_paye
+                                                            )
+                                                          ),
+                                                        ]),
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                              ],
+                                              2
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticStyle: {
+                                                  display: "flex",
+                                                  "justify-content": "right",
+                                                },
+                                              },
+                                              [
+                                                _c("p", [
+                                                  _c("strong", [
+                                                    _vm._v("Total payé :"),
+                                                  ]),
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.scolarite.mt_payer
+                                                    )
+                                                  ),
+                                                ]),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]),
+                                    ]),
+                                  ]),
+                                ]
+                              ),
                               _vm._v(" "),
                               _vm._m(6),
                               _vm._v(" "),
@@ -49540,134 +49636,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "historique_payement" }, [
-      _c(
-        "p",
-        {
-          staticClass: "text-center",
-          staticStyle: {
-            "font-weight": "bolder",
-            display: "flex",
-            "justify-content": "center",
-            "align-items": "center",
-          },
-        },
-        [_vm._v("HISTORIQUE PAIEMENT")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", [
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      display: "flex",
-                      "justify-content": "space-between",
-                    },
-                  },
-                  [
-                    _c("p", [_vm._v("DATE PAIEMENT")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("MONTANT PAYER")]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      display: "flex",
-                      "justify-content": "space-around",
-                    },
-                  },
-                  [
-                    _c("p", [_vm._v("01-02-2022")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("95000")]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      display: "flex",
-                      "justify-content": "space-around",
-                    },
-                  },
-                  [
-                    _c("p", [_vm._v("01-03-2022")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("90000")]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      display: "flex",
-                      "justify-content": "space-around",
-                    },
-                  },
-                  [
-                    _c("p", [_vm._v("01-04-2022")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("80000")]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      display: "flex",
-                      "justify-content": "space-around",
-                    },
-                  },
-                  [
-                    _c("p", [_vm._v("01-05-2022")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("75000")]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticStyle: {
-                      display: "flex",
-                      "justify-content": "space-around",
-                    },
-                  },
-                  [
-                    _c("p", [_vm._v("01-06-2022")]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("90000")]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticStyle: { display: "flex", "justify-content": "right" },
-                },
-                [
-                  _c("p", [
-                    _c("strong", [_vm._v("Total payé :")]),
-                    _vm._v("22000"),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
+    return _c(
+      "div",
+      { staticStyle: { display: "flex", "justify-content": "space-between" } },
+      [
+        _c("p", [_vm._v("DATE PAIEMENT")]),
+        _vm._v(" "),
+        _c("p", [_vm._v("MONTANT PAYER")]),
+      ]
+    )
   },
   function () {
     var _vm = this

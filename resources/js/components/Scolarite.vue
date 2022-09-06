@@ -222,11 +222,11 @@
                                                                                     <p>MONTANT PAYER</p>
                                                                                 </div>
                                                                                 
-                                                                                <div style="display:flex;justify-content:space-around">
-                                                                                    <p>01-02-2022</p>
-                                                                                    <p>95000</p>
+                                                                                <div style="display:flex;justify-content:space-around" v-for="historique in historiques" :key="historique.id">
+                                                                                    <p>{{historique.created_at}}</p>
+                                                                                    <p>{{historique.montant_paye}}</p>
                                                                                 </div>
-                                                                                <div style="display:flex;justify-content:space-around">
+                                                                                <!--<div style="display:flex;justify-content:space-around">
                                                                                     <p>01-03-2022</p>
                                                                                     <p>90000</p>
                                                                                 </div>
@@ -241,11 +241,11 @@
                                                                                 <div style="display:flex;justify-content:space-around">
                                                                                     <p>01-06-2022</p>
                                                                                     <p>90000</p>
-                                                                                </div>
+                                                                                </div>-->
                                                                                 
                                                                             </div>
                                                                             <div style="display:flex;justify-content:right">
-                                                                                <p><strong>Total payé :</strong>22000</p>
+                                                                                <p><strong>Total payé :</strong>{{scolarite.mt_payer}}</p>
                                                                             </div>
                                                                             
                                                                     </div>
@@ -315,6 +315,7 @@
         },
         data(){
             return{
+                historiques:[],
                 years:[],
                 cycles:[],
                 dFilieres:[],
@@ -479,7 +480,9 @@
                     //this.scolarite.mt_payer=res.data.mt[0].montant_payer,
                     res.data.mt[0].montant_payer == null ? this.scolarite.mt_payer = 0 :this.scolarite.mt_payer=res.data.mt[0].montant_payer,
                     this.etudiant.etudiants_id=res.data.etudiant[0].id,
-                    this.etudiant.annee_scolaires_id=res.data.etudiant[0].year_id
+                    this.etudiant.annee_scolaires_id=res.data.etudiant[0].year_id,
+                    //historique payement
+                    this.historiques = res.data.historique
          
                 })
             },
