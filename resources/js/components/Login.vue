@@ -62,6 +62,7 @@
             },
             loginUser(){
                 alert("Bienvenue sur l'application de gestion de frais de scolarité"+"\n Vous allez etre rediriger dans quelques instants...!!!")
+                this.$router.push("/");
             }
           
         },

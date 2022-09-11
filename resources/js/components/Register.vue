@@ -76,6 +76,7 @@
             },
             registerUser(){
                 alert("Nouveau compte creer avec success !!!"+"\n Vous allez etre rediriger dans quelques instant...!!!");
+                this.$router.push("/");
             }
           
         },

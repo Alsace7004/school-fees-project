@@ -3300,6 +3300,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     loginUser: function loginUser() {
       alert("Bienvenue sur l'application de gestion de frais de scolarité" + "\n Vous allez etre rediriger dans quelques instants...!!!");
+      this.$router.push("/");
     }
   },
   mounted: function mounted() {
@@ -3396,6 +3397,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     registerUser: function registerUser() {
       alert("Nouveau compte creer avec success !!!" + "\n Vous allez etre rediriger dans quelques instant...!!!");
+      this.$router.push("/");
     }
   },
   mounted: function mounted() {
