@@ -51009,7 +51009,7 @@ var render = function () {
                   { staticClass: "small-box bg-danger" },
                   [
                     _c("div", { staticClass: "inner" }, [
-                      _c("h3", [_vm._v(_vm._s(_vm.cycles))]),
+                      _c("h3", [_vm._v(_vm._s(_vm.etudiants))]),
                       _vm._v(" "),
                       _c("p", [_vm._v("Scolarités")]),
                     ]),
@@ -51020,7 +51020,7 @@ var render = function () {
                       "router-link",
                       {
                         staticClass: "small-box-footer",
-                        attrs: { to: "/etudiants" },
+                        attrs: { to: "/scolarites" },
                       },
                       [
                         _vm._v("Plus info "),
@@ -51222,9 +51222,7 @@ var render = function () {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.email))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Avedji")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v("Admin")]),
+                            _c("td", [_vm._v(_vm._s(user.role_name))]),
                             _vm._v(" "),
                             _vm._m(2, true),
                           ])
@@ -51270,8 +51268,6 @@ var staticRenderFns = [
             _c("th", [_vm._v("Nom")]),
             _vm._v(" "),
             _c("th", [_vm._v("Email")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Succursale")]),
             _vm._v(" "),
             _c("th", [_vm._v("Role")]),
             _vm._v(" "),

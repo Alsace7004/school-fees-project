@@ -27,7 +27,7 @@
                                                             <th>#</th>
                                                             <th>Nom</th>
                                                             <th>Email</th>
-                                                            <th>Succursale</th>
+                                                            <!--<th>Succursale</th>-->
                                                             <th>Role</th>
                                                             <th>Actions</th>
                                                         </tr>
@@ -41,8 +41,8 @@
                                                             <td>{{i=i+1}}</td>
                                                             <td>{{user.name}}</td>
                                                             <td>{{user.email}}</td>
-                                                            <td>Avedji</td>
-                                                            <td>Admin</td>
+                                                            <!--<td>Avedji</td>-->
+                                                            <td>{{user.role_name}}</td>
                                                             <td>
                                                                 <div class="display-flex">
                                                                     <a href="" class="btn-edit">Edit</a>

@@ -123,14 +123,14 @@
                                     <!-- small box -->
                                     <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>{{cycles}}</h3>
+                                        <h3>{{etudiants}}</h3>
 
                                         <p>Scolarités</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
                                     </div>
-                                    <router-link to="/etudiants" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
+                                    <router-link to="/scolarites" class="small-box-footer">Plus info <i class="fas fa-arrow-circle-right"></i></router-link>
                                     </div>
                                 </div>
                                 <!-- ./col -->

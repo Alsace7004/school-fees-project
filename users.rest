@@ -1,0 +1,40 @@
+//RECUPERARTION DE TOUS LES USERS
+GET http://localhost:8001/api/users
+Authorization: Bearer 17|9sDDdhrhRwIi4V28tSBoBYnvfzKmGscO8jZAEAo7
+
+###
+//CRRER UN NOUVEAU USER EN CHOISSISSANT UN ROLE OBLIGATOIREMENT
+
+POST http://localhost:8001/api/users
+Authorization: Bearer 17|9sDDdhrhRwIi4V28tSBoBYnvfzKmGscO8jZAEAo7
+Content-Type: application/json
+
+{
+    "name":"Femi",
+    "email":"femi@femi.com",
+    "password":"123456789",
+    "roles": [3]
+}
+###
+//RECUPERER LES INFO CONCERNANT UN SEUL USER
+GET http://localhost:8001/api/users/5
+Authorization: Bearer 17|9sDDdhrhRwIi4V28tSBoBYnvfzKmGscO8jZAEAo7
+
+###
+//METTRE A JOUR LES INFO CONCERNAT UN SEUL USER
+PUT http://localhost:8001/api/users/19
+Authorization: Bearer 18|t0Lo35vmWzQkMcoAy8ErHS97Al7xs9P3ZnvcGwNT
+Content-Type: application/json
+
+{
+    "name":"Femi",
+    "email":"femi@femi.com",
+    "password":"123456789",
+    "roles": [3]
+}
+###
+//SUPPRIMER UN USER EN DESACTIVANT SES users OBLIGATOIREMENT
+DELETE http://localhost:8001/api/users/8
+
+###
+//SELECT u.id,u.code,u.firstname,u.lastname,u.phone_number1,u.phone_number2,u.email,u.user_status,u.profil_image,u.adresse,r.name as role_name FROM users u inner join roles r inner join model_has_roles WHERE u.id = model_has_roles.model_id and r.id = model_has_roles.role_id

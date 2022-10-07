@@ -31,7 +31,8 @@ use App\Http\Controllers\UserController;
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         //Users
-        Route::get('/users',[UserController::class,'index']);
+        //Route::get('/users',[UserController::class,'index']);
+        Route::apiResources(['users'=>UserController::class]);
         //Years
         Route::apiResources(['years'=>YearController::class]);
 
