@@ -71,13 +71,13 @@
                     if(res.data.status_code == 200){
                         const token = res.data.token;
                         const email = res.data.user.email;
-                        //const role = res.data.role;
+                        const role = res.data.role;
                   
                         localStorage.setItem("jwt",token);
                         localStorage.setItem("username",email);
-                        //localStorage.setItem("role",role);
+                        localStorage.setItem("role",role);
 
-                        if(token && email){
+                        if(token && email && (role ==="Admin" || role ==="Secretaire" || role==="Caissier")){
                             Swal.fire('Reussi!','Connexion reussi!!!.','success') ;
                             this.$router.push("/");
                         }else{

@@ -15,7 +15,7 @@
             <img :src="'../admin/dist/img/user2-160x160.jpg'" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{user.email}} ({{user.name}})</a>
+            <a href="#" class="d-block">{{user.email}} ({{user.user_role}})</a>
           </div>
         </div>
 
@@ -127,16 +127,21 @@ export default {
     return{
       user:{
         name:'',
-        email:''
+        email:'',
+        user_role:'',
       }
     }
   },
   methods:{
     loadAuthUser(){
       axiosClient.get('api/authUser').then((res)=>{
-        console.log("valeur de res dans auth user:",res)
+        //console.log("valeur de res dans auth user:",res)
         this.user.name = res.data.name;
         this.user.email = res.data.email;
+        let rl = localStorage.getItem("role");
+        //console.log("valeur du role:",rl)
+        this.user.user_role = rl;
+        
       })
     },
     logoutUser(){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -73,8 +74,20 @@ class AuthController extends Controller
                 ];
                 return response($res1,400);
             }else{
+                //$the_user = Auth::user(); 
+                $role = DB::SELECT("SELECT r.name as role_name  from roles r,users u, model_has_roles 
+                where u.id = $user->id AND r.id = model_has_roles.role_id and model_has_roles.model_id = $user->id");
+          
+                if($role == []){
+                    $role_name = "client";
+                    //dd($role_name);
+                }else{
+                    $role_name = $role[0]->role_name;
+                    //dd($role_name);
+                }
                 $token = $user->createToken('$request->device_name')->plainTextToken;
                 $reponse = [
+                    'role'=>$role_name,
                     'user'=>$user,
                     'token'=>$token,
                     'token_type'=>'Bearer',

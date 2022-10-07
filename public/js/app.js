@@ -3264,12 +3264,13 @@ __webpack_require__.r(__webpack_exports__);
 
         if (res.data.status_code == 200) {
           var token = res.data.token;
-          var email = res.data.user.email; //const role = res.data.role;
-
+          var email = res.data.user.email;
+          var role = res.data.role;
           localStorage.setItem("jwt", token);
-          localStorage.setItem("username", email); //localStorage.setItem("role",role);
+          localStorage.setItem("username", email);
+          localStorage.setItem("role", role);
 
-          if (token && email) {
+          if (token && email && (role === "Admin" || role === "Secretaire" || role === "Caissier")) {
             Swal.fire('Reussi!', 'Connexion reussi!!!.', 'success');
 
             _this.$router.push("/");
@@ -5396,7 +5397,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       user: {
         name: '',
-        email: ''
+        email: '',
+        user_role: ''
       }
     };
   },
@@ -5405,9 +5407,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       _axios_index__WEBPACK_IMPORTED_MODULE_0__["default"].get('api/authUser').then(function (res) {
-        console.log("valeur de res dans auth user:", res);
+        //console.log("valeur de res dans auth user:",res)
         _this.user.name = res.data.name;
         _this.user.email = res.data.email;
+        var rl = localStorage.getItem("role"); //console.log("valeur du role:",rl)
+
+        _this.user.user_role = rl;
       });
     },
     logoutUser: function logoutUser() {
@@ -52012,7 +52017,10 @@ var render = function () {
             _c("div", { staticClass: "info" }, [
               _c("a", { staticClass: "d-block", attrs: { href: "#" } }, [
                 _vm._v(
-                  _vm._s(_vm.user.email) + " (" + _vm._s(_vm.user.name) + ")"
+                  _vm._s(_vm.user.email) +
+                    " (" +
+                    _vm._s(_vm.user.user_role) +
+                    ")"
                 ),
               ]),
             ]),
