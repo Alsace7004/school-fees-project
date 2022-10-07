@@ -4,7 +4,7 @@
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
         <img :src="'../admin/dist/img/AdminLTELogo.png'" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Fees</span>
+        <span class="brand-text font-weight-light">Fees-Bank</span>
       </a>
 
       <!-- Sidebar -->
@@ -15,7 +15,7 @@
             <img :src="'../admin/dist/img/user2-160x160.jpg'" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Ogunbissi Moshe</a>
+            <a href="#" class="d-block">{{user.email}} ({{user.name}})</a>
           </div>
         </div>
 
@@ -100,8 +100,8 @@
             </li>
 
             <li class="nav-header">PARAMETRES</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
+            <li class="nav-item" >
+              <a @click="logoutUser" class="nav-link">
                 <i class="nav-icon fas fa-power-off text-danger"></i>
                 <p class="text">Logout</p>
               </a>
@@ -117,11 +117,38 @@
 </template>
 
 <script>
+  import axiosClient from "../../axios/index";
 export default {
   name: "Aside",
   props: {
-    
+   
   },
+  data(){
+    return{
+      user:{
+        name:'',
+        email:''
+      }
+    }
+  },
+  methods:{
+    loadAuthUser(){
+      axiosClient.get('api/authUser').then((res)=>{
+        console.log("valeur de res dans auth user:",res)
+        this.user.name = res.data.name;
+        this.user.email = res.data.email;
+      })
+    },
+    logoutUser(){
+      axiosClient.post('api/logout').then((res)=>{
+        localStorage.clear();
+        this.$router.push('/login');
+      })
+    }
+  },
+  created(){
+    this.loadAuthUser();
+  }
 };
 </script>
 

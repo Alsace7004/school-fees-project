@@ -208,6 +208,7 @@
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"Etudiant",
         components:{
@@ -279,44 +280,44 @@
                         "\nthis.ret.valAnn:"+this.ret.valAnn+
                         "\nthis.ret.valSuc:"+this.ret.valSuc);*/
                         //${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}
-                            axios.get(`api/loadOnFilCycAnSuChange/${this.ret.valfil}/${this.ret.valcyc}/${this.ret.valAnn}/${this.ret.valSuc}`).then(res=>{
+                            axiosClient.get(`api/loadOnFilCycAnSuChange/${this.ret.valfil}/${this.ret.valcyc}/${this.ret.valAnn}/${this.ret.valSuc}`).then(res=>{
                                 this.etudiants=res.data
                             })           
                 },
             /************************LES-SELECT***************************/
             loadDistinctSuccursales(){
-                axios.get('api/distincSuccursales').then((succursales)=>{
+                axiosClient.get('api/distincSuccursales').then((succursales)=>{
                     this.dSuccursales = succursales.data;
                 })
             },
             loadDistinctFilieres(){
-                axios.get('api/distinctFilieres').then((filieres)=>{
+                axiosClient.get('api/distinctFilieres').then((filieres)=>{
                     this.dFilieres = filieres.data;
                 })
             },
             loadYears(){
-                axios.get('api/years').then((data)=>{
+                axiosClient.get('api/years').then((data)=>{
                     this.years = data.data;
                 })
             },
             loadCycles(){
-                axios.get('api/cycles').then((cycles)=>{
+                axiosClient.get('api/cycles').then((cycles)=>{
                     this.cycles = cycles.data;
                 })
             },
             /***********************************************************/
             loadDistinctFiliereCycleYear(){
-                axios.get('api/filiereCycleYear').then((filieres)=>{
+                axiosClient.get('api/filiereCycleYear').then((filieres)=>{
                     this.filieres = filieres.data;
                 })
             },
             loadSuccursales(){
-                axios.get('api/succursales').then((succursales)=>{
+                axiosClient.get('api/succursales').then((succursales)=>{
                     this.succursales = succursales.data;
                 })
             },
             loadEtudiants(){
-                axios.get('api/etudiants').then((etudiants)=>{
+                axiosClient.get('api/etudiants').then((etudiants)=>{
                     this.etudiants = etudiants.data;
                 })
             },
@@ -328,7 +329,7 @@
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post("api/etudiants",this.etudiant).then(()=>{
+                axiosClient.post("api/etudiants",this.etudiant).then(()=>{
                     Swal.fire('Created!','Etudiant créer avec success.','success') ;
                     this.loadEtudiants();
                     this.etudiant={
@@ -391,7 +392,7 @@
             },
 
             editEtudiant(id){
-                axios.get(`api/etudiants/${id}`).then((res)=>{
+                axiosClient.get(`api/etudiants/${id}`).then((res)=>{
                     $('#addNew').modal('show');
                     //console.log("valeur de res:",res);
                     this.edit_id = res.data.etudiant.id;
@@ -413,7 +414,7 @@
                 })
             },
             updateEtudiant(){
-                axios.put(`api/etudiants/${this.edit_id}`,this.etudiant).then(()=>{
+                axiosClient.put(`api/etudiants/${this.edit_id}`,this.etudiant).then(()=>{
                         $('#addNew').modal('hide');
                         Swal.fire('Mise à jour!',"Les informations de l'etudiant ont été mise à jour avec success.",'success')    
                         this.loadEtudiants();

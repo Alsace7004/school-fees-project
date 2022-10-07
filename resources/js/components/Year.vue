@@ -34,8 +34,8 @@
                                         <table>
                                             <tbody>
                                                 <tr v-if="!years.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">Pas encore d'Année Scolaire disponible</tr>
-                                                <tr v-for="year in years" :key="year.id">
-                                                    <td>{{year.id}}</td>
+                                                <tr v-for="(year,i) in years" :key="year.id">
+                                                    <td>{{i = i+1}}</td>
                                                     <td>{{year.valeur_annee_scolaire}}</td>
                                                     <td>
                                                         <div class="display-flex">
@@ -101,6 +101,7 @@
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"Year",
         components:{
@@ -118,7 +119,7 @@
         },
         methods:{
             updateYear(){
-                this.form.put(`api/years/${this.form.id}`).then(()=>{
+                axiosClient.put(`api/years/${this.form.id}`,this.form).then(()=>{
                         $('#addNew').modal('hide');
                         Swal.fire('Updated!','The year has been updated.','success')    
                         this.loadYears();
@@ -138,7 +139,7 @@
                 $('#addNew').modal('show');
             },
             loadYears(){
-                axios.get('api/years').then((data)=>{
+                axiosClient.get('api/years').then((data)=>{
                     this.years = data.data;
                 })
             },
@@ -153,7 +154,7 @@
                     return;
                 }
       
-                this.form.post('api/years').then(()=>{
+                axiosClient.post('api/years',this.form).then(()=>{
                   
                     Swal.fire('Created!','The year has been created.','success')  
                     this.loadYears();
@@ -174,7 +175,7 @@
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            this.form.delete(`api/years/${id}`).then(()=>{
+                            axiosClient.delete(`api/years/${id}`).then(()=>{
                             
                                     Swal.fire(
                                     'Deleted!',

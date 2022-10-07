@@ -68,3 +68,25 @@
         </div>
         <!-- Modal -->
     </div>
+
+    //-----------------------LISTE DES ETUDIANTS AVEC LEUR SOMME PAYER CORRESPONDANT--------------------------------------------------
+    SELECT etudiants.nom, SUM(frais_scolarites.montant_paye) as totalpayer FROM etudiants,frais_scolarites WHERE etudiants.id = frais_scolarites.etudiant_id GROUP BY etudiants.nom
+
+    //-----------------------LISTE DES ETUDIANTS AVEC LEUR SOMME PAYER CORRESPONDANT ANSI la scolarite de leur filiere correspondant-------------------------------------------------------
+    SELECT etudiants.nom,filieres.scolarite_filiere, SUM(frais_scolarites.montant_paye) as totalpayer 
+    FROM etudiants,frais_scolarites,filieres 
+    WHERE etudiants.id = frais_scolarites.etudiant_id AND
+    etudiants.filiere_id = filieres.id
+    GROUP BY etudiants.nom
+    //-----------------------LISTE DES ETUDIANTS AYANTS SOLDE-----------------------------------------------
+     SELECT etudiants.nom,filieres.scolarite_filiere, SUM(frais_scolarites.montant_paye) as totalpayer 
+    FROM etudiants,frais_scolarites,filieres 
+    WHERE etudiants.id = frais_scolarites.etudiant_id AND
+    etudiants.filiere_id = filieres.id 
+    GROUP BY etudiants.nom HAVING filieres.scolarite_filiere = SUM(frais_scolarites.montant_paye)
+
+    SELECT COUNT(etudiants.id),filieres.code_filiere,filieres.scolarite_filiere
+from etudiants,filieres,frais_scolarites
+WHERE etudiants.filiere_id = filieres.id AND
+etudiants.id= frais_scolarites.etudiant_id
+GROUP BY filieres.code_filiere

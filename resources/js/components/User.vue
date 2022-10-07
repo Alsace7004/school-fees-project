@@ -24,9 +24,9 @@
                                                 <table>
                                                     <thead>
                                                         <tr>
+                                                            <th>#</th>
                                                             <th>Nom</th>
-                                                            <th>Prenom</th>
-                                                            <th>Gender</th>
+                                                            <th>Email</th>
                                                             <th>Succursale</th>
                                                             <th>Role</th>
                                                             <th>Actions</th>
@@ -37,10 +37,10 @@
                                             <div class="tbl-content">
                                                 <table>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Jhon</td>
-                                                            <td>Doe</td>
-                                                            <td>M</td>
+                                                        <tr v-for="(user,i) in users" :key="user.id">
+                                                            <td>{{i=i+1}}</td>
+                                                            <td>{{user.name}}</td>
+                                                            <td>{{user.email}}</td>
                                                             <td>Avedji</td>
                                                             <td>Admin</td>
                                                             <td>
@@ -50,7 +50,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <!--<tr>
                                                             <td>ABA</td>
                                                             <td>Afi</td>
                                                             <td>F</td>
@@ -101,7 +101,7 @@
                                                                     <a href="" class="btn-delete">Delete</a>
                                                                 </div>
                                                             </td>
-                                                        </tr>
+                                                        </tr>-->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -124,6 +124,7 @@
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"User",
         components:{
@@ -131,12 +132,17 @@
         },
         data(){
             return{
-
+                users:[],
             }
         },
         methods:{
-            hello(){
-                alert("hello every one, hope you are all fine!!!");
+        
+            getAllUsers(){
+                axiosClient.get('api/users').then((res)=>{
+                    //console.log("valeur de res:",res);
+                    this.users = res.data;
+                    //console.log("valeur de users:",users);
+                })
             }
           
         },
@@ -145,6 +151,9 @@
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
             personnel.classList.add('active');
+        },
+        created(){
+            this.getAllUsers();
         }
     }
 </script>

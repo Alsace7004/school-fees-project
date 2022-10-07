@@ -36,8 +36,8 @@
                                                 <table>
                                                     <tbody>
                                                         <tr v-if="!villes.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">Pas encore de villes disponible</tr>
-                                                        <tr v-for="ville in villes" :key="ville.id">
-                                                            <td>{{ville.id}}</td>
+                                                        <tr v-for="(ville,i) in villes" :key="ville.id">
+                                                            <td>{{i=i+1}}</td>
                                                             <td>{{ville.libelle_ville}}</td>
                                                             <td>{{ville.description_ville}}</td>
                                                             <td>
@@ -100,6 +100,7 @@
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"Ville",
         components:{
@@ -126,7 +127,7 @@
                 $('#addNew').modal('show');
             },
             loadVilles(){
-                axios.get('api/villes').then((villes)=>{
+                axiosClient.get('api/villes').then((villes)=>{
                     this.villes = villes.data;
                 })
             },
@@ -137,7 +138,7 @@
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post(`api/villes`,this.ville).then(()=>{
+                axiosClient.post(`api/villes`,this.ville).then(()=>{
                     //$('#addNew').modal('hide');
                     Swal.fire('Created!','The Ville has been created.','success') ;
                     this.loadVilles();
@@ -159,7 +160,7 @@
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            axios.delete(`api/villes/${id}`).then(()=>{
+                            axiosClient.delete(`api/villes/${id}`).then(()=>{
                             
                                     Swal.fire(
                                     'Deleted!',
@@ -177,7 +178,7 @@
                 })//first Then
             },//deleteCycle
             editVille(id){
-                axios.get(`api/villes/${id}`).then((res)=>{
+                axiosClient.get(`api/villes/${id}`).then((res)=>{
                     $('#addNew').modal('show');
                     this.edit_id = res.data.id;
                     this.ville.libelle_ville = res.data.libelle_ville;
@@ -186,7 +187,7 @@
                 })
             },
             updateVille(){
-                    axios.put(`api/villes/${this.edit_id}`,this.ville).then(()=>{
+                    axiosClient.put(`api/villes/${this.edit_id}`,this.ville).then(()=>{
                         $('#addNew').modal('hide');
                         Swal.fire('Updated!','The ville has been updated.','success')    
                         this.loadVilles();

@@ -36,8 +36,8 @@
                                                 <table>
                                                     <tbody>
                                                         <tr v-if="!cycles.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">Pas encore de cycles disponible</tr>
-                                                        <tr v-for="cycle in cycles" :key="cycle.id">
-                                                            <td>{{cycle.id}}</td>
+                                                        <tr v-for="(cycle,i) in cycles" :key="cycle.id">
+                                                            <td>{{i=i+1}}</td>
                                                             <td>{{cycle.code_cycle}}</td>
                                                             <td>{{cycle.libelle_cycle}}</td>
                                                             <td>
@@ -100,6 +100,7 @@ import Title from "../components/pages/Title.vue";
 import Nav from "../components/pages/Nav.vue";
 import Aside from "../components/pages/Aside.vue";
 import Footer from "../components/pages/Footer.vue";
+import axiosClient from "../axios/index";
     export default {
         name:"Cycle",
         components:{
@@ -126,7 +127,7 @@ import Footer from "../components/pages/Footer.vue";
                 $('#addNew').modal('show');
             },
             loadCycles(){
-                axios.get('api/cycles').then((cycles)=>{
+                axiosClient.get('api/cycles').then((cycles)=>{
                     this.cycles = cycles.data;
                     //console.log("valeur des cycles:",cycles.data);
                 })
@@ -138,7 +139,7 @@ import Footer from "../components/pages/Footer.vue";
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post(`api/cycles`,this.cycle).then(()=>{
+                axiosClient.post(`api/cycles`,this.cycle).then(()=>{
                     //$('#addNew').modal('hide'); 
                     Swal.fire('Created!','The Cycle has been created.','success') ;
                     this.loadCycles();
@@ -160,7 +161,7 @@ import Footer from "../components/pages/Footer.vue";
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            axios.delete(`api/cycles/${id}`).then(()=>{
+                            axiosClient.delete(`api/cycles/${id}`).then(()=>{
                             
                                     Swal.fire(
                                     'Deleted!',
@@ -178,7 +179,7 @@ import Footer from "../components/pages/Footer.vue";
                 })//first Then
             },//deleteCycle
             editCycle(id){
-                axios.get(`api/cycles/${id}`).then((res)=>{
+                axiosClient.get(`api/cycles/${id}`).then((res)=>{
                     $('#addNew').modal('show');
                     this.edit_id = res.data.id;
                     this.cycle.code_cycle = res.data.code_cycle;
@@ -187,7 +188,7 @@ import Footer from "../components/pages/Footer.vue";
                 })
             },
             updateCycle(){
-                    axios.put(`api/cycles/${this.edit_id}`,this.cycle).then(()=>{
+                    axiosClient.put(`api/cycles/${this.edit_id}`,this.cycle).then(()=>{
                         $('#addNew').modal('hide');
                         Swal.fire('Updated!','The cycle has been updated.','success')    
                         this.loadCycles();

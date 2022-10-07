@@ -147,7 +147,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-md-12">
                                                             <label for="">Somme à payer</label>
-                                                            <input type="number" v-model="etudiant.montant_paye" id="montant" placeholder="date" class="form-control">
+                                                            <input type="number" v-model="etudiant.montant_paye" id="montant" placeholder="montant à payer" class="form-control">
                                                         </div>
                                                     </div>
                                                 
@@ -182,7 +182,8 @@
                                                     <!---->
                                                         <div class="header">
                                                             <div class="shool-info">
-                                                                <p>le logo de l'ecole ici</p>
+                                                                <p><img :src="'../admin/010.jpg'" height="100" alt="le logo de l'ecole ici" srcset=""></p>
+                                                                <p>L'ILLUMINATION</p>
                                                             </div>
                                                         </div>
                                                     <!---->
@@ -273,7 +274,7 @@
                                                         </div>
                                                     <!---->
                                                         <div style="display:flex;justify-content:right">
-                                                            <p><strong>NOM & PRENOM du caissier(ère)</strong></p>
+                                                            <p><strong>{{user.name}} -/- {{user.email}}</strong></p>
                                                         </div>
                                                     <!---->
                                                    </div>
@@ -308,6 +309,7 @@
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"Etudiant",
         components:{
@@ -351,6 +353,10 @@
                     libelle_filiere:'',
                     libelle_succursale:'',
                     matricule:''
+                },
+                user:{
+                    name:'',
+                    email:''
                 }
             }
         },
@@ -380,29 +386,29 @@
                 $('#addNew').modal('show');
             },
             /*************************************************************/
-               onFilCycAnSuChange(){
-                            axios.get(`api/loadOnFilCycAnSuChange/${this.ret.valfil}/${this.ret.valcyc}/${this.ret.valAnn}/${this.ret.valSuc}`).then(res=>{
-                                this.etudiants=res.data
-                            })           
-                },
+            onFilCycAnSuChange(){
+                axiosClient.get(`api/loadOnFilCycAnSuChange/${this.ret.valfil}/${this.ret.valcyc}/${this.ret.valAnn}/${this.ret.valSuc}`).then(res=>{
+                        this.etudiants=res.data
+                })           
+            },
             /************************LES-SELECT***************************/
             loadDistinctSuccursales(){
-                axios.get('api/distincSuccursales').then((succursales)=>{
+                axiosClient.get('api/distincSuccursales').then((succursales)=>{
                     this.dSuccursales = succursales.data;
                 })
             },
             loadDistinctFilieres(){
-                axios.get('api/distinctFilieres').then((filieres)=>{
+                axiosClient.get('api/distinctFilieres').then((filieres)=>{
                     this.dFilieres = filieres.data;
                 })
             },
             loadYears(){
-                axios.get('api/years').then((data)=>{
+                axiosClient.get('api/years').then((data)=>{
                     this.years = data.data;
                 })
             },
             loadCycles(){
-                axios.get('api/cycles').then((cycles)=>{
+                axiosClient.get('api/cycles').then((cycles)=>{
                     this.cycles = cycles.data;
                 })
             },
@@ -418,7 +424,7 @@
                 })
             },*/
             loadEtudiants(){
-                axios.get('api/etudiants').then((etudiants)=>{
+                axiosClient.get('api/etudiants').then((etudiants)=>{
                     this.etudiants = etudiants.data;
                 })
             },
@@ -430,7 +436,7 @@
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post("api/payerScolariteEtudiant",this.etudiant).then(()=>{
+                axiosClient.post("api/payerScolariteEtudiant",this.etudiant).then(()=>{
                     Swal.fire('Effectué!','Payement de Scolarité effectuer avec success.','success') ;
                     this.loadEtudiants();
                     this.etudiant={
@@ -449,7 +455,7 @@
             },
 
             payerScolarite(id){
-                axios.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
+                axiosClient.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
                     //console.log("valeur de res dans payerScolarite:",res.data);
                     this.scolarite.nom=res.data.etudiant[0].nom,
                     this.scolarite.prenom=res.data.etudiant[0].prenom,
@@ -465,7 +471,7 @@
                 })
             },
             getRecuPaiementInfo(id){
-                axios.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
+                axiosClient.get('api/getEtudiantScolariteInformation/'+id).then((res)=>{
                     console.log("valeur de res dans getEtudiantScolariteInformation:",res.data);
                     this.scolarite.nom=res.data.etudiant[0].nom,
                     this.scolarite.prenom=res.data.etudiant[0].prenom,
@@ -486,8 +492,8 @@
          
                 })
             },
-                //for recu paiement print
-                codespeedy(){
+            //for recu paiement print
+            codespeedy(){
                         var print_div = document.getElementById("hello");
                         var print_area = window.open();
                         print_area.document.write(print_div.innerHTML);
@@ -496,19 +502,26 @@
                         print_area.print();
                         print_area.close();
                     // This is the code print a particular div element
-                }
+            },
+            loadAuthUser(){
+                axiosClient.get('api/authUser').then((res)=>{
+                    console.log("valeur de res dans auth user:",res)
+                    this.user.name = res.data.name;
+                    this.user.email = res.data.email;
+                })
+            }
           
         },
         created(){
             //this.loadDistinctFiliereCycleYear();
             //this.loadSuccursales();
             this.loadEtudiants();
-            
             /*SELECT*/
             this.loadDistinctFilieres();
             this.loadCycles();
             this.loadYears();
             this.loadDistinctSuccursales();
+             this.loadAuthUser();
         },
         mounted() {
             var etudiant = document.querySelector('.scolarite');

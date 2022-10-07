@@ -61,8 +61,8 @@
                                                 <table>
                                                     <tbody>
                                                         <tr v-if="!filieres.length" class="text-center" style="font-weight:bold;margin:0px auto">No filieres found</tr>
-                                                        <tr v-for="filiere in filieres" :key="filiere.id">
-                                                            <td>{{filiere.id}}</td>
+                                                        <tr v-for="(filiere,i) in filieres" :key="filiere.id">
+                                                            <td>{{i=i+1}}</td>
                                                             <td>{{filiere.code_filiere}}</td>
                                                             <td>{{filiere.libelle_filiere}}</td>
                                                             <td>{{filiere.scolarite_filiere}}</td>
@@ -150,6 +150,7 @@ import Title from "./pages/Title.vue";
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"Filiere",
         components:{
@@ -196,28 +197,28 @@ import Title from "./pages/Title.vue";
                 onFiliereChange(){
                     /*console.log("this.ret.valfil:",this.ret.valfil)
                     alert("this.ret.valfil:"+this.ret.valfil)*/
-                            axios.get(`api/loadOnFiliereChange/${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}`).then(res=>{
+                            axiosClient.get(`api/loadOnFiliereChange/${this.ret.valfil}/${this.ret.valAnn}/${this.ret.valcyc}`).then(res=>{
                                 this.filieres=res.data
                             })           
                 },
             /*************************************************************************/
             loadDistinctFilieres(){
-                axios.get('api/distinctFilieres').then((filieres)=>{
+                axiosClient.get('api/distinctFilieres').then((filieres)=>{
                     this.dFilieres = filieres.data;
                 })
             },
             loadYears(){
-                axios.get('api/years').then((data)=>{
+                axiosClient.get('api/years').then((data)=>{
                     this.years = data.data;
                 })
             },
             loadCycles(){
-                axios.get('api/cycles').then((cycles)=>{
+                axiosClient.get('api/cycles').then((cycles)=>{
                     this.cycles = cycles.data;
                 })
             },
             loadFilieres(){
-                axios.get('api/filieres').then((filieres)=>{
+                axiosClient.get('api/filieres').then((filieres)=>{
                     this.filieres = filieres.data;
                 })
             },
@@ -238,7 +239,7 @@ import Title from "./pages/Title.vue";
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }*/
-                axios.post(`api/filieres`,this.filiere).then(()=>{
+                axiosClient.post(`api/filieres`,this.filiere).then(()=>{
                     //$('#addNew').modal('hide');
                     Swal.fire('Created!','The Filiere has been created.','success') ;
                     this.loadFilieres();
@@ -252,7 +253,7 @@ import Title from "./pages/Title.vue";
                 })
             },
             updateFiliere(){
-                    axios.put(`api/filieres/${this.edit_id}`,this.filiere).then(()=>{
+                    axiosClient.put(`api/filieres/${this.edit_id}`,this.filiere).then(()=>{
                         $('#addNew').modal('hide');
                         Swal.fire('Updated!','The Filiere has been updated.','success')    
                         this.loadFilieres();
@@ -264,7 +265,7 @@ import Title from "./pages/Title.vue";
                     })
             },
             editFiliere(id){
-                axios.get(`api/filieres/${id}`).then((res)=>{
+                axiosClient.get(`api/filieres/${id}`).then((res)=>{
                     $('#addNew').modal('show');
                     this.edit_id = res.data.id;
                     this.filiere.code_filiere = res.data.code_filiere;
@@ -287,7 +288,7 @@ import Title from "./pages/Title.vue";
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            axios.delete(`api/filieres/${id}`).then(()=>{
+                            axiosClient.delete(`api/filieres/${id}`).then(()=>{
                             
                                     Swal.fire(
                                     'Deleted!',

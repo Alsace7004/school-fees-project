@@ -31,8 +31,9 @@ class AppServiceProvider extends ServiceProvider
             $protocol='http://'.$_SERVER['HTTP_HOST']; 
         }*/
 
-        if(env('APP_ENV') !== 'local'){
+        /*if(env('APP_ENV') !== 'local'){
             URL::forceScheme('https');
-        }
+        }*/
+       
     }
 }

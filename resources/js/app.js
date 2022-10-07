@@ -35,19 +35,85 @@ Vue.use(VueRouter);
 let routes = [
     {path:'/login',component:require('./components/Login.vue').default},
     {path:'/register',component:require('./components/Register.vue').default},
-    {path:'/',component:require('./components/Try.vue').default},
-    {path:'/etudiants',component:require('./components/Etudiant.vue').default},
-    {path:'/filieres',component:require('./components/Filiere.vue').default},
-    {path:'/succursales',component:require('./components/Succursale.vue').default},
-    {path:'/users',component:require('./components/User.vue').default},
-    {path:'/villes',component:require('./components/Ville.vue').default},
-    {path:'/years',component:require('./components/Year.vue').default},
-    {path:'/cycles',component:require('./components/Cycle.vue').default},
-    {path:'/scolarites',component:require('./components/Scolarite.vue').default}
+    {
+      path:'/',
+      component:require('./components/Try.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/etudiants',
+      component:require('./components/Etudiant.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/filieres',
+      component:require('./components/Filiere.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/succursales',
+      component:require('./components/Succursale.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/users',
+      component:require('./components/User.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/villes',
+      component:require('./components/Ville.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/years',
+      component:require('./components/Year.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/cycles',
+      component:require('./components/Cycle.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    },
+    {
+      path:'/scolarites',
+      component:require('./components/Scolarite.vue').default,
+      meta:{
+        requiresAuth:true,
+      }
+    }
 ]
 
 const router = new VueRouter({
     routes
+})
+
+router.beforeEach((to,from,next)=>{
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+    if(localStorage.getItem("jwt")==null){
+      next({path:'/login'});
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
 })
 /**
  * The following block of code may be used to automatically register your
@@ -60,7 +126,7 @@ const router = new VueRouter({
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

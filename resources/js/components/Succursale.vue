@@ -36,8 +36,8 @@
                                                     <table>
                                                         <tbody>
                                                             <tr v-if="!succursales.length" class="text-center text-danger" style="font-weight:bolder;margin:0px auto">No succursales found</tr>
-                                                            <tr v-for="succursale in succursales" :key="succursale.id">
-                                                                <td>{{succursale.id}}</td>
+                                                            <tr v-for="(succursale,i) in succursales" :key="succursale.id">
+                                                                <td>{{i=i+1}}</td>
                                                                 <td>{{succursale.libelle_succursale}}</td>
                                                                 <td>{{succursale.libelle_ville}}</td>
                                                                 <td>
@@ -105,6 +105,7 @@
     import Nav from "./pages/Nav.vue";
     import Aside from "./pages/Aside.vue";
     import Footer from "./pages/Footer.vue";
+    import axiosClient from "../axios/index";
     export default {
         name:"Succursale",
          components:{
@@ -135,12 +136,12 @@
                 $('#addNew').modal('show');
             },
             loadSuccursales(){
-                axios.get('api/succursales').then((succursales)=>{
+                axiosClient.get('api/succursales').then((succursales)=>{
                     this.succursales = succursales.data;
                 })
             },
             loadVilles(){
-                axios.get('api/succursalesVilles').then((villes)=>{
+                axiosClient.get('api/succursalesVilles').then((villes)=>{
                     this.villes = villes.data;
                 })
             },
@@ -153,7 +154,7 @@
                     Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
                     return;
                 }
-                axios.post(`api/succursales`,this.succursale).then(()=>{
+                axiosClient.post(`api/succursales`,this.succursale).then(()=>{
                     //$('#addNew').modal('hide');
                     Swal.fire('Created!','The Succursale has been created.','success') ;
                     this.loadSuccursales();
@@ -165,7 +166,7 @@
                 })
             },
             editSuccursale(id){
-                axios.get(`api/succursales/${id}`).then((res)=>{
+                axiosClient.get(`api/succursales/${id}`).then((res)=>{
                     $('#addNew').modal('show');
                     this.edit_id = res.data.id;
                     this.succursale.libelle_succursale = res.data.libelle_succursale;
@@ -175,7 +176,7 @@
                 })
             },
             updateSuccursale(){
-                    axios.put(`api/succursales/${this.edit_id}`,this.succursale).then(()=>{
+                    axiosClient.put(`api/succursales/${this.edit_id}`,this.succursale).then(()=>{
                         $('#addNew').modal('hide');
                         Swal.fire('Updated!','The succursale has been updated.','success')    
                         this.loadSuccursales();
@@ -196,7 +197,7 @@
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            axios.delete(`api/succursales/${id}`).then(()=>{
+                            axiosClient.delete(`api/succursales/${id}`).then(()=>{
                             
                                     Swal.fire(
                                     'Deleted!',

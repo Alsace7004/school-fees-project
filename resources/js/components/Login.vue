@@ -11,7 +11,7 @@
 
                 <form @submit.prevent="loginUser">
                     <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" class="form-control" v-model="user.email" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                         <span class="fas fa-envelope"></span>
@@ -19,7 +19,7 @@
                     </div>
                     </div>
                     <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" v-model="user.password" placeholder="Password">
                     <div class="input-group-append">
                         <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -39,7 +39,7 @@
                 
                 <!-- /.social-auth-links -->
                 <p class="mb-0">
-                    <router-link to="/register" class="text-center">Crer un nouveau compte</router-link>
+                    <!--<router-link to="/register" class="text-center">Crer un nouveau compte</router-link>-->
                 </p>
                 </div>
                 <!-- /.login-card-body -->
@@ -53,16 +53,56 @@
         name:"Login",
         data(){
             return{
-
+                user:{
+                    email:'',
+                    password:'',
+                }
             }
         },
         methods:{
-            hello(){
-                alert("hello every one, hope you are all fine Am login Component!!!");
-            },
+           
             loginUser(){
-                alert("Bienvenue sur l'application de gestion de frais de scolarité"+"\n Vous allez etre rediriger dans quelques instants...!!!")
-                this.$router.push("/");
+                //alert("Bienvenue sur l'application de gestion de frais de scolarité"+"\n Vous allez etre rediriger dans quelques instants...!!!")
+                //this.$router.push("/");
+                axios.post('api/login',this.user).then((res)=>{
+                    console.log("valeur de res dans login component :",res.data)
+                    localStorage.clear(); 
+            
+                    if(res.data.status_code == 200){
+                        const token = res.data.token;
+                        const email = res.data.user.email;
+                        //const role = res.data.role;
+                  
+                        localStorage.setItem("jwt",token);
+                        localStorage.setItem("username",email);
+                        //localStorage.setItem("role",role);
+
+                        if(token && email){
+                            Swal.fire('Reussi!','Connexion reussi!!!.','success') ;
+                            this.$router.push("/");
+                        }else{
+                            Swal.fire('Error !!!','Une Erreur Survenue  token+username!!!','error')
+                        }
+                    }else{
+                        Swal.fire('Error !!!',`Une erreur est survenue 200`,'error')
+                    }
+                }).catch((error)=>{
+                    //console.log('avl de err:',error.response.data.status_code == 400);
+                    if(error.response.data.status_code == 400){
+                        Toast.fire({icon: 'error',title: `${error.response.data.message}`});
+                        return;
+                    }else 
+                    if(error.response.data.err.email){
+                        Toast.fire({icon: 'error',title: `${error.response.data.err.email[0]}`});
+                        //return;
+                    }else if(error.response.data.err.password){
+                        Toast.fire({icon: 'error',title: `${error.response.data.err.password[0]}`});
+                        //return;
+                    }else{
+                         Swal.fire('Error !!!',`Une erreur est survenue`,'error')
+                        //return;
+                    }
+                })
             }
           
         },

@@ -252,6 +252,7 @@
 import Nav from "../components/pages/Nav.vue";
 import Aside from "../components/pages/Aside.vue";
 import Footer from "../components/pages/Footer.vue";
+import axiosClient from "../axios/index";
 
 import { Pie } from 'vue-chartjs/legacy'
 
@@ -333,7 +334,7 @@ export default {
   },
   methods:{
     loadCountData(){
-        axios.get('api/count').then((res)=>{
+        axiosClient.get('api/count').then((res)=>{
             //console.log("valeur de res pour le count: ",res.data)
             this.users = res.data.users[0].nbr_users;
             this.etudiants = res.data.etudiants[0].nbr_etudiants;
@@ -346,7 +347,7 @@ export default {
         })
     },
     loadNbrEtudiantParSuccursale(){
-        axios.get('api/etudiantParSuccursale').then((res)=>{
+        axiosClient.get('api/etudiantParSuccursale').then((res)=>{
             //console.log("valeur de res lors des stats :",res.data)
             var k = res.data;
             for(var i =0;i<k.length;i++){
