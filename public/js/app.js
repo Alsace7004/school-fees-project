@@ -48380,19 +48380,6 @@ var render = function () {
                                       staticClass: "btn-edit",
                                       on: {
                                         click: function ($event) {
-                                          return _vm.voirEtudiant(etudiant.id)
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("View")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn-edit",
-                                      on: {
-                                        click: function ($event) {
                                           return _vm.editEtudiant(etudiant.id)
                                         },
                                       },

@@ -80,7 +80,7 @@
                                                             <td>{{etudiant.valeur_filiere}}</td>
                                                             <td>
                                                                 <div class="display-flex">
-                                                                    <a @click="voirEtudiant(etudiant.id)" class="btn-edit">View</a>
+                                                                    <!--<a @click="voirEtudiant(etudiant.id)" class="btn-edit">View</a>-->
                                                                     <a @click="editEtudiant(etudiant.id)" class="btn-edit">Edit</a>
                                                                     <!--<a href="" class="btn-delete">Delete</a>-->
                                                                 </div>
