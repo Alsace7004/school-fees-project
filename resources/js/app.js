@@ -124,6 +124,16 @@ let routes = [
         caissier:true,
         secretaire:false,
       }
+    },
+    {
+      path:'/parents',
+      component:require('./components/Parents.vue').default,
+      /*meta:{
+        requiresAuth:true,
+        admin:true,
+        caissier:true,
+        secretaire:false,
+      }*/
     }
 ]
 

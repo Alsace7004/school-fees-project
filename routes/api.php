@@ -29,7 +29,8 @@ use App\Http\Controllers\RoleController;
     Route::post('/register',[AuthController::class,'register']);
     Route::post('/login',[AuthController::class,'login']);
    
-
+    Route::get('/livesearch', [UserController::class, 'getBooks']);
+    
     Route::group(['middleware' => ['auth:sanctum']], function () {
         //roles
         Route::apiResources(['roles'=>RoleController::class]); 

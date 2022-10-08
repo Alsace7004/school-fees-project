@@ -40,7 +40,7 @@
                 <!-- /.social-auth-links -->
                 <p class="mb-0">
                     <!--<router-link to="/register" class="text-center">Crer un nouveau compte</router-link>-->
-                    <router-link to="/register" class="text-center">Parent d'élève</router-link>
+                    <router-link to="/parents" class="text-center">Parent d'élève</router-link>
                 </p>
                 </div>
                 <!-- /.login-card-body -->

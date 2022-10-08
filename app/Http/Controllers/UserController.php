@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Etudiant;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -98,5 +99,22 @@ class UserController extends Controller
                 'error'=>'an error occured'
             ],404);
         }
+    }
+
+    public function getBooks(Request $request)
+    {
+        //$data = Etudiant::where('matricule', 'LIKE','%'.$request->keyword.'%')->get();
+        /*dd($request->keyword);
+        die();*/
+        $data = DB::SELECT("SELECT E.id,E.nom,E.prenom,E.email,E.genre,E.date_anniv,E.contact_1,E.contact_2,
+        E.adresse,E.nationalite,E.matricule,E.created_at,succursales.libelle_succursale,
+        filieres.code_filiere, CONCAT(filieres.code_filiere,'/',cycles.code_cycle,'/',years.valeur_annee_scolaire) as valeur_filiere
+        FROM etudiants E,succursales,filieres,cycles,years 
+        WHERE  E.filiere_id = filieres.id 
+        AND    E.succursale_id = succursales.id
+        AND  filieres.year_id = years.id AND filieres.cycle_id = cycles.id
+        AND E.matricule LIKE '$request->keyword' ");
+      
+        return response()->json($data); 
     }
 }

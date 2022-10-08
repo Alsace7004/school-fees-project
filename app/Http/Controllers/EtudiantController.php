@@ -94,7 +94,9 @@ class EtudiantController extends Controller
                 'err'=>$validator->errors()
             ],500);
         }else{
-            Etudiant::create($request->all());
+            $inputs = $request->all();
+            $inputs['matricule'] = $request->nom.'-'.$request->email;
+            Etudiant::create($inputs);
             $etud_id = DB::table('etudiants')->latest('id')->first();
             $inscript = new Inscription();
             $inscript->montant = $request->montant;

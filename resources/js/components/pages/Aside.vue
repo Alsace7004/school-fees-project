@@ -99,6 +99,14 @@
               </router-link>
             </li>
             <!------------------------------------------------------------------------------->
+            <li class="nav-header">PARENTS D'ELEVES</li>
+            <li class="nav-item">
+              <router-link to="/parents" class="nav-link year">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Parents d'élèves</p>
+              </router-link>
+            </li>
+            <!------------------------------------------------------------------------------->
             <li class="nav-header">PARAMETRES</li>
             <li class="nav-item" >
               <a @click="logoutUser" class="nav-link">
