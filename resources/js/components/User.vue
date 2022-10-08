@@ -17,7 +17,7 @@
                                 <div class="row mt-2" >
                                             <!---->
                                             <div style="display: flex;justify-content: end;">
-                                                <button class="btn-add">Ajouter</button>
+                                                <button class="btn-add" @click="newModal" data-toggle="modal" data-target="#addNew">Ajouter</button>
                                             </div>
                                             <!--table-->
                                             <div class="tbl-header">
@@ -45,63 +45,12 @@
                                                             <td>{{user.role_name}}</td>
                                                             <td>
                                                                 <div class="display-flex">
-                                                                    <a href="" class="btn-edit">Edit</a>
-                                                                    <a href="" class="btn-delete">Delete</a>
+                                                                    <a @click="editUser(user.id)" class="btn-edit">Edit</a>
+                                                                    <a @click="deleteUser(user.id)" class="btn-delete">Delete</a>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <!--<tr>
-                                                            <td>ABA</td>
-                                                            <td>Afi</td>
-                                                            <td>F</td>
-                                                            <td>Avedji</td>
-                                                            <td>Secretaire</td>
-                                                            <td>
-                                                                <div class="display-flex">
-                                                                    <a href="" class="btn-edit">Edit</a>
-                                                                    <a href="" class="btn-delete">Delete</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ABBEY</td>
-                                                            <td>Benitha</td>
-                                                            <td>F</td>
-                                                            <td>Avenou</td>
-                                                            <td>Secretaire</td>
-                                                            <td>
-                                                                <div class="display-flex">
-                                                                    <a href="" class="btn-edit">Edit</a>
-                                                                    <a href="" class="btn-delete">Delete</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ADOMAY</td>
-                                                            <td>Koko</td>
-                                                            <td>F</td>
-                                                            <td>KOdjoviakope</td>
-                                                            <td>Secreatire</td>
-                                                            <td>
-                                                                <div class="display-flex">
-                                                                    <a href="" class="btn-edit">Edit</a>
-                                                                    <a href="" class="btn-delete">Delete</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>AGBESSI</td>
-                                                            <td>Kokou</td>
-                                                            <td>M</td>
-                                                            <td>Adidogome</td>
-                                                            <td>Secretaire</td>
-                                                            <td>
-                                                                <div class="display-flex">
-                                                                    <a href="" class="btn-edit">Edit</a>
-                                                                    <a href="" class="btn-delete">Delete</a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>-->
+                                              
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -114,6 +63,47 @@
                     </section>
                     <!-- /.content -->
                 </div>
+
+                <!-- Modal -->
+                                <div class="modal fade" id="addNew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{is_Editing ?"Mise à jour utilisateur":"Ajouter nouvel utilisateur"}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form @submit.prevent="is_Editing ? updateUser() : createUser()">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="user.name"  id="user_name" placeholder="user name..." class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" v-model="user.email" id="user_email" placeholder="user email..." class="form-control">
+                                                    </div>
+
+                                                    
+                                                        <div class="form-group">
+                                                        
+                                                            <select  v-model="user.roles" id="role_id" class="form-control">
+                                                                <option value="Selectionner un Role" selected>Selectionner un Role</option>
+                                                                <option v-for="role in roles" :key="role.id" :value="role.id">{{role.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    
+
+                                                </div>
+                                            
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">{{is_Editing ?"Update":"Create"}}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
         <Footer/>
     
     </div>
@@ -132,18 +122,109 @@
         },
         data(){
             return{
+                roles:[],
                 users:[],
+                user:{
+                    name:'',
+                    email:'',
+                    password:'123456789',
+                    roles:''
+                },
+                edit_id:'',
+                is_Editing:false,
             }
         },
         methods:{
-        
+            newModal(){
+                this.user={
+                    name:'',
+                    email:'',
+                    password:'123456789'
+                }
+                this.is_Editing = false;
+                $('#addNew').modal('show');
+            },
+            loadRoles(){
+                axiosClient.get('api/roles').then((roles)=>{
+                    this.roles = roles.data;
+                })
+            },
             getAllUsers(){
                 axiosClient.get('api/users').then((res)=>{
                     //console.log("valeur de res:",res);
                     this.users = res.data;
                     //console.log("valeur de users:",users);
                 })
-            }
+            },
+            createUser(){
+                let lv = document.querySelector("#user_name").value;
+                let dv = document.querySelector("#user_email").value;
+                if(lv =="" || dv==""){
+                    Toast.fire({icon: 'error',title: 'veuillez remplir tous les champs !!!'});
+                    return;
+                }
+                axiosClient.post(`api/users`,this.user).then(()=>{
+                    //$('#addNew').modal('hide');
+                    Swal.fire('Created!','Utilisateur Creer avec success.','success') ;
+                    this.getAllUsers();
+
+                    this.user.name ="";
+                    this.user.email="";
+                    this.user.password="";
+                }).catch((err)=>{
+                    Swal.fire('Error !!!','An Error Occured !!!','error')
+                })
+            },
+            deleteUser(id){
+                    Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            axiosClient.delete(`api/users/${id}`).then(()=>{
+                            
+                                    Swal.fire(
+                                    'Deleted!',
+                                    'Utilisateur a été supprimé.',
+                                    'success'
+                                    )
+                                
+                                this.getAllUsers();
+                            }).catch((err)=>{
+                                Swal.fire('Error !!!','An Error Occured !!!','error')
+                            })
+                        }else{
+                            Swal.fire('Cancelled !!!','The Ville is safe for you !!!','error')
+                        }
+                })//first Then
+            },//deleteUser
+            editUser(id){
+                axiosClient.get(`api/users/${id}`).then((res)=>{
+                    $('#addNew').modal('show');
+                    //console.log('valeur de res:',res.data)
+                    this.edit_id = res.data[0].id;
+                    this.user.name = res.data[0].name;
+                    this.user.email = res.data[0].email;
+                    this.user.roles = res.data[0].role_id;
+                    this.is_Editing = true;
+                })
+            },//editUser
+            updateUser(){
+                    axiosClient.put(`api/users/${this.edit_id}`,this.user).then(()=>{
+                        $('#addNew').modal('hide');
+                        Swal.fire('Updated!','Utilisateur mise à jour avec success.','success')    
+                        this.getAllUsers();
+                        this.edit_id = "";
+                        this.is_Editing = false;
+                    }).catch((err)=>{
+                        Swal.fire('Error !!!','Une Erreur Survenue !!!','error')
+                    })
+            },//updateUser
           
         },
         mounted() {
@@ -154,6 +235,7 @@
         },
         created(){
             this.getAllUsers();
+            this.loadRoles();
         }
     }
 </script>

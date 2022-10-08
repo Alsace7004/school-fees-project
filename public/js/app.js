@@ -3242,6 +3242,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Login",
   data: function data() {
@@ -4733,16 +4734,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4758,18 +4749,126 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      users: []
+      roles: [],
+      users: [],
+      user: {
+        name: '',
+        email: '',
+        password: '123456789',
+        roles: ''
+      },
+      edit_id: '',
+      is_Editing: false
     };
   },
   methods: {
-    getAllUsers: function getAllUsers() {
+    newModal: function newModal() {
+      this.user = {
+        name: '',
+        email: '',
+        password: '123456789'
+      };
+      this.is_Editing = false;
+      $('#addNew').modal('show');
+    },
+    loadRoles: function loadRoles() {
       var _this = this;
+
+      _axios_index__WEBPACK_IMPORTED_MODULE_4__["default"].get('api/roles').then(function (roles) {
+        _this.roles = roles.data;
+      });
+    },
+    getAllUsers: function getAllUsers() {
+      var _this2 = this;
 
       _axios_index__WEBPACK_IMPORTED_MODULE_4__["default"].get('api/users').then(function (res) {
         //console.log("valeur de res:",res);
-        _this.users = res.data; //console.log("valeur de users:",users);
+        _this2.users = res.data; //console.log("valeur de users:",users);
       });
-    }
+    },
+    createUser: function createUser() {
+      var _this3 = this;
+
+      var lv = document.querySelector("#user_name").value;
+      var dv = document.querySelector("#user_email").value;
+
+      if (lv == "" || dv == "") {
+        Toast.fire({
+          icon: 'error',
+          title: 'veuillez remplir tous les champs !!!'
+        });
+        return;
+      }
+
+      _axios_index__WEBPACK_IMPORTED_MODULE_4__["default"].post("api/users", this.user).then(function () {
+        //$('#addNew').modal('hide');
+        Swal.fire('Created!', 'Utilisateur Creer avec success.', 'success');
+
+        _this3.getAllUsers();
+
+        _this3.user.name = "";
+        _this3.user.email = "";
+        _this3.user.password = "";
+      })["catch"](function (err) {
+        Swal.fire('Error !!!', 'An Error Occured !!!', 'error');
+      });
+    },
+    deleteUser: function deleteUser(id) {
+      var _this4 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _axios_index__WEBPACK_IMPORTED_MODULE_4__["default"]["delete"]("api/users/".concat(id)).then(function () {
+            Swal.fire('Deleted!', 'Utilisateur a été supprimé.', 'success');
+
+            _this4.getAllUsers();
+          })["catch"](function (err) {
+            Swal.fire('Error !!!', 'An Error Occured !!!', 'error');
+          });
+        } else {
+          Swal.fire('Cancelled !!!', 'The Ville is safe for you !!!', 'error');
+        }
+      }); //first Then
+    },
+    //deleteUser
+    editUser: function editUser(id) {
+      var _this5 = this;
+
+      _axios_index__WEBPACK_IMPORTED_MODULE_4__["default"].get("api/users/".concat(id)).then(function (res) {
+        $('#addNew').modal('show'); //console.log('valeur de res:',res.data)
+
+        _this5.edit_id = res.data[0].id;
+        _this5.user.name = res.data[0].name;
+        _this5.user.email = res.data[0].email;
+        _this5.user.roles = res.data[0].role_id;
+        _this5.is_Editing = true;
+      });
+    },
+    //editUser
+    updateUser: function updateUser() {
+      var _this6 = this;
+
+      _axios_index__WEBPACK_IMPORTED_MODULE_4__["default"].put("api/users/".concat(this.edit_id), this.user).then(function () {
+        $('#addNew').modal('hide');
+        Swal.fire('Updated!', 'Utilisateur mise à jour avec success.', 'success');
+
+        _this6.getAllUsers();
+
+        _this6.edit_id = "";
+        _this6.is_Editing = false;
+      })["catch"](function (err) {
+        Swal.fire('Error !!!', 'Une Erreur Survenue !!!', 'error');
+      });
+    } //updateUser
+
   },
   mounted: function mounted() {
     /*var personnel = document.querySelector('.personnel');
@@ -4779,6 +4878,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getAllUsers();
+    this.loadRoles();
   }
 });
 
@@ -10388,7 +10488,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d884f594]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d884f594]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d884f594]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d884f594]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d884f594]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d884f594]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d884f594]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-d884f594]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n}\n.btn-delete[data-v-d884f594]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d884f594]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d884f594]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/***********************USERS-TABLE***********BEGIN*******************/\ntable[data-v-d884f594]{\n    width: 100%;\n    table-layout: fixed;\n}\n.tbl-header[data-v-d884f594]{\n    /*background-color: rgba(255,255,255,0.3);*/\n    background-color: gray;\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.tbl-content[data-v-d884f594]{\n    height: 300px;\n    overflow-x: auto;\n    margin-top: 0px;\n    /*border: 1px solid rgba(255,255,255,0.3);*/\n    border: 1px solid gray;\n    color: #fff;\n    background: linear-gradient(to right, #25c481, #25b7c4);\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\nth[data-v-d884f594]{\n    padding: 20px 15px;\n    text-align: left;\n    font-weight: 900;\n    font-size: 12px;\n    color: #fff;\n    text-transform: uppercase;\n}\ntd[data-v-d884f594]{\n    padding: 15px 15px;\n    text-align: left;\n    vertical-align: middle;\n    font-weight: bolder;\n    font-size: 12px;\n    /*border-bottom: solid 1px rgba(255,255,255,0.1);*/\n    border-bottom: solid 1px rgba(255,255,255,0.1);\n}\n/***********************USERS-TABLE***********END*******************/\n/***********************BTN-DESIGN***BEGIN**************************/\n.display-flex[data-v-d884f594]{\n    display: flex;\n    flex-direction: row;\n    justify-content:space-between;\n}\n.btn-edit[data-v-d884f594]{\n    border: none;\n    background-color: blue;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-edit[data-v-d884f594]:hover{\n    background-color:rgb(69, 69, 240);\n    transition: 0.5s all;\n}\n.btn-delete[data-v-d884f594]{\n    border: none;\n    background-color: red;\n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n}\n.btn-delete[data-v-d884f594]:hover{\n    background-color:rgb(247, 82, 82);\n    transition: 0.5s all;\n}\n.btn-add[data-v-d884f594]{\n    border: none;\n    background-color: blue; \n    padding: 0.4rem 1rem;\n    border-radius: 5px;\n    color: #fff;\n    text-decoration: none;\n    margin: 2px;\n    cursor: pointer;\n    margin-bottom: 10px;\n    font-weight: bolder;\n}\n/***********************BTN-DESIGN***END****************************/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49163,7 +49263,18 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _c("p", { staticClass: "mb-0" }),
+          _c(
+            "p",
+            { staticClass: "mb-0" },
+            [
+              _c(
+                "router-link",
+                { staticClass: "text-center", attrs: { to: "/register" } },
+                [_vm._v("Parent d'élève")]
+              ),
+            ],
+            1
+          ),
         ]),
       ]),
     ]),
@@ -51328,9 +51439,31 @@ var render = function () {
             _c("div", { staticClass: "container-fluid" }, [
               _c("div", { staticClass: "container" }, [
                 _c("div", { staticClass: "row mt-2" }, [
-                  _vm._m(0),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        display: "flex",
+                        "justify-content": "end",
+                      },
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn-add",
+                          attrs: {
+                            "data-toggle": "modal",
+                            "data-target": "#addNew",
+                          },
+                          on: { click: _vm.newModal },
+                        },
+                        [_vm._v("Ajouter")]
+                      ),
+                    ]
+                  ),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c("div", { staticClass: "tbl-content" }, [
                     _c("table", [
@@ -51346,7 +51479,35 @@ var render = function () {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.role_name))]),
                             _vm._v(" "),
-                            _vm._m(2, true),
+                            _c("td", [
+                              _c("div", { staticClass: "display-flex" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn-edit",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.editUser(user.id)
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("Edit")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn-delete",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.deleteUser(user.id)
+                                      },
+                                    },
+                                  },
+                                  [_vm._v("Delete")]
+                                ),
+                              ]),
+                            ]),
                           ])
                         }),
                         0
@@ -51361,22 +51522,200 @@ var render = function () {
         1
       ),
       _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "addNew",
+            tabindex: "-1",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLabel" },
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(
+                        _vm.is_Editing
+                          ? "Mise à jour utilisateur"
+                          : "Ajouter nouvel utilisateur"
+                      )
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1),
+              ]),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      _vm.is_Editing ? _vm.updateUser() : _vm.createUser()
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.name,
+                            expression: "user.name",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "user_name",
+                          placeholder: "user name...",
+                        },
+                        domProps: { value: _vm.user.name },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.user, "name", $event.target.value)
+                          },
+                        },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.email,
+                            expression: "user.email",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "user_email",
+                          placeholder: "user email...",
+                        },
+                        domProps: { value: _vm.user.email },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.user, "email", $event.target.value)
+                          },
+                        },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.user.roles,
+                              expression: "user.roles",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "role_id" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.user,
+                                "roles",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: {
+                                value: "Selectionner un Role",
+                                selected: "",
+                              },
+                            },
+                            [_vm._v("Selectionner un Role")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.roles, function (role) {
+                            return _c(
+                              "option",
+                              { key: role.id, domProps: { value: role.id } },
+                              [_vm._v(_vm._s(role.name))]
+                            )
+                          }),
+                        ],
+                        2
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v(_vm._s(_vm.is_Editing ? "Update" : "Create"))]
+                    ),
+                  ]),
+                ]
+              ),
+            ]),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
       _c("Footer"),
     ],
     1
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticStyle: { display: "flex", "justify-content": "end" } },
-      [_c("button", { staticClass: "btn-add" }, [_vm._v("Ajouter")])]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -51403,17 +51742,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "display-flex" }, [
-        _c("a", { staticClass: "btn-edit", attrs: { href: "" } }, [
-          _vm._v("Edit"),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn-delete", attrs: { href: "" } }, [
-          _vm._v("Delete"),
-        ]),
-      ]),
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close",
+        },
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   },
 ]
 render._withStripped = true

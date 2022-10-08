@@ -11,6 +11,7 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\ScolariteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,6 +31,8 @@ use App\Http\Controllers\UserController;
    
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
+        //roles
+        Route::apiResources(['roles'=>RoleController::class]); 
         //Users
         //Route::get('/users',[UserController::class,'index']);
         Route::apiResources(['users'=>UserController::class]);
