@@ -182,7 +182,7 @@
                                                     <!---->
                                                         <div class="header">
                                                             <div class="shool-info">
-                                                                <p><img :src="'../admin/010.jpg'" height="100" alt="le logo de l'ecole ici" srcset=""></p>
+                                                                <p><img :src="'../admin/010.jpg'" height="80" alt="le logo de l'ecole ici" srcset=""></p>
                                                                 <p>L'ILLUMINATION</p>
                                                             </div>
                                                         </div>

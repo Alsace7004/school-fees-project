@@ -50032,7 +50032,7 @@ var render = function () {
                                     _c("img", {
                                       attrs: {
                                         src: "../admin/010.jpg",
-                                        height: "100",
+                                        height: "80",
                                         alt: "le logo de l'ecole ici",
                                         srcset: "",
                                       },
