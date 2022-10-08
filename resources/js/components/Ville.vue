@@ -203,10 +203,10 @@
             this.loadVilles();
         },
         mounted() {
-            var ville = document.querySelector('.ville');
+            /*var ville = document.querySelector('.ville');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            ville.classList.add('active');
+            ville.classList.add('active');*/
         }
     }
 </script>

@@ -198,10 +198,10 @@
             this.loadYears();
         },
         mounted() {
-            var year = document.querySelector('.year');
+            /*var year = document.querySelector('.year');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            year.classList.add('active');
+            year.classList.add('active');*/
         }
     }
 </script>

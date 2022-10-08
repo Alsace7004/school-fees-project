@@ -314,10 +314,10 @@ import Title from "./pages/Title.vue";
             this.loadDistinctFilieres();
         },
         mounted() {
-            var filiere = document.querySelector('.filiere');
+            /*var filiere = document.querySelector('.filiere');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            filiere.classList.add('active');
+            filiere.classList.add('active');*/
         }
     }
 </script>

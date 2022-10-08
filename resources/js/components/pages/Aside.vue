@@ -27,78 +27,78 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-            <li class="nav-item menu-open">
+                <!------------------------------------------------------------------------------->
+            <li class="nav-item menu-open" v-if="user.user_role=='Admin' || user.user_role=='Secretaire' || user.user_role=='Caissier'">
               <router-link to="/" class="nav-link dash active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </router-link>
             </li>
-            <li class="nav-header">UTILISATEURS</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin'">UTILISATEURS</li>
+            <li class="nav-item" v-if="user.user_role=='Admin'">
               <router-link to="/users" class="nav-link personnel">
                 <i class="nav-icon fas fa-users"></i>
                 <p>Personnels</p>
               </router-link>
             </li>
-            
-            <li class="nav-header">ETUDIANTS</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Caissier'">ETUDIANTS</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Caissier'">
               <router-link to="/etudiants" class="nav-link etudiant">
                 <i class="nav-icon fas fa-users"></i>
                 <p>Etudiants</p>
               </router-link>
             </li>
-            <li class="nav-header">SCOLARITES</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Caissier'">SCOLARITES</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Caissier'">
               <router-link to="/scolarites" class="nav-link scolarite">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>Scolarités</p>
               </router-link>
             </li>
-            <li class="nav-header">FILIERES</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">FILIERES</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">
               <router-link to="/filieres" class="nav-link filiere">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>Filieres</p>
               </router-link>
             </li>
-
-            
-
-            <li class="nav-header">CYCLES</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">CYCLES</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">
               <router-link to="/cycles" class="nav-link cycle">
                 <i class="nav-icon fas fa-level-up-alt"></i>
                 <p>Cycles</p>
               </router-link>
             </li>
-
-            <li class="nav-header">VILLES</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">VILLES</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">
               <router-link to="/villes" class="nav-link ville">
                 <i class="nav-icon fas fa-city"></i>
                 <p>Villes</p>
               </router-link>
             </li>
-
-   
-            
-            <li class="nav-header">SUCCURSALES</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">SUCCURSALES</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">
               <router-link to="/succursales" class="nav-link succursale">
                 <i class="nav-icon fas fa-building"></i>
                 <p>Succursales</p>
               </router-link>
             </li>
-
-            <li class="nav-header">ANNEES SCOLAIRES</li>
-            <li class="nav-item">
+            <!------------------------------------------------------------------------------->
+            <li class="nav-header" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">ANNEES SCOLAIRES</li>
+            <li class="nav-item" v-if="user.user_role=='Admin' || user.user_role=='Secretaire'">
               <router-link to="/years" class="nav-link year">
                 <i class="nav-icon fas fa-table"></i>
                 <p>Années Scolaires</p>
               </router-link>
             </li>
-
+            <!------------------------------------------------------------------------------->
             <li class="nav-header">PARAMETRES</li>
             <li class="nav-item" >
               <a @click="logoutUser" class="nav-link">
@@ -106,6 +106,7 @@
                 <p class="text">Logout</p>
               </a>
             </li>
+            <!------------------------------------------------------------------------------->
             
           </ul>
         </nav>

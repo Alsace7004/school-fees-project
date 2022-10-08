@@ -2290,10 +2290,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadCycles();
   },
   mounted: function mounted() {
-    var cycle = document.querySelector('.cycle');
+    /*var cycle = document.querySelector('.cycle');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    cycle.classList.add('active');
+    cycle.classList.add('active');*/
   }
 });
 
@@ -2812,10 +2812,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadDistinctSuccursales();
   },
   mounted: function mounted() {
-    var etudiant = document.querySelector('.etudiant');
+    /*var etudiant = document.querySelector('.etudiant');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    etudiant.classList.add('active');
+    etudiant.classList.add('active');*/
   }
 });
 
@@ -3172,10 +3172,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadDistinctFilieres();
   },
   mounted: function mounted() {
-    var filiere = document.querySelector('.filiere');
+    /*var filiere = document.querySelector('.filiere');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    filiere.classList.add('active');
+    filiere.classList.add('active');*/
   }
 });
 
@@ -3954,10 +3954,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadAuthUser();
   },
   mounted: function mounted() {
-    var etudiant = document.querySelector('.scolarite');
+    /*var etudiant = document.querySelector('.scolarite');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    etudiant.classList.add('active');
+    etudiant.classList.add('active');*/
   }
 });
 
@@ -4215,10 +4215,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadVilles();
   },
   mounted: function mounted() {
-    var succursale = document.querySelector('.succursale');
+    /*var succursale = document.querySelector('.succursale');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    succursale.classList.add('active');
+    succursale.classList.add('active');*/
   }
 });
 
@@ -4772,10 +4772,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var personnel = document.querySelector('.personnel');
+    /*var personnel = document.querySelector('.personnel');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    personnel.classList.add('active');
+    personnel.classList.add('active');*/
   },
   created: function created() {
     this.getAllUsers();
@@ -5020,10 +5020,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadVilles();
   },
   mounted: function mounted() {
-    var ville = document.querySelector('.ville');
+    /*var ville = document.querySelector('.ville');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    ville.classList.add('active');
+    ville.classList.add('active');*/
   }
 });
 
@@ -5250,10 +5250,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadYears();
   },
   mounted: function mounted() {
-    var year = document.querySelector('.year');
+    /*var year = document.querySelector('.year');
     var dash = document.querySelector('.dash');
     dash.classList.remove('active');
-    year.classList.add('active');
+    year.classList.add('active');*/
   }
 });
 
@@ -5271,6 +5271,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _axios_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../axios/index */ "./resources/js/axios/index.js");
+//
 //
 //
 //
@@ -5615,60 +5616,99 @@ var routes = [{
   path: '/',
   component: (__webpack_require__(/*! ./components/Try.vue */ "./resources/js/components/Try.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: true,
+    caissier: true
   }
 }, {
   path: '/etudiants',
   component: (__webpack_require__(/*! ./components/Etudiant.vue */ "./resources/js/components/Etudiant.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: false,
+    caissier: true
   }
 }, {
   path: '/filieres',
   component: (__webpack_require__(/*! ./components/Filiere.vue */ "./resources/js/components/Filiere.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: true,
+    caissier: false
   }
 }, {
   path: '/succursales',
   component: (__webpack_require__(/*! ./components/Succursale.vue */ "./resources/js/components/Succursale.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: true,
+    caissier: false
   }
 }, {
   path: '/users',
   component: (__webpack_require__(/*! ./components/User.vue */ "./resources/js/components/User.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: false,
+    caissier: false
   }
 }, {
   path: '/villes',
   component: (__webpack_require__(/*! ./components/Ville.vue */ "./resources/js/components/Ville.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: true,
+    caissier: false
   }
 }, {
   path: '/years',
   component: (__webpack_require__(/*! ./components/Year.vue */ "./resources/js/components/Year.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: true,
+    caissier: false
   }
 }, {
   path: '/cycles',
   component: (__webpack_require__(/*! ./components/Cycle.vue */ "./resources/js/components/Cycle.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    secretaire: true,
+    caissier: false
   }
 }, {
   path: '/scolarites',
   component: (__webpack_require__(/*! ./components/Scolarite.vue */ "./resources/js/components/Scolarite.vue")["default"]),
   meta: {
-    requiresAuth: true
+    requiresAuth: true,
+    admin: true,
+    caissier: true,
+    secretaire: false
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   routes: routes
 });
+/*router.beforeEach((to,from,next)=>{
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+    if(localStorage.getItem("jwt")==null){
+      next({path:'/login'});
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})*/
+
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth;
@@ -5677,6 +5717,83 @@ router.beforeEach(function (to, from, next) {
       next({
         path: '/login'
       });
+    } else if (to.meta.admin && to.meta.secretaire && to.meta.caissier) {
+      var authUserRole = window.localStorage.getItem("role");
+      var authSecretaireRole = window.localStorage.getItem("role");
+      var authCaissierRole = window.localStorage.getItem("role"); //console.log("valeur de authUserRole :",authUserRole);
+
+      if (authUserRole == "Admin" || authSecretaireRole == "Secretaire" || authCaissierRole == "Caissier") {
+        next();
+      } else {
+        //alert("Allez Ouss,dehors caissier ,secretaire et admin");
+        next({
+          path: '/login'
+        });
+      }
+    } else if (to.meta.admin && to.meta.secretaire) {
+      var _authUserRole = window.localStorage.getItem("role");
+
+      var _authSecretaireRole = window.localStorage.getItem("role"); //console.log("valeur de authUserRole :",authUserRole);
+
+
+      if (_authUserRole == "Admin" || _authSecretaireRole == "Secretaire") {
+        next();
+      } else {
+        //alert("Allez Ouss,dehors secretaire et admin");
+        next({
+          path: '/login'
+        });
+      }
+    } else if (to.meta.admin && to.meta.caissier) {
+      var _authUserRole2 = window.localStorage.getItem("role");
+
+      var _authCaissierRole = window.localStorage.getItem("role"); //console.log("valeur de authUserRole :",authUserRole);
+
+
+      if (_authUserRole2 == "Admin" || _authCaissierRole == "Caissier") {
+        next();
+      } else {
+        //alert("Allez Ouss,dehors caissier et admin");
+        next({
+          path: '/login'
+        });
+      }
+    } else if (to.meta.admin) {
+      var _authUserRole3 = window.localStorage.getItem("role"); //console.log("valeur de authUserRole :",authUserRole);
+
+
+      if (_authUserRole3 == "Admin") {
+        next();
+      } else {
+        //alert("Allez Ouss,dehors admin");
+        next({
+          path: '/login'
+        });
+      }
+    } else if (to.meta.secretaire) {
+      var _authSecretaireRole2 = window.localStorage.getItem("role"); //console.log("valeur de authUserRole :",authUserRole);
+
+
+      if (_authSecretaireRole2 == "Secretaire") {
+        next();
+      } else {
+        //alert("Allez Ouss,dehors secretaire");
+        next({
+          path: '/login'
+        });
+      }
+    } else if (to.meta.caissier) {
+      var _authCaissierRole2 = window.localStorage.getItem("role"); //console.log("valeur de authUserRole :",authUserRole);
+
+
+      if (_authCaissierRole2 == "Caissier") {
+        next();
+      } else {
+        //alert("Allez Ouss,dehors caissier");
+        next({
+          path: '/login'
+        });
+      }
     } else {
       next();
     }
@@ -52038,210 +52155,273 @@ var render = function () {
                 },
               },
               [
-                _c(
-                  "li",
-                  { staticClass: "nav-item menu-open" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link dash active",
-                        attrs: { to: "/" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire" ||
+                _vm.user.user_role == "Caissier"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item menu-open" },
                       [
-                        _c("i", {
-                          staticClass: "nav-icon fas fa-tachometer-alt",
-                        }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Dashboard")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link dash active",
+                            attrs: { to: "/" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon fas fa-tachometer-alt",
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Dashboard")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [
-                  _vm._v("UTILISATEURS"),
-                ]),
+                _vm.user.user_role == "Admin"
+                  ? _c("li", { staticClass: "nav-header" }, [
+                      _vm._v("UTILISATEURS"),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link personnel",
-                        attrs: { to: "/users" },
-                      },
+                _vm.user.user_role == "Admin"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-users" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Personnels")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link personnel",
+                            attrs: { to: "/users" },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon fas fa-users" }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Personnels")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [_vm._v("ETUDIANTS")]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Caissier"
+                  ? _c("li", { staticClass: "nav-header" }, [
+                      _vm._v("ETUDIANTS"),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link etudiant",
-                        attrs: { to: "/etudiants" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Caissier"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-users" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Etudiants")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link etudiant",
+                            attrs: { to: "/etudiants" },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon fas fa-users" }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Etudiants")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [_vm._v("SCOLARITES")]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Caissier"
+                  ? _c("li", { staticClass: "nav-header" }, [
+                      _vm._v("SCOLARITES"),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link scolarite",
-                        attrs: { to: "/scolarites" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Caissier"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", {
-                          staticClass: "nav-icon fas fa-money-check-alt",
-                        }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Scolarités")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link scolarite",
+                            attrs: { to: "/scolarites" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon fas fa-money-check-alt",
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Scolarités")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [_vm._v("FILIERES")]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c("li", { staticClass: "nav-header" }, [
+                      _vm._v("FILIERES"),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link filiere",
-                        attrs: { to: "/filieres" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-chart-pie" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Filieres")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link filiere",
+                            attrs: { to: "/filieres" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon fas fa-chart-pie",
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Filieres")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [_vm._v("CYCLES")]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c("li", { staticClass: "nav-header" }, [_vm._v("CYCLES")])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link cycle",
-                        attrs: { to: "/cycles" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", {
-                          staticClass: "nav-icon fas fa-level-up-alt",
-                        }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Cycles")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link cycle",
+                            attrs: { to: "/cycles" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon fas fa-level-up-alt",
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Cycles")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [_vm._v("VILLES")]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c("li", { staticClass: "nav-header" }, [_vm._v("VILLES")])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link ville",
-                        attrs: { to: "/villes" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-city" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Villes")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link ville",
+                            attrs: { to: "/villes" },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon fas fa-city" }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Villes")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [
-                  _vm._v("SUCCURSALES"),
-                ]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c("li", { staticClass: "nav-header" }, [
+                      _vm._v("SUCCURSALES"),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "nav-link succursale",
-                        attrs: { to: "/succursales" },
-                      },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-building" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Succursales")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link succursale",
+                            attrs: { to: "/succursales" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "nav-icon fas fa-building",
+                            }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Succursales")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-header" }, [
-                  _vm._v("ANNEES SCOLAIRES"),
-                ]),
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c("li", { staticClass: "nav-header" }, [
+                      _vm._v("ANNEES SCOLAIRES"),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  { staticClass: "nav-item" },
-                  [
-                    _c(
-                      "router-link",
-                      { staticClass: "nav-link year", attrs: { to: "/years" } },
+                _vm.user.user_role == "Admin" ||
+                _vm.user.user_role == "Secretaire"
+                  ? _c(
+                      "li",
+                      { staticClass: "nav-item" },
                       [
-                        _c("i", { staticClass: "nav-icon fas fa-table" }),
-                        _vm._v(" "),
-                        _c("p", [_vm._v("Années Scolaires")]),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link year",
+                            attrs: { to: "/years" },
+                          },
+                          [
+                            _c("i", { staticClass: "nav-icon fas fa-table" }),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Années Scolaires")]),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("li", { staticClass: "nav-header" }, [_vm._v("PARAMETRES")]),
                 _vm._v(" "),

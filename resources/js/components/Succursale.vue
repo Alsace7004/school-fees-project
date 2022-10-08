@@ -220,10 +220,10 @@
             this.loadVilles();
         },
         mounted() {
-            var succursale = document.querySelector('.succursale');
+            /*var succursale = document.querySelector('.succursale');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            succursale.classList.add('active');
+            succursale.classList.add('active');*/
         }
     }
 </script>

@@ -147,10 +147,10 @@
           
         },
         mounted() {
-            var personnel = document.querySelector('.personnel');
+            /*var personnel = document.querySelector('.personnel');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            personnel.classList.add('active');
+            personnel.classList.add('active');*/
         },
         created(){
             this.getAllUsers();

@@ -524,10 +524,10 @@
              this.loadAuthUser();
         },
         mounted() {
-            var etudiant = document.querySelector('.scolarite');
+            /*var etudiant = document.querySelector('.scolarite');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            etudiant.classList.add('active');
+            etudiant.classList.add('active');*/
         }
     }
 </script>

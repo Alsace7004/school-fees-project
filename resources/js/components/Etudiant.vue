@@ -476,10 +476,10 @@
             this.loadDistinctSuccursales();
         },
         mounted() {
-            var etudiant = document.querySelector('.etudiant');
+            /*var etudiant = document.querySelector('.etudiant');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            etudiant.classList.add('active');
+            etudiant.classList.add('active');*/
         }
     }
 </script>

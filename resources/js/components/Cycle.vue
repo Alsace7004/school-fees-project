@@ -205,10 +205,10 @@ import axiosClient from "../axios/index";
             this.loadCycles();
         },
         mounted() {
-            var cycle = document.querySelector('.cycle');
+            /*var cycle = document.querySelector('.cycle');
             var dash = document.querySelector('.dash');
             dash.classList.remove('active');
-            cycle.classList.add('active');
+            cycle.classList.add('active');*/
         }
     }
 </script>

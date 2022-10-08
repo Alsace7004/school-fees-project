@@ -40,6 +40,9 @@ let routes = [
       component:require('./components/Try.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:true,
+        caissier:true,
       }
     },
     {
@@ -47,6 +50,9 @@ let routes = [
       component:require('./components/Etudiant.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:false,
+        caissier:true,
       }
     },
     {
@@ -54,6 +60,9 @@ let routes = [
       component:require('./components/Filiere.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:true,
+        caissier:false,
       }
     },
     {
@@ -61,6 +70,9 @@ let routes = [
       component:require('./components/Succursale.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:true,
+        caissier:false,
       }
     },
     {
@@ -68,6 +80,9 @@ let routes = [
       component:require('./components/User.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:false,
+        caissier:false,
       }
     },
     {
@@ -75,6 +90,9 @@ let routes = [
       component:require('./components/Ville.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:true,
+        caissier:false,
       }
     },
     {
@@ -82,6 +100,9 @@ let routes = [
       component:require('./components/Year.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:true,
+        caissier:false,
       }
     },
     {
@@ -89,6 +110,9 @@ let routes = [
       component:require('./components/Cycle.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        secretaire:true,
+        caissier:false,
       }
     },
     {
@@ -96,6 +120,9 @@ let routes = [
       component:require('./components/Scolarite.vue').default,
       meta:{
         requiresAuth:true,
+        admin:true,
+        caissier:true,
+        secretaire:false,
       }
     }
 ]
@@ -104,10 +131,79 @@ const router = new VueRouter({
     routes
 })
 
+/*router.beforeEach((to,from,next)=>{
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+    if(localStorage.getItem("jwt")==null){
+      next({path:'/login'});
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})*/
 router.beforeEach((to,from,next)=>{
   if(to.matched.some(record=>record.meta.requiresAuth)){
     if(localStorage.getItem("jwt")==null){
       next({path:'/login'});
+    }else if((to.meta.admin) && (to.meta.secretaire) && (to.meta.caissier)){
+      const authUserRole        = (window.localStorage.getItem("role"));
+      const authSecretaireRole  = (window.localStorage.getItem("role"));
+      const authCaissierRole    = (window.localStorage.getItem("role"));
+      //console.log("valeur de authUserRole :",authUserRole);
+      if(authUserRole =="Admin" || authSecretaireRole =="Secretaire" || authCaissierRole =="Caissier"){
+        next();
+      }else{
+        //alert("Allez Ouss,dehors caissier ,secretaire et admin");
+        next({path:'/login'});
+      }
+    }else if((to.meta.admin) && (to.meta.secretaire)){
+      const authUserRole        = (window.localStorage.getItem("role"));
+      const authSecretaireRole  = (window.localStorage.getItem("role"));
+      //console.log("valeur de authUserRole :",authUserRole);
+      if(authUserRole =="Admin" || authSecretaireRole =="Secretaire"){
+        next();
+      }else{
+        //alert("Allez Ouss,dehors secretaire et admin");
+        next({path:'/login'});
+      }
+    }else if((to.meta.admin) && (to.meta.caissier)){
+      const authUserRole        = (window.localStorage.getItem("role"));
+      const authCaissierRole    = (window.localStorage.getItem("role"));
+      //console.log("valeur de authUserRole :",authUserRole);
+      if(authUserRole =="Admin" || authCaissierRole =="Caissier"){
+        next();
+      }else{
+        //alert("Allez Ouss,dehors caissier et admin");
+        next({path:'/login'});
+      }
+    }else if(to.meta.admin){
+      const authUserRole = (window.localStorage.getItem("role"));
+      //console.log("valeur de authUserRole :",authUserRole);
+      if(authUserRole =="Admin"){
+        next();
+      }else{
+        //alert("Allez Ouss,dehors admin");
+        next({path:'/login'});
+      }
+    }else if(to.meta.secretaire){
+      const authSecretaireRole = (window.localStorage.getItem("role"));
+      //console.log("valeur de authUserRole :",authUserRole);
+      if(authSecretaireRole =="Secretaire"){
+        next();
+      }else{
+        //alert("Allez Ouss,dehors secretaire");
+        next({path:'/login'});
+      }
+    }else if(to.meta.caissier){
+      const authCaissierRole = (window.localStorage.getItem("role"));
+      //console.log("valeur de authUserRole :",authUserRole);
+      if(authCaissierRole =="Caissier"){
+        next();
+      }else{
+        //alert("Allez Ouss,dehors caissier");
+        next({path:'/login'});
+      }
     }else{
       next();
     }
