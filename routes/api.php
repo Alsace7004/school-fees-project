@@ -30,13 +30,13 @@ use App\Http\Controllers\RoleController;
     Route::post('/login',[AuthController::class,'login']);
    
     Route::get('/livesearch', [UserController::class, 'getBooks']);
-    
+    Route::apiResources(['users'=>UserController::class]);
     Route::group(['middleware' => ['auth:sanctum']], function () {
         //roles
         Route::apiResources(['roles'=>RoleController::class]); 
         //Users
         //Route::get('/users',[UserController::class,'index']);
-        Route::apiResources(['users'=>UserController::class]);
+       
         //Years
         Route::apiResources(['years'=>YearController::class]);
 
