@@ -75,7 +75,7 @@
                 alert("hello every one, hope you are all fine Am Register Component!!!");
             },
             registerUser(){
-                alert("Nouveau compte creer avec success !!!"+"\n Vous allez etre rediriger dans quelques instant...!!!");
+                Swal.fire('Success !!!',`Nouveau compte creer avec success !!! \n Vous allez etre rediriger dans quelques instant...!!!`,'success')
                 this.$router.push("/");
             }
           

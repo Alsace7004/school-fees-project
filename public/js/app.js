@@ -3931,7 +3931,7 @@ __webpack_require__.r(__webpack_exports__);
       alert("hello every one, hope you are all fine Am Register Component!!!");
     },
     registerUser: function registerUser() {
-      alert("Nouveau compte creer avec success !!!" + "\n Vous allez etre rediriger dans quelques instant...!!!");
+      Swal.fire('Success !!!', "Nouveau compte creer avec success !!! \n Vous allez etre rediriger dans quelques instant...!!!", 'success');
       this.$router.push("/");
     }
   },
@@ -49948,8 +49948,8 @@ var render = function () {
             [
               _c(
                 "router-link",
-                { staticClass: "text-center", attrs: { to: "/parents" } },
-                [_vm._v("Parent d'élève")]
+                { staticClass: "text-center", attrs: { to: "/register" } },
+                [_vm._v("Crer un nouveau compte")]
               ),
             ],
             1
