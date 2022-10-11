@@ -82,7 +82,8 @@
                             Swal.fire('Reussi!','Connexion reussi!!!.','success') ;
                             this.$router.push("/");
                         }else{
-                            Swal.fire('Error !!!','Une Erreur Survenue  token+username!!!','error')
+                            //Swal.fire('Error !!!','Une Erreur Survenue  token+username!!!','error')
+                            Swal.fire('Error !!!','Une Erreur de connexion Survenue !!!','error')
                         }
                     }else{
                         Swal.fire('Error !!!',`Une erreur est survenue 200`,'error')

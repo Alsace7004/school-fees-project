@@ -3276,7 +3276,8 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.$router.push("/");
           } else {
-            Swal.fire('Error !!!', 'Une Erreur Survenue  token+username!!!', 'error');
+            //Swal.fire('Error !!!','Une Erreur Survenue  token+username!!!','error')
+            Swal.fire('Error !!!', 'Une Erreur de connexion Survenue !!!', 'error');
           }
         } else {
           Swal.fire('Error !!!', "Une erreur est survenue 200", 'error');
@@ -3924,15 +3925,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Register",
   data: function data() {
-    return {};
+    return {
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        password_conf: ''
+      }
+    };
   },
   methods: {
-    hello: function hello() {
-      alert("hello every one, hope you are all fine Am Register Component!!!");
-    },
     registerUser: function registerUser() {
-      Swal.fire('Success !!!', "Nouveau compte creer avec success !!! \n Vous allez etre rediriger dans quelques instant...!!!", 'success');
-      this.$router.push("/");
+      var _this = this;
+
+      axios.post('api/register', this.user).then(function (res) {
+        Swal.fire('Success !!!', "Nouveau compte creer avec success !!! \n Vous allez etre rediriger dans quelques instant...!!!", 'success');
+
+        _this.$router.push("/login");
+      })["catch"](function (error) {
+        console.log("valeur de err dans register : ", error.response);
+
+        if (error.response.data.err.name) {
+          Toast.fire({
+            icon: 'error',
+            title: "".concat(error.response.data.err.name[0])
+          }); //return;
+        } else if (error.response.data.err.email) {
+          Toast.fire({
+            icon: 'error',
+            title: "".concat(error.response.data.err.email[0])
+          }); //return;
+        } else if (error.response.data.err.password) {
+          Toast.fire({
+            icon: 'error',
+            title: "".concat(error.response.data.err.password[0])
+          }); //return;
+        } else {
+          Swal.fire('Error !!!', "Une erreur est survenue", 'error'); //return;
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -50911,13 +50942,112 @@ var render = function () {
                 },
               },
               [
-                _vm._m(1),
+                _c("div", { staticClass: "input-group mb-3" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.name,
+                        expression: "user.name",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "nom" },
+                    domProps: { value: _vm.user.name },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "name", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                ]),
                 _vm._v(" "),
-                _vm._m(2),
+                _c("div", { staticClass: "input-group mb-3" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.email,
+                        expression: "user.email",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "email", placeholder: "Email" },
+                    domProps: { value: _vm.user.email },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "email", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2),
+                ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "input-group mb-3" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.password,
+                        expression: "user.password",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "password", placeholder: "Password" },
+                    domProps: { value: _vm.user.password },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "password", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _vm._m(3),
+                ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _c("div", { staticClass: "input-group mb-3" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.password_conf,
+                        expression: "user.password_conf",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "password",
+                      placeholder: "Confirmer password",
+                    },
+                    domProps: { value: _vm.user.password_conf },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "password_conf", $event.target.value)
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _vm._m(4),
+                ]),
                 _vm._v(" "),
                 _vm._m(5),
               ]
@@ -50951,16 +51081,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "nom" },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c("div", { staticClass: "input-group-text" }, [
-          _c("span", { staticClass: "fas fa-user" }),
-        ]),
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("div", { staticClass: "input-group-text" }, [
+        _c("span", { staticClass: "fas fa-user" }),
       ]),
     ])
   },
@@ -50968,16 +51091,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "email", placeholder: "Email" },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c("div", { staticClass: "input-group-text" }, [
-          _c("span", { staticClass: "fas fa-envelope" }),
-        ]),
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("div", { staticClass: "input-group-text" }, [
+        _c("span", { staticClass: "fas fa-envelope" }),
       ]),
     ])
   },
@@ -50985,16 +51101,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", placeholder: "Password" },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c("div", { staticClass: "input-group-text" }, [
-          _c("span", { staticClass: "fas fa-lock" }),
-        ]),
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("div", { staticClass: "input-group-text" }, [
+        _c("span", { staticClass: "fas fa-lock" }),
       ]),
     ])
   },
@@ -51002,16 +51111,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group mb-3" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", placeholder: "Confirmer password" },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c("div", { staticClass: "input-group-text" }, [
-          _c("span", { staticClass: "fas fa-lock" }),
-        ]),
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("div", { staticClass: "input-group-text" }, [
+        _c("span", { staticClass: "fas fa-lock" }),
       ]),
     ])
   },

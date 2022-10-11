@@ -23,12 +23,12 @@ class AuthController extends Controller
                     'name.required'         =>'Veuillez Entrer le nom svp !!!',
                     'email.required'        =>'Veuillez Entrer le email svp !!!',
                     'password.required'     =>'Veuillez Choisir le password svp !!!'
-                      //'password' => 'required|string|confirmed|min:6',
                 ];
                 $validator = Validator::make($request->all(),[
                     'name'           => 'required|string|between:2,100',
                     'email'          => 'required|string|email|max:100|unique:users',
-                    'password'       => 'required|string|min:6'
+                    'password'       => 'required|string|min:6',
+                    'password_conf' => 'required_with:password|string|same:password|min:6'
                 ],$message);
                 
                 if($validator->fails())

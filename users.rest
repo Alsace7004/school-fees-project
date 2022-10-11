@@ -17,8 +17,8 @@ Content-Type: application/json
 }
 ###
 //RECUPERER LES INFO CONCERNANT UN SEUL USER
-GET http://localhost:8001/api/users/5
-Authorization: Bearer 17|9sDDdhrhRwIi4V28tSBoBYnvfzKmGscO8jZAEAo7
+GET http://localhost:8001/api/users/23
+Authorization: Bearer 82|H6pgkYj7xyquHPrEjr7hFGumiTRwCqxMT7s4PnF9
 
 ###
 //METTRE A JOUR LES INFO CONCERNAT UN SEUL USER

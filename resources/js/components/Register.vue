@@ -11,36 +11,36 @@
 
                 <form @submit.prevent="registerUser">
                     <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="nom">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                        <input type="text" v-model="user.name" class="form-control" placeholder="nom">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
+                        <input type="email" v-model="user.email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                        <input type="password" v-model="user.password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Confirmer password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                        <input type="password" v-model="user.password_conf" class="form-control" placeholder="Confirmer password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="row">
                     
@@ -67,16 +67,36 @@
         name:"Register",
         data(){
             return{
-
+                user:{
+                    name:'',
+                    email:'',
+                    password:'',
+                    password_conf:''
+                }
             }
         },
         methods:{
-            hello(){
-                alert("hello every one, hope you are all fine Am Register Component!!!");
-            },
             registerUser(){
-                Swal.fire('Success !!!',`Nouveau compte creer avec success !!! \n Vous allez etre rediriger dans quelques instant...!!!`,'success')
-                this.$router.push("/");
+                axios.post('api/register',this.user).then((res)=>{
+                    Swal.fire('Success !!!',`Nouveau compte creer avec success !!! \n Vous allez etre rediriger dans quelques instant...!!!`,'success')
+                    this.$router.push("/login");
+                }).catch((error)=>{
+                    console.log("valeur de err dans register : ",error.response)
+                    if(error.response.data.err.name){
+                        Toast.fire({icon: 'error',title: `${error.response.data.err.name[0]}`});
+                        //return;
+                    }else if(error.response.data.err.email){
+                        Toast.fire({icon: 'error',title: `${error.response.data.err.email[0]}`});
+                        //return;
+                    }else if(error.response.data.err.password){
+                        Toast.fire({icon: 'error',title: `${error.response.data.err.password[0]}`});
+                        //return;
+                    }else{
+                         Swal.fire('Error !!!',`Une erreur est survenue`,'error')
+                        //return;
+                    }
+                    
+                })
             }
           
         },
