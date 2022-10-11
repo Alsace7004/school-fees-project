@@ -35,9 +35,9 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }*/
 
-        /*if(env('APP_ENV') !== 'local'){
+        if(env('APP_ENV') !== 'local'){
              URL::forceScheme('https');
-        }*/
+        }
        
     }
 }
