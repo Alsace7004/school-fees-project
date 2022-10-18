@@ -4,6 +4,10 @@
             <div class="login-logo">
                 <a href="/"><b>Fees</b>Bank</a>
             </div>
+            <!---->
+                            
+                            
+                            
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
@@ -31,9 +35,12 @@
                         <!-- /.col -->
                         <div class="col-6">
                             <button type="submit" class="btn btn-primary btn-block">Se Connecter</button>
+                            
                         </div>
+                            
                     <!-- /.col -->
                     </div>
+                            
                 </form>
 
                 
@@ -45,6 +52,19 @@
                 </div>
                 <!-- /.login-card-body -->
             </div>
+            <!--Card End-->
+                            <div class="row">
+                                <p class="col-md-6">Email:admin@gmail.com</p>
+                                <p class="col-md-6">Password:123456789</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-6">Email:secretaire@gmail.com</p>
+                                <p class="col-md-6">Password:123456789</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-md-6">Email:caissier@gmail.com</p>
+                                <p class="col-md-6">Password:123456789</p>
+                            </div>
         </div>
     </div>
 </template>

@@ -3243,6 +3243,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Login",
   data: function data() {
@@ -49987,6 +50007,12 @@ var render = function () {
           ),
         ]),
       ]),
+      _vm._v(" "),
+      _vm._m(4),
+      _vm._v(" "),
+      _vm._m(5),
+      _vm._v(" "),
+      _vm._m(6),
     ]),
   ])
 }
@@ -50037,6 +50063,40 @@ var staticRenderFns = [
           [_vm._v("Se Connecter")]
         ),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("p", { staticClass: "col-md-6" }, [_vm._v("Email:admin@gmail.com")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "col-md-6" }, [_vm._v("Password:123456789")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("p", { staticClass: "col-md-6" }, [
+        _vm._v("Email:secretaire@gmail.com"),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "col-md-6" }, [_vm._v("Password:123456789")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("p", { staticClass: "col-md-6" }, [
+        _vm._v("Email:caissier@gmail.com"),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "col-md-6" }, [_vm._v("Password:123456789")]),
     ])
   },
 ]
