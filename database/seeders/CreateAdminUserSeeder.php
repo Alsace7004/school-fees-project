@@ -19,21 +19,21 @@ class CreateAdminUserSeeder extends Seeder
         //php artisan db:seed --class=CreateAdminUserSeeder
         /***********************************************************/
         $admin = User::create([
-            'name' => 'admin', 
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('123456789')
+            'name' => 'root', 
+            'email' => 'root@gmail.com',
+            'password' => '123456789'
         ]);
         /***********************************************************/
         $secretaire = User::create([
             'name' => 'secretaire', 
-            'email' => 'secretaire@secretaire.com',
-            'password' => bcrypt('123456789')
+            'email' => 'secretaire@gmail.com',
+            'password' =>'123456789'
         ]);
         /***********************************************************/
         $caissier = User::create([
             'name' => 'caissier', 
-            'email' => 'caissier@caissier.com',
-            'password' => bcrypt('123456789')
+            'email' => 'caissier@gmail.com',
+            'password' =>'123456789'
         ]);
         /***********************************************************/
         $roleAdmin      = Role::create(['name' => 'Admin']);
