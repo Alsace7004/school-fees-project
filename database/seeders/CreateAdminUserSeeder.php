@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -18,9 +19,10 @@ class CreateAdminUserSeeder extends Seeder
     {
         //php artisan db:seed --class=CreateAdminUserSeeder
         /***********************************************************/
+        DB::SELECT("DELETE FROM users");
         $admin = User::create([
-            'name' => 'root', 
-            'email' => 'root@gmail.com',
+            'name' => 'admin', 
+            'email' => 'admin@gmail.com',
             'password' => '123456789'
         ]);
         /***********************************************************/
