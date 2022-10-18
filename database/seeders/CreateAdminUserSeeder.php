@@ -20,6 +20,7 @@ class CreateAdminUserSeeder extends Seeder
         //php artisan db:seed --class=CreateAdminUserSeeder
         /***********************************************************/
         DB::SELECT("DELETE FROM users");
+        DB::SELECT("DELETE FROM roles");
         $admin = User::create([
             'name' => 'admin', 
             'email' => 'admin@gmail.com',
